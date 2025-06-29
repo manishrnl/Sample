@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="StudentsFields" managed="true" prefHeight="452.0" prefWidth="872.0" spacing="10.0" styleClass="back-ground" stylesheets="@Stylesheet/Dark_Theme.css" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+
+    <Label styleClass="Sub-Heading" text="Additional Student Academic Details" />
+
+    <GridPane hgap="10.0" vgap="10.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="250.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="136.20001831054685" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="294.5999816894531" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+
+            <Label styleClass="Label" text="Course" GridPane.halignment="RIGHT" />
+            <ComboBox fx:id="courseComboBox" prefHeight="26.0" prefWidth="293.0" promptText="Select Course" styleClass="combo-box" GridPane.columnIndex="1" />
+            <Label styleClass="Label" text="Enrolled On:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <DatePicker fx:id="studentEnrolledOnPicker" prefHeight="26.0" prefWidth="406.0" promptText="YYYY-MM-DD" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label styleClass="Label" text="Select Batch" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <ComboBox fx:id="studentBatchCombo" prefHeight="26.0" prefWidth="310.0" promptText="Select Batch" styleClass="combo-box" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+            <Label styleClass="Label" text="Select Stream" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+            <ComboBox fx:id="studentStreamCombo" layoutX="105.0" layoutY="12.0" prefHeight="33.0" prefWidth="306.0" promptText="Select Stream" styleClass="combo-box" GridPane.columnIndex="3" />
+
+        </children>
+    </GridPane>
+
+    <Label styleClass="Sub-Heading" text="10th Class Details" />
+
+
+    <GridPane hgap="10.0" vgap="10.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="250.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label styleClass="Label" text="School Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+            <TextField fx:id="school10NameField" promptText="Name of 10th class school" styleClass="Signup-TextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label styleClass="Label" text="Passing Year:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <TextField fx:id="school10PassingYearField" promptText="e.g., 2018" styleClass="Signup-TextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label styleClass="Label" text="Percentage:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <TextField fx:id="school10PercentageField" promptText="e.g., 90.5" styleClass="Signup-TextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        </children>
+    </GridPane>
+
+    <Label styleClass="Sub-Heading" text="12th Class Details" />
+
+    <GridPane hgap="10.0" vgap="10.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="250.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label styleClass="Label" text="School Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+            <TextField fx:id="school12NameField" promptText="Name of 12th class school/college" styleClass="Signup-TextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label styleClass="Label" text="Passing Year:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <TextField fx:id="school12PassingYearField" promptText="e.g., 2020" styleClass="Signup-TextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label styleClass="Label" text="Percentage:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <TextField fx:id="school12PercentageField" promptText="e.g., 88.0" styleClass="Signup-TextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        </children>
+    </GridPane>
+</VBox>

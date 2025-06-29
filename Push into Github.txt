@@ -1,0 +1,28 @@
+Remove-Item -Recurse -Force .git      
+git init
+git add .
+git commit -m "Version 2025.0.23"
+git branch -M main
+git remote add origin https://github.com/manishrnl/University-Management-System.git
+git push origin main --force
+
+
+Remove-Item -Recurse -Force .git      
+git init
+git add .
+git commit -m "Version 2025.0.23"
+git branch -M main
+git remote add origin https://github.com/manishrnl/Sample.git
+git push origin main --force
+
+
+
+https://github.com/manishrnl/Sample.git
+https://github.com/manishrnl/University-Management-System.git
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/manishrnl/University-Management-System.git
+git branch -M main
+git push -u origin main
+ 
