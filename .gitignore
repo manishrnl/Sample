@@ -1,0 +1,21 @@
+# Ignore build output
+/target/
+/out/
+
+# IntelliJ IDEA project files
+.idea/
+/*.iml
+
+# Maven wrapper files (optional)
+.mvn/
+
+# Ignore compiled classes and temp files
+*.class
+*.log
+
+
+# Meta files
+META-INF/
+
+# Notes or temporary local files
+Push into Github.txt

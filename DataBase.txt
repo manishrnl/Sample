@@ -1,0 +1,663 @@
+DROP DATABASE IF EXISTS university_management_system;
+CREATE DATABASE university_management_system;
+USE university_management_system;
+
+CREATE TABLE Users (
+    User_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Role ENUM('Student', 'Teacher', 'Staff', 'Admin', 'Accountant', 'Librarian') NOT NULL,
+    User_Status ENUM('Active', 'Inactive', 'Suspended', 'Archived') DEFAULT 'Active',
+    Joined_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    First_Name VARCHAR(30) NOT NULL,
+    Last_Name VARCHAR(30) NOT NULL,
+    Aadhar BIGINT UNIQUE,
+    Pan VARCHAR(20) UNIQUE,
+    Mobile BIGINT UNIQUE,
+    Alternate_Mobile BIGINT,
+    Email VARCHAR(40) UNIQUE,
+    Gender ENUM('Male', 'Female', 'Other'),
+    DOB DATE,
+    Blood_Group VARCHAR(5),
+    Marital_Status VARCHAR(15),
+    Nationality VARCHAR(30),
+    Emergency_Contact_Name VARCHAR(100),
+    Emergency_Contact_Relationship VARCHAR(50),
+    Emergency_Contact_Mobile BIGINT,
+    Temporary_Address VARCHAR(200),
+    Permanent_Address VARCHAR(200),
+    Fathers_Name VARCHAR(50),
+    Mothers_Name VARCHAR(50),
+    Photo_URL LONGBLOB,
+    Referenced_Via VARCHAR(50),
+    Admin_Approval_Status ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
+    Created_By_User_Id INT,
+    FOREIGN KEY (Created_By_User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE SET NULL
+);
+
+select * from Users WHERE First_Name LIKE 'Man';
+
+CREATE TABLE Authentication (
+    Auth_Id INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id INT UNIQUE NOT NULL,
+    UserName VARCHAR(50) NOT NULL,
+    Password_Hash VARCHAR(255) NOT NULL,
+    Salt VARCHAR(64),
+    Last_Login TIMESTAMP,
+    Lockout_Until TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Bank_Details (
+    Bank_Detail_Id INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id INT UNIQUE NOT NULL,
+    Bank_Name VARCHAR(100) NOT NULL,
+    Account_Number VARCHAR(50) NOT NULL,
+    IFSC_Code VARCHAR(20) NOT NULL,
+    Branch_Name VARCHAR(100),
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Departments (
+    Department_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Department_Name VARCHAR(100) UNIQUE NOT NULL,
+    Department_Code VARCHAR(10) UNIQUE,
+    Head_Of_Department_User_Id INT,
+    Contact_Email VARCHAR(40),
+    Phone_Number BIGINT,
+    Description TEXT,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Head_Of_Department_User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Courses (
+    Course_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Course_Code VARCHAR(20) UNIQUE NOT NULL,
+    Course_Name VARCHAR(150) NOT NULL,
+    Department_Id INT NOT NULL,
+    Credits DECIMAL(3 , 1 ) NOT NULL,
+    Description TEXT,
+    Is_Active BOOLEAN DEFAULT TRUE,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Department_Id)
+        REFERENCES Departments (Department_Id)
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE Students (
+    User_Id INT PRIMARY KEY,
+    Registration_Number VARCHAR(20) UNIQUE,
+    Roll_Number VARCHAR(20) NULL,
+    Course VARCHAR(50),
+    Stream VARCHAR(100),
+    Batch VARCHAR(100),
+    Department_Id INT,
+    Enrolled_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Current_Academic_Year INT,
+    Current_Semester INT,
+    School_10_Name VARCHAR(100),
+    School_10_Passing_Year INT,
+    School_10_Percentage FLOAT,
+    School_12_Name VARCHAR(100),
+    School_12_Passing_Year INT,
+    School_12_Percentage FLOAT,
+    FOREIGN KEY (User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (Department_Id)
+        REFERENCES Departments (Department_Id)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Teachers (
+    User_Id INT PRIMARY KEY,
+    Registration_Number VARCHAR(20) UNIQUE NOT NULL,
+    Designation VARCHAR(50),
+    Department_Id INT,
+    Qualification VARCHAR(100),
+    Specialisation VARCHAR(100),
+    Employment_Type ENUM('Full-time', 'Part-time', 'Visiting') DEFAULT 'Full-time',
+    Teaching_Experience_Years INT,
+    Last_Taught_on DATE,
+    Salary DECIMAL(10 , 2 ) DEFAULT NULL,
+    FOREIGN KEY (User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (Department_Id)
+        REFERENCES Departments (Department_Id)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Teacher_Courses (
+    Teacher_Course_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Teacher_Id INT NOT NULL,
+    Course_Id INT NOT NULL,
+    Academic_Year INT NOT NULL,
+    Semester ENUM('1st', '2nd', 'Summer'),
+    Start_Date DATE,
+    End_Date DATE,
+    FOREIGN KEY (Teacher_Id)
+        REFERENCES Teachers (User_Id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (Course_Id)
+        REFERENCES Courses (Course_Id)
+        ON DELETE CASCADE,
+    UNIQUE (Teacher_Id , Course_Id , Academic_Year , Semester)
+);
+
+CREATE TABLE Staffs (
+    User_Id INT PRIMARY KEY,
+    Registration_Number VARCHAR(20) UNIQUE NOT NULL,
+    Designation VARCHAR(50),
+    Department_Id INT,
+    Employment_Type ENUM('Full-time', 'Part-time', 'Contract') DEFAULT 'Full-time',
+    Work_Experience_Years INT,
+    Salary DECIMAL(10,2),
+    FOREIGN KEY (User_Id) REFERENCES Users(User_Id) ON DELETE CASCADE,
+    FOREIGN KEY (Department_Id) REFERENCES Departments(Department_Id) ON DELETE SET NULL
+);
+
+CREATE TABLE Admins (
+    User_Id INT PRIMARY KEY,
+    Designation VARCHAR(50),
+    Department_Id INT,
+    Access_Level ENUM('Super', 'Departmental', 'Academic', 'Finance', 'Library', 'HR') DEFAULT 'Departmental',
+    FOREIGN KEY (User_Id) REFERENCES Users(User_Id) ON DELETE CASCADE,
+    FOREIGN KEY (Department_Id) REFERENCES Departments(Department_Id) ON DELETE SET NULL
+);
+
+CREATE TABLE Accountants (
+    User_Id INT PRIMARY KEY,
+    Qualification VARCHAR(100),
+    Certification VARCHAR(100),
+    Experience_Years INT,
+    Designation VARCHAR(50),
+    Department_Id INT,
+    Salary DECIMAL(10,2),
+    FOREIGN KEY (User_Id) REFERENCES Users(User_Id) ON DELETE CASCADE,
+    FOREIGN KEY (Department_Id) REFERENCES Departments(Department_Id) ON DELETE SET NULL
+);
+
+CREATE TABLE Librarians (
+    User_Id INT PRIMARY KEY,
+    Qualification VARCHAR(100),
+    Certification VARCHAR(100),
+    Experience_Years INT,
+    Designation VARCHAR(50),
+    Department_Id INT,
+    Salary DECIMAL(10,2),
+    FOREIGN KEY (User_Id) REFERENCES Users(User_Id) ON DELETE CASCADE,
+    FOREIGN KEY (Department_Id) REFERENCES Departments(Department_Id) ON DELETE SET NULL
+);
+
+CREATE TABLE Fee_Types (
+    Fee_Type_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Fee_Type_Name VARCHAR(50) UNIQUE NOT NULL,
+    Description TEXT,
+    Default_Amount DECIMAL(10,2) DEFAULT 0.00,
+    Is_Recurring BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE Student_Fees (
+    Fee_Record_Id INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id INT NOT NULL,
+    Fee_Type_Id INT NOT NULL,
+    Academic_Year INT NOT NULL,
+    Semester ENUM('1st', '2nd', 'Summer') DEFAULT NULL,
+    Fee_Month INT CHECK (Fee_Month BETWEEN 1 AND 12) DEFAULT NULL,
+    Amount_Due DECIMAL(10,2) NOT NULL,
+    Amount_Paid DECIMAL(10,2) DEFAULT 0.00,
+    Due_Date DATE NOT NULL,
+    Payment_Date DATE,
+    Payment_Status ENUM('Paid', 'Unpaid', 'Partial', 'Waived') DEFAULT 'Unpaid',
+    Transaction_Id VARCHAR(100),
+    Receipt_Number VARCHAR(50) UNIQUE,
+    Remarks TEXT,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_Id) REFERENCES Students(User_Id) ON DELETE CASCADE,
+    FOREIGN KEY (Fee_Type_Id) REFERENCES Fee_Types(Fee_Type_Id) ON DELETE RESTRICT,
+    UNIQUE (User_Id, Fee_Type_Id, Academic_Year, Semester, Fee_Month)
+);
+
+CREATE TABLE Salary_Components (
+    Component_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Component_Name VARCHAR(50) UNIQUE NOT NULL,
+    Component_Type ENUM('Earning', 'Deduction') NOT NULL,
+    Description TEXT
+);
+
+CREATE TABLE Salary_Payments (
+	Salary_Payment_Id INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id INT NOT NULL,
+    Salary_Month INT CHECK (Salary_Month BETWEEN 1 AND 12) NOT NULL,
+    Salary_Year INT NOT NULL,
+    Gross_Amount DECIMAL(10,2) NOT NULL,
+    Total_Deductions DECIMAL(10,2) DEFAULT 0.00,
+    Net_Amount_Paid DECIMAL(10,2) DEFAULT 0.00,
+    Payment_Date DATE,
+    Payment_Method ENUM('Bank Transfer', 'Cash', 'Cheque') DEFAULT 'Bank Transfer',
+    Payment_Status ENUM('Paid', 'Unpaid', 'Partial') DEFAULT 'Unpaid',
+    Transaction_Id VARCHAR(100),
+    Remarks TEXT,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     FOREIGN KEY (User_Id) REFERENCES Users(User_Id) ON DELETE CASCADE,
+     UNIQUE (User_Id, Salary_Month, Salary_Year)
+);
+
+CREATE TABLE Salary_Payment_Details (
+    Detail_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Salary_Payment_Id INT NOT NULL,
+    Component_Id INT NOT NULL,
+    Amount DECIMAL(10 , 2 ) NOT NULL,
+    FOREIGN KEY (Salary_Payment_Id)
+        REFERENCES Salary_Payments (Salary_Payment_Id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (Component_Id)
+        REFERENCES Salary_Components (Component_Id)
+        ON DELETE RESTRICT,
+    UNIQUE (Salary_Payment_Id , Component_Id)
+);
+
+CREATE TABLE Enrollments (
+    Enrollment_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Student_Id INT NOT NULL,
+    Course_Id INT NOT NULL,
+    Academic_Year INT NOT NULL,
+    Semester ENUM('1st', '2nd', 'Summer') NOT NULL,
+    Enrollment_Date DATE NOT NULL,
+    Completion_Date DATE,
+    Grade VARCHAR(5),
+    Status ENUM('Enrolled', 'Completed', 'Dropped', 'Withdrawn') DEFAULT 'Enrolled',
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Student_Id)
+        REFERENCES Students (User_Id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (Course_Id)
+        REFERENCES Courses (Course_Id)
+        ON DELETE CASCADE,
+    UNIQUE (Student_Id , Course_Id , Academic_Year , Semester)
+);
+
+CREATE TABLE Attendances (
+    Attendance_Id INT AUTO_INCREMENT PRIMARY KEY,
+    User_Id INT NOT NULL,
+    Attendance_Date DATE NOT NULL,
+    Time_In TIME,
+    Time_Out TIME,
+    Status ENUM('Present', 'Absent', 'Leave', 'Late', 'Half Day') NOT NULL,
+    Remarks TEXT,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE CASCADE,
+    UNIQUE (User_Id , Attendance_Date)
+);
+
+CREATE TABLE Books (
+    Book_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(150) NOT NULL,
+    ISBN VARCHAR(20) UNIQUE,
+    Publisher VARCHAR(100),
+    Publication_Year INT,
+    Genre VARCHAR(50),
+    Total_Copies INT DEFAULT 0,
+    Available_Copies INT DEFAULT 0,
+    Location_Shelf VARCHAR(50),
+    Description TEXT,
+    Added_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Borrow_Records (
+    Borrow_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Book_Id INT NOT NULL,
+    User_Id INT NOT NULL,
+    Borrow_Date DATE NOT NULL,
+    Due_Date DATE NOT NULL,
+    Return_Date DATE,
+    Fine_Amount DECIMAL(8 , 2 ) DEFAULT 0.00,
+    Status ENUM('Borrowed', 'Returned', 'Overdue', 'Lost') DEFAULT 'Borrowed',
+    Librarian_User_Id INT,
+    Remarks TEXT,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Book_Id)
+        REFERENCES Books (Book_Id)
+        ON DELETE RESTRICT,
+    FOREIGN KEY (User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (Librarian_User_Id)
+        REFERENCES Librarians (User_Id)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Admin_Activity_Log (
+    Log_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Admin_User_Id INT NOT NULL,
+    Action_Type VARCHAR(50) NOT NULL,
+    Target_Table VARCHAR(50) NOT NULL,
+    Target_Record_Id INT,
+    Action_Details TEXT,
+    Action_Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    IP_Address VARCHAR(45),
+    FOREIGN KEY (Admin_User_Id)
+        REFERENCES Admins (User_Id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Notifications (
+    Notification_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    Message TEXT NOT NULL,
+    Target_Role ENUM('Student', 'Teacher', 'Staff', 'Admin', 'Accountant', 'Librarian', 'All Roles') DEFAULT 'All Roles',
+    Target_User_Id INT,
+    Created_By_User_Id INT NOT NULL,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Expiry_Date DATE,
+    Is_Read ENUM('Read','Un-Read')DEFAULT 'Un-Read',
+    Read_On TIMESTAMP,
+    FOREIGN KEY (Created_By_User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE RESTRICT,
+    FOREIGN KEY (Target_User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Events (
+    Event_Id INT AUTO_INCREMENT PRIMARY KEY,
+    Event_Name VARCHAR(150) NOT NULL,
+    Event_Description TEXT,
+    Event_Type VARCHAR(50),
+    Event_Date DATE NOT NULL,
+    Start_Time TIME,
+    End_Time TIME,
+    Location VARCHAR(100),
+    Organized_By_User_Id INT,
+    Is_Public BOOLEAN DEFAULT TRUE,
+    Created_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Updated_On TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (Organized_By_User_Id)
+        REFERENCES Users (User_Id)
+        ON DELETE SET NULL
+);
+
+CREATE INDEX idx_users_role ON Users (Role);
+CREATE INDEX idx_users_admin_approval_status ON Users (Admin_Approval_Status);
+CREATE INDEX idx_users_joined_on ON Users (Joined_On);
+CREATE INDEX idx_users_name ON Users (Last_Name, First_Name);
+
+CREATE INDEX idx_authentication_last_login ON Authentication (Last_Login);
+
+CREATE INDEX idx_departments_head_of_department_user_id ON Departments (Head_Of_Department_User_Id);
+
+CREATE INDEX idx_courses_department_id ON Courses (Department_Id);
+CREATE INDEX idx_courses_name ON Courses (Course_Name);
+
+CREATE INDEX idx_students_department_id ON Students (Department_Id);
+CREATE INDEX idx_students_academic_year_semester ON Students (Current_Academic_Year, Current_Semester);
+
+CREATE INDEX idx_teachers_department_id ON Teachers (Department_Id);
+CREATE INDEX idx_teachers_specialisation ON Teachers (Specialisation);
+
+CREATE INDEX idx_staffs_department_id ON Staffs (Department_Id);
+CREATE INDEX idx_staffs_designation ON Staffs (Designation);
+
+CREATE INDEX idx_admins_department_id ON Admins (Department_Id);
+CREATE INDEX idx_admins_access_level ON Admins (Access_Level);
+
+CREATE INDEX idx_accountants_department_id ON Accountants (Department_Id);
+CREATE INDEX idx_accountants_designation ON Accountants (Designation);
+
+CREATE INDEX idx_librarians_department_id ON Librarians (Department_Id);
+CREATE INDEX idx_librarians_designation ON Librarians (Designation);
+
+CREATE INDEX idx_student_fees_payment_status ON Student_Fees (Payment_Status);
+CREATE INDEX idx_student_fees_academic_year_month ON Student_Fees (Academic_Year, Fee_Month);
+CREATE INDEX idx_student_fees_due_date ON Student_Fees (Due_Date);
+
+CREATE INDEX idx_salary_payments_payment_status ON Salary_Payments (Payment_Status);
+CREATE INDEX idx_salary_payments_payment_date ON Salary_Payments (Payment_Date);
+
+CREATE INDEX idx_enrollments_status ON Enrollments (Status);
+CREATE INDEX idx_enrollments_academic_year ON Enrollments (Academic_Year);
+
+CREATE INDEX idx_attendances_date ON Attendances (Attendance_Date);
+CREATE INDEX idx_attendances_status ON Attendances (Status);
+
+CREATE INDEX idx_books_title ON Books (Title);
+CREATE INDEX idx_books_author ON Books (Author);
+CREATE INDEX idx_books_title_author ON Books (Title, Author);
+CREATE INDEX idx_books_genre ON Books (Genre);
+
+CREATE INDEX idx_borrow_records_book_id ON Borrow_Records (Book_Id);
+CREATE INDEX idx_borrow_records_user_id ON Borrow_Records (User_Id);
+CREATE INDEX idx_borrow_records_librarian_user_id ON Borrow_Records (Librarian_User_Id);
+CREATE INDEX idx_borrow_records_status ON Borrow_Records (Status);
+CREATE INDEX idx_borrow_records_borrow_date ON Borrow_Records (Borrow_Date);
+CREATE INDEX idx_borrow_records_due_date ON Borrow_Records (Due_Date);
+
+CREATE INDEX idx_admin_activity_log_admin_user_id ON Admin_Activity_Log (Admin_User_Id);
+CREATE INDEX idx_admin_activity_log_action_type ON Admin_Activity_Log (Action_Type);
+CREATE INDEX idx_admin_activity_log_target_table ON Admin_Activity_Log (Target_Table);
+CREATE INDEX idx_admin_activity_log_timestamp ON Admin_Activity_Log (Action_Timestamp);
+
+CREATE INDEX idx_notifications_target_user_id ON Notifications (Target_User_Id);
+CREATE INDEX idx_notifications_target_role ON Notifications (Target_Role);
+CREATE INDEX idx_notifications_is_read ON Notifications (Is_Read);
+CREATE INDEX idx_notifications_created_on ON Notifications (Created_On);
+
+CREATE INDEX idx_events_organized_by_user_id ON Events (Organized_By_User_Id);
+CREATE INDEX idx_events_event_date ON Events (Event_Date);
+CREATE INDEX idx_events_event_type ON Events (Event_Type);
+
+INSERT INTO Users (Role, First_Name, Last_Name, Aadhar, Pan, Mobile, Alternate_Mobile, Email, Gender, DOB, Blood_Group, Marital_Status, Nationality, Emergency_Contact_Name, Emergency_Contact_Relationship, Emergency_Contact_Mobile, Temporary_Address, Permanent_Address, Fathers_Name, Mothers_Name) VALUES
+        ('Student', 'Aarav', 'Sharma', 123456789001, 'ABCDE0001F', 9876543201, 8765432101, 'aarav.sharma01@example.com', 'Male', '2004-05-10', 'O+', 'Single', 'Indian', 'Ramesh Sharma', 'Father', 9876543211, '123, Hostel A, University Campus, Delhi', '456, Green Park, New Delhi', 'Ramesh Sharma', 'Sunita Sharma'),
+        ('Student', 'Vivaan', 'Singh', 123456789002, 'ABCDE0002G', 9876543202, 8765432102, 'vivaan.singh02@example.com', 'Male', '2003-08-15', 'A+', 'Single', 'Indian', 'Suresh Singh', 'Father', 9876543212, '124, Hostel A, University Campus, Delhi', '789, Karol Bagh, New Delhi', 'Suresh Singh', 'Anita Singh'),
+        ('Teacher', 'Aditi', 'Verma', 123456789003, 'ABCDE0003H', 9876543203, 8765432103, 'aditi.verma03@example.com', 'Female', '1985-11-20', 'B+', 'Married', 'Indian', 'Anil Verma', 'Husband', 9876543213, 'Staff Quarters, Block C, University Campus, Delhi', '101, Lajpat Nagar, New Delhi', 'Rajesh Verma', 'Priya Verma'),
+        ('Student', 'Arjun', 'Kumar', 123456789004, 'ABCDE0004I', 9876543204, 8765432104, 'arjun.kumar04@example.com', 'Male', '2004-02-25', 'AB+', 'Single', 'Indian', 'Vijay Kumar', 'Father', 9876543214, '125, Hostel B, University Campus, Delhi', '212, Rohini, New Delhi', 'Vijay Kumar', 'Meena Kumar'),
+        ('Staff', 'Saanvi', 'Patel', 123456789005, 'ABCDE0005J', 9876543205, 8765432105, 'saanvi.patel05@example.com', 'Female', '1990-07-30', 'O-', 'Single', 'Indian', 'Bharat Patel', 'Father', 9876543215, 'Staff Quarters, Block D, University Campus, Delhi', '333, Ahmedabad, Gujarat', 'Bharat Patel', 'Leela Patel'),
+        ('Student', 'Ishaan', 'Gupta', 123456789006, 'ABCDE0006K', 9876543206, 8765432106, 'ishaan.gupta06@example.com', 'Male', '2003-12-01', 'B-', 'Single', 'Indian', 'Manoj Gupta', 'Father', 9876543216, '126, Hostel B, University Campus, Delhi', '444, Chandigarh', 'Manoj Gupta', 'Ritu Gupta'),
+        ('Student', 'Diya', 'Jain', 123456789007, 'ABCDE0007L', 9876543207, 8765432107, 'diya.jain07@example.com', 'Female', '2004-09-18', 'A-', 'Single', 'Indian', 'Prakash Jain', 'Father', 9876543217, '127, Hostel C, University Campus, Delhi', '555, Jaipur, Rajasthan', 'Prakash Jain', 'Kavita Jain'),
+        ('Admin', 'Rohan', 'Mishra', 123456789008, 'ABCDE0008M', 9876543208, 8765432108, 'rohan.mishra08@example.com', 'Male', '1982-01-12', 'B+', 'Married', 'Indian', 'Priya Mishra', 'Wife', 9876543218, 'Staff Quarters, Block A, University Campus, Delhi', '666, Lucknow, UP', 'Girish Mishra', 'Sarita Mishra'),
+        ('Student', 'Aanya', 'Yadav', 123456789009, 'ABCDE0009N', 9876543209, 8765432109, 'aanya.yadav09@example.com', 'Female', '2003-06-22', 'O+', 'Single', 'Indian', 'Dharmendra Yadav', 'Father', 9876543219, '128, Hostel C, University Campus, Delhi', '777, Gurgaon, Haryana', 'Dharmendra Yadav', 'Poonam Yadav'),
+        ('Staff', 'Kabir', 'Mehta', 123456789010, 'ABCDE0010P', 9876543210, 8765432110, 'kabir.mehta10@example.com', 'Male', '1995-03-05', 'A+', 'Single', 'Indian', 'Sunil Mehta', 'Father', 9876543220, 'Staff Quarters, Block B, University Campus, Delhi', '888, Mumbai, Maharashtra', 'Sunil Mehta', 'Anjali Mehta'),
+        ('Student', 'Advik', 'Chauhan', 123456789011, 'ABCDE0011Q', 9876543211, 8765432111, 'advik.chauhan11@example.com', 'Male', '2004-01-01', 'B+', 'Single', 'Indian', 'Rajesh Chauhan', 'Father', 9876543221, '201, Hostel D, University Campus, Delhi', '111, Shimla, HP', 'Rajesh Chauhan', 'Geeta Chauhan'),
+        ('Student', 'Anika', 'Roy', 123456789012, 'ABCDE0012R', 9876543212, 8765432112, 'anika.roy12@example.com', 'Female', '2003-04-14', 'O-', 'Single', 'Indian', 'Amit Roy', 'Father', 9876543222, '202, Hostel D, University Campus, Delhi', '222, Kolkata, WB', 'Amit Roy', 'Soma Roy'),
+		('Teacher', 'Vikram', 'Nair', 123456789013, 'ABCDE0013S', 9876543213, 8765432113, 'vikram.nair13@example.com', 'Male', '1979-08-23', 'A-', 'Married', 'Indian', 'Lakshmi Nair', 'Wife', 9876543223, 'Staff Quarters, Block E, University Campus, Delhi', '333, Kochi, Kerala', 'Gopalakrishnan Nair', 'Radha Nair'),
+        ('Student', 'Zara', 'Khan', 123456789014, 'ABCDE0014T', 9876543214, 8765432114, 'zara.khan14@example.com', 'Female', '2004-07-07', 'B-', 'Single', 'Indian', 'Imran Khan', 'Father', 9876543224, '203, Hostel E, University Campus, Delhi', '444, Hyderabad, Telangana', 'Imran Khan', 'Fatima Khan'),
+        ('Staff', 'Reyansh', 'Joshi', 123456789015, 'ABCDE0015U', 9876543215, 8765432115, 'reyansh.joshi15@example.com', 'Male', '1998-10-19', 'AB+', 'Single', 'Indian', 'Harish Joshi', 'Father', 9876543225, 'Staff Quarters, Block F, University Campus, Delhi', '555, Dehradun, Uttarakhand', 'Harish Joshi', 'Maya Joshi'),
+        ('Student', 'Myra', 'Reddy', 123456789016, 'ABCDE0016V', 9876543216, 8765432116, 'myra.reddy16@example.com', 'Female', '2003-02-11', 'O+', 'Single', 'Indian', 'Krishna Reddy', 'Father', 9876543226, '204, Hostel E, University Campus, Delhi', '666, Bengaluru, Karnataka', 'Krishna Reddy', 'Padma Reddy'),
+        ('Student', 'Vihaan', 'Malhotra', 123456789017, 'ABCDE0017W', 9876543217, 8765432117, 'vihaan.malhotra17@example.com', 'Male', '2004-03-30', 'A+', 'Single', 'Indian', 'Sanjay Malhotra', 'Father', 9876543227, '205, Hostel F, University Campus, Delhi', '777, Pune, Maharashtra', 'Sanjay Malhotra', 'Neetu Malhotra'),
+        ('Teacher', 'Kiara', 'Das', 123456789018, 'ABCDE0018X', 9876543218, 8765432118, 'kiara.das18@example.com', 'Female', '1988-05-09', 'B+', 'Single', 'Indian', 'Ashok Das', 'Father', 9876543228, 'Staff Quarters, Block G, University Campus, Delhi', '888, Bhubaneswar, Odisha', 'Ashok Das', 'Rekha Das'),
+        ('Student', 'Sai', 'Rao', 123456789019, 'ABCDE0019Y', 9876543219, 8765432119, 'sai.rao19@example.com', 'Male', '2003-11-16', 'O-', 'Single', 'Indian', 'Srinivas Rao', 'Father', 9876543229, '206, Hostel F, University Campus, Delhi', '999, Chennai, Tamil Nadu', 'Srinivas Rao', 'Lalitha Rao'),
+        ('Staff', 'Anaya', 'Biswas', 123456789020, 'ABCDE0020Z', 9876543220, 8765432120, 'anaya.biswas20@example.com', 'Female', '1992-09-02', 'A-', 'Married', 'Indian', 'Rahul Biswas', 'Husband', 9876543230, 'Staff Quarters, Block H, University Campus, Delhi', '100, Guwahati, Assam', 'Deb Biswas', 'Rina Biswas'),
+        ('Student', 'Aryan', 'Iyer', 123456789021, 'ABCDE0021A', 9876543221, 8765432121, 'aryan.iyer21@example.com', 'Male', '2004-06-13', 'B-', 'Single', 'Indian', 'Ramakrishnan Iyer', 'Father', 9876543231, '301, Hostel G, University Campus, Delhi', '201, Coimbatore, Tamil Nadu', 'Ramakrishnan Iyer', 'Sita Iyer'),
+        ('Student', 'Amaira', 'Menon', 123456789022, 'ABCDE0022B', 9876543222, 8765432122, 'amaira.menon22@example.com', 'Female', '2003-10-25', 'AB-', 'Single', 'Indian', 'Jayakrishnan Menon', 'Father', 9876543232, '302, Hostel G, University Campus, Delhi', '302, Thiruvananthapuram, Kerala', 'Jayakrishnan Menon', 'Geetha Menon'),
+        ('Accountant', 'Dhruv', 'Pandey', 123456789023, 'ABCDE0023C', 9876543223, 8765432123, 'dhruv.pandey23@example.com', 'Male', '1984-04-17', 'O+', 'Married', 'Indian', 'Shilpa Pandey', 'Wife', 9876543233, 'Staff Quarters, Block I, University Campus, Delhi', '403, Varanasi, UP', 'Surendra Pandey', 'Urmila Pandey'),
+        ('Student', 'Eva', 'Sinha', 123456789024, 'ABCDE0024D', 9876543224, 8765432124, 'eva.sinha24@example.com', 'Female', '2004-08-29', 'A+', 'Single', 'Indian', 'Alok Sinha', 'Father', 9876543234, '303, Hostel H, University Campus, Delhi', '504, Patna, Bihar', 'Alok Sinha', 'Madhu Sinha'),
+        ('Staff', 'Yuvan', 'Chopra', 123456789025, 'ABCDE0025E', 9876543225, 8765432125, 'yuvan.chopra25@example.com', 'Male', '1996-12-31', 'B+', 'Single', 'Indian', 'Vikram Chopra', 'Father', 9876543235, 'Staff Quarters, Block J, University Campus, Delhi', '605, Jalandhar, Punjab', 'Vikram Chopra', 'Simran Chopra'),
+        ('Student', 'Pari', 'Thakur', 123456789026, 'ABCDE0026F', 9876543226, 8765432126, 'pari.thakur26@example.com', 'Female', '2003-05-21', 'O-', 'Single', 'Indian', 'Anand Thakur', 'Father', 9876543236, '304, Hostel H, University Campus, Delhi', '706, Jammu, J&K', 'Anand Thakur', 'Shanti Thakur'),
+        ('Student', 'Ayaan', 'Bhat', 123456789027, 'ABCDE0027G', 9876543227, 8765432127, 'ayaan.bhat27@example.com', 'Male', '2004-10-03', 'A-', 'Single', 'Indian', 'Farooq Bhat', 'Father', 9876543237, '305, Hostel I, University Campus, Delhi', '807, Srinagar, J&K', 'Farooq Bhat', 'Aisha Bhat'),
+        ('Librarian', 'Rhea', 'Goswami', 123456789028, 'ABCDE0028H', 9876543228, 8765432128, 'rhea.goswami28@example.com', 'Female', '1989-02-14', 'B-', 'Single', 'Indian', 'Bikash Goswami', 'Father', 9876543238, 'Staff Quarters, Block K, University Campus, Delhi', '908, Jorhat, Assam', 'Bikash Goswami', 'Anima Goswami'),
+        ('Student', 'Krish', 'Dubey', 123456789029, 'ABCDE0029I', 9876543229, 8765432129, 'krish.dubey29@example.com', 'Male', '2003-07-17', 'AB+', 'Single', 'Indian', 'Kamlesh Dubey', 'Father', 9876543239, '306, Hostel I, University Campus, Delhi', '109, Bhopal, MP', 'Kamlesh Dubey', 'Vimla Dubey'),
+        ('Staff', 'Zoya', 'Aggarwal', 123456789030, 'ABCDE0030J', 9876543230, 8765432130, 'zoya.aggarwal30@example.com', 'Female', '1993-11-28', 'O+', 'Married', 'Indian', 'Nitin Aggarwal', 'Husband', 9876543240, 'Staff Quarters, Block L, University Campus, Delhi', '210, Ambala, Haryana', 'Pawan Aggarwal', 'Suman Aggarwal'),
+        ('Student', 'Arnav', 'Saxena', 123456789031, 'ABCDE0031K', 9876543231, 8765432131, 'arnav.saxena31@example.com', 'Male', '2004-12-15', 'A+', 'Single', 'Indian', 'Alok Saxena', 'Father', 9876543241, '401, Hostel J, University Campus, Delhi', '311, Bareilly, UP', 'Alok Saxena', 'Nisha Saxena'),
+        ('Student', 'Navya', 'Trivedi', 123456789032, 'ABCDE0032L', 9876543232, 8765432132, 'navya.trivedi32@example.com', 'Female', '2003-09-09', 'B+', 'Single', 'Indian', 'Ashutosh Trivedi', 'Father', 9876543242, '402, Hostel J, University Campus, Delhi', '412, Kanpur, UP', 'Ashutosh Trivedi', 'Shobha Trivedi'),
+        ('Teacher', 'Leo', 'Fernandes', 123456789033, 'ABCDE0033M', 9876543233, 8765432133, 'leo.fernandes33@example.com', 'Male', '1981-06-06', 'O-', 'Married', 'Indian', 'Maria Fernandes', 'Wife', 9876543243, 'Staff Quarters, Block M, University Campus, Delhi', '513, Panaji, Goa', 'John Fernandes', 'Anna Fernandes'),
+        ('Student', 'Samaira', 'Pillai', 123456789034, 'ABCDE0034N', 9876543234, 8765432134, 'samaira.pillai34@example.com', 'Female', '2004-11-11', 'A-', 'Single', 'Indian', 'Ganesh Pillai', 'Father', 9876543244, '403, Hostel K, University Campus, Delhi', '614, Madurai, Tamil Nadu', 'Ganesh Pillai', 'Meenakshi Pillai'),
+        ('Staff', 'Veer', 'Rathore', 123456789035, 'ABCDE0035P', 9876543235, 8765432135, 'veer.rathore35@example.com', 'Male', '1997-01-26', 'B-', 'Single', 'Indian', 'Bhim Singh Rathore', 'Father', 9876543245, 'Staff Quarters, Block N, University Campus, Delhi', '715, Jodhpur, Rajasthan', 'Bhim Singh Rathore', 'Kiran Rathore'),
+        ('Student', 'Aarohi', 'Deshpande', 123456789036, 'ABCDE0036Q', 9876543236, 8765432136, 'aarohi.deshpande36@example.com', 'Female', '2003-08-08', 'AB+', 'Single', 'Indian', 'Milind Deshpande', 'Father', 9876543246, '404, Hostel K, University Campus, Delhi', '816, Nagpur, Maharashtra', 'Milind Deshpande', 'Varsha Deshpande'),
+        ('Student', 'Rudra', 'Patil', 123456789037, 'ABCDE0037R', 9876543237, 8765432137, 'rudra.patil37@example.com', 'Male', '2004-04-04', 'O+', 'Single', 'Indian', 'Sandeep Patil', 'Father', 9876543247, '405, Hostel L, University Campus, Delhi', '917, Kolhapur, Maharashtra', 'Sandeep Patil', 'Smita Patil'),
+        ('Teacher', 'Ira', 'Chakraborty', 123456789038, 'ABCDE0038S', 9876543238, 8765432138, 'ira.chakraborty38@example.com', 'Female', '1986-07-21', 'A+', 'Single', 'Indian', 'Tapan Chakraborty', 'Father', 9876543248, 'Staff Quarters, Block P, University Campus, Delhi', '118, Agartala, Tripura', 'Tapan Chakraborty', 'Shipra Chakraborty'),
+        ('Student', 'Zain', 'Shaikh', 123456789039, 'ABCDE0039T', 9876543239, 8765432139, 'zain.shaikh39@example.com', 'Male', '2003-03-13', 'B+', 'Single', 'Indian', 'Mustafa Shaikh', 'Father', 9876543249, '406, Hostel L, University Campus, Delhi', '219, Aurangabad, Maharashtra', 'Mustafa Shaikh', 'Zarina Shaikh'),
+        ('Staff', 'Mahi', 'Garg', 123456789040, 'ABCDE0040U', 9876543240, 8765432140, 'mahi.garg40@example.com', 'Female', '1994-06-16', 'O-', 'Single', 'Indian', 'Mahesh Garg', 'Father', 9876543250, 'Staff Quarters, Block Q, University Campus, Delhi', '320, Ludhiana, Punjab', 'Mahesh Garg', 'Anu Garg'),
+        ('Student', 'Dev', 'Kashyap', 123456789041, 'ABCDE0041V', 9876543241, 8765432141, 'dev.kashyap41@example.com', 'Male', '2004-09-27', 'A-', 'Single', 'Indian', 'Ravi Kashyap', 'Father', 9876543251, '501, Hostel M, University Campus, Delhi', '421, Haridwar, Uttarakhand', 'Ravi Kashyap', 'Savita Kashyap'),
+        ('Student', 'Kavya', 'Rawat', 123456789042, 'ABCDE0042W', 9876543242, 8765432142, 'kavya.rawat42@example.com', 'Female', '2003-12-24', 'B-', 'Single', 'Indian', 'Gopal Singh Rawat', 'Father', 9876543252, '502, Hostel M, University Campus, Delhi', '522, Nainital, Uttarakhand', 'Gopal Singh Rawat', 'Bimla Rawat'),
+        ('Teacher', 'Neel', 'Dutta', 123456789043, 'ABCDE0043X', 9876543243, 8765432143, 'neel.dutta43@example.com', 'Male', '1980-03-19', 'AB+', 'Married', 'Indian', 'Rupa Dutta', 'Wife', 9876543253, 'Staff Quarters, Block R, University Campus, Delhi', '623, Durgapur, WB', 'Pradip Dutta', 'Aloka Dutta'),
+        ('Student', 'Sara', 'Pawar', 123456789044, 'ABCDE0044Y', 9876543244, 8765432144, 'sara.pawar44@example.com', 'Female', '2004-01-31', 'O+', 'Single', 'Indian', 'Sharad Pawar', 'Father', 9876543254, '503, Hostel N, University Campus, Delhi', '724, Baramati, Maharashtra', 'Sharad Pawar', 'Pratibha Pawar'),
+        ('Staff', 'Om', 'Shinde', 123456789045, 'ABCDE0045Z', 9876543245, 8765432145, 'om.shinde45@example.com', 'Male', '1999-02-28', 'A+', 'Single', 'Indian', 'Eknath Shinde', 'Father', 9876543255, 'Staff Quarters, Block S, University Campus, Delhi', '825, Thane, Maharashtra', 'Eknath Shinde', 'Lata Shinde'),
+        ('Student', 'Avani', 'Naidu', 123456789046, 'ABCDE0046A', 9876543246, 8765432146, 'avani.naidu46@example.com', 'Female', '2003-06-06', 'B+', 'Single', 'Indian', 'Chandrababu Naidu', 'Father', 9876543256, '504, Hostel N, University Campus, Delhi', '926, Amaravati, AP', 'Chandrababu Naidu', 'Bhuvaneswari Naidu'),
+        ('Student', 'Yash', 'Tiwari', 123456789047, 'ABCDE0047B', 9876543247, 8765432147, 'yash.tiwari47@example.com', 'Male', '2004-05-05', 'O-', 'Single', 'Indian', 'Manoj Tiwari', 'Father', 9876543257, '505, Hostel P, University Campus, Delhi', '127, Rewa, MP', 'Manoj Tiwari', 'Rani Tiwari'),
+        ('Teacher', 'Siya', 'Varrier', 123456789048, 'ABCDE0048C', 9876543248, 8765432148, 'siya.varrier48@example.com', 'Female', '1987-09-19', 'A-', 'Married', 'Indian', 'Prakash Varrier', 'Husband', 9876543258, 'Staff Quarters, Block T, University Campus, Delhi', '228, Thrissur, Kerala', 'Unnikrishnan Varrier', 'Prema Varrier'),
+        ('Student', 'Parth', 'Soni', 123456789049, 'ABCDE0049D', 9876543249, 8765432149, 'parth.soni49@example.com', 'Male', '2003-01-08', 'B-', 'Single', 'Indian', 'Rakesh Soni', 'Father', 9876543259, '506, Hostel P, University Campus, Delhi', '329, Rajkot, Gujarat', 'Rakesh Soni', 'Jayshree Soni'),
+        ('Admin', 'Manish', 'Kumar', 123456789050, 'ABCDE0050E', 9876543250, 8765432150, 'manish@gmail.com', 'Male', '1991-04-12', 'AB-', 'Married', 'Indian', 'Satpal Choudhary', 'Father', 9876543260, 'Staff Quarters, Block U, University Campus, Delhi', '430, Meerut, UP', 'Satpal Choudhary', 'Usha Choudhary');
+
+INSERT INTO Authentication (User_Id, UserName, Password_Hash, Salt, Last_Login, Lockout_Until) VALUES
+        (1, 'aarav.sharma01', 'Aarav@2004', NULL, NULL, NULL),
+        (2, 'vivaan.singh02', 'Vivaan@2003', NULL, NULL, NULL),
+        (3, 'aditi.verma03', 'Aditi@1985', NULL, NULL, NULL),
+        (4, 'arjun.kumar04', 'Arjun@2004', NULL, NULL, NULL),
+        (5, 'saanvi.patel05', 'Saanvi@1990', NULL, NULL, NULL),
+        (6, 'ishaan.gupta06', 'Ishaan@2003', NULL, NULL, NULL),
+        (7, 'diya.jain07', 'Diya@2004', NULL, NULL, NULL),
+        (8, 'rohan.mishra08', 'Rohan@1982', NULL, NULL, NULL),
+        (9, 'aanya.yadav09', 'Aanya@2003', NULL, NULL, NULL),
+        (10, 'kabir.mehta10', 'Kabir@1995', NULL, NULL, NULL),
+        (11, 'advik.chauhan11', 'Advik@2004', NULL, NULL, NULL),
+        (12, 'anika.roy12', 'Anika@2003', NULL, NULL, NULL),
+        (13, 'vikram.nair13', 'Vikram@1979', NULL, NULL, NULL),
+        (14, 'zara.khan14', 'Zara@2004', NULL, NULL, NULL),
+        (15, 'reyansh.joshi15', 'Reyansh@1998', NULL, NULL, NULL),
+        (16, 'myra.reddy16', 'Myra@2003', NULL, NULL, NULL),
+        (17, 'vihaan.malhotra17', 'Vihaan@2004', NULL, NULL, NULL),
+        (18, 'kiara.das18', 'Kiara@1988', NULL, NULL, NULL),
+        (19, 'sai.rao19', 'Sai@2003', NULL, NULL, NULL),
+        (20, 'anaya.biswas20', 'Anaya@1992', NULL, NULL, NULL),
+        (21, 'aryan.iyer21', 'Aryan@2004', NULL, NULL, NULL),
+        (22, 'amaira.menon22', 'Amaira@2003', NULL, NULL, NULL),
+        (23, 'dhruv.pandey23', 'Dhruv@1984', NULL, NULL, NULL),
+        (24, 'eva.sinha24', 'Eva@2004', NULL, NULL, NULL),
+        (25, 'yuvan.chopra25', 'Yuvan@1996', NULL, NULL, NULL),
+        (26, 'pari.thakur26', 'Pari@2003', NULL, NULL, NULL),
+        (27, 'ayaan.bhat27', 'Ayaan@2004', NULL, NULL, NULL),
+        (28, 'rhea.goswami28', 'Rhea@1989', NULL, NULL, NULL),
+        (29, 'krish.dubey29', 'Krish@2003', NULL, NULL, NULL),
+        (30, 'zoya.aggarwal30', 'Zoya@1993', NULL, NULL, NULL),
+        (31, 'arnav.saxena31', 'Arnav@2004', NULL, NULL, NULL),
+        (32, 'navya.trivedi32', 'Navya@2003', NULL, NULL, NULL),
+        (33, 'leo.fernandes33', 'Leo@1981', NULL, NULL, NULL),
+        (34, 'samaira.pillai34', 'Samaira@2004', NULL, NULL, NULL),
+        (35, 'veer.rathore35', 'Veer@1997', NULL, NULL, NULL),
+        (36, 'aarohi.deshpande36', 'Aarohi@2003', NULL, NULL, NULL),
+        (37, 'rudra.patil37', 'Rudra@2004', NULL, NULL, NULL),
+        (38, 'ira.chakraborty38', 'Ira@1986', NULL, NULL, NULL),
+        (39, 'zain.shaikh39', 'Zain@2003', NULL, NULL, NULL),
+        (40, 'mahi.garg40', 'Mahi@1994', NULL, NULL, NULL),
+        (41, 'dev.kashyap41', 'Dev@2004', NULL, NULL, NULL),
+        (42, 'kavya.rawat42', 'Kavya@2003', NULL, NULL, NULL),
+        (43, 'neel.dutta43', 'Neel@1980', NULL, NULL, NULL),
+        (44, 'sara.pawar44', 'Sara@2004', NULL, NULL, NULL),
+        (45, 'om.shinde45', 'Om@1999', NULL, NULL, NULL),
+        (46, 'avani.naidu46', 'Avani@2003', NULL, NULL, NULL),
+        (47, 'yash.tiwari47', 'Yash@2004', NULL, NULL, NULL),
+        (48, 'siya.varrier48', 'Siya@1987', NULL, NULL, NULL),
+        (49, 'parth.soni49', 'Parth@2003', NULL, NULL, NULL),
+        (50, 'manish', 'Manish', NULL, NULL, NULL);
+
+
+INSERT INTO Attendances (User_Id, Attendance_Date, Time_In, Time_Out, Status, Remarks) VALUES
+         (1, CURDATE(), '08:55:00', '17:05:00', 'Present', NULL),
+         (2, CURDATE(), '08:58:00', '17:01:00', 'Absent', NULL),
+         (3, CURDATE(), '09:00:00', '17:03:00', 'Present', NULL),
+         (4, CURDATE(), '08:50:00', '17:10:00', 'Present', NULL),
+         (5, CURDATE(), '08:52:00', '17:00:00', 'Present', NULL),
+         (6, CURDATE(), '08:59:00', '17:08:00', 'Present', NULL),
+        (7, CURDATE(), '08:57:00', '17:02:00', 'Present', NULL),
+        (8, CURDATE(), '08:49:00', '17:05:00', 'Present', NULL),
+        (9, CURDATE(), '08:53:00', '17:11:00', 'Present', NULL),
+        (10, CURDATE(), '08:56:00', '17:04:00', 'Present', NULL),
+        (11, CURDATE(), '08:51:00', '17:07:00', 'Present', NULL),
+        (12, CURDATE(), '08:54:00', '17:09:00', 'Present', NULL),
+        (13, CURDATE(), '08:48:00', '17:06:00', 'Present', NULL),
+        (14, CURDATE(), '08:55:00', '17:12:00', 'Present', NULL),
+        (15, CURDATE(), '08:58:00', '17:01:00', 'Present', NULL),
+        (16, CURDATE(), '09:00:00', '17:03:00', 'Present', NULL),
+        (17, CURDATE(), '08:50:00', '17:10:00', 'Present', NULL),
+        (18, CURDATE(), '08:52:00', '17:00:00', 'Present', NULL),
+        (19, CURDATE(), '08:59:00', '17:08:00', 'Present', NULL),
+        (20, CURDATE(), '08:57:00', '17:02:00', 'Present', NULL),
+        (21, CURDATE(), '08:49:00', '17:05:00', 'Present', NULL),
+        (22, CURDATE(), '08:53:00', '17:11:00', 'Present', NULL),
+        (23, CURDATE(), '08:56:00', '17:04:00', 'Present', NULL),
+        (24, CURDATE(), '08:51:00', '17:07:00', 'Present', NULL),
+        (25, CURDATE(), '08:54:00', '17:09:00', 'Present', NULL),
+        (26, CURDATE(), '08:48:00', '17:06:00', 'Present', NULL),
+        (27, CURDATE(), '08:55:00', '17:12:00', 'Present', NULL),
+        (28, CURDATE(), '08:58:00', '17:01:00', 'Present', NULL),
+        (29, CURDATE(), '09:00:00', '17:03:00', 'Present', NULL),
+        (30, CURDATE(), '08:50:00', '17:10:00', 'Present', NULL);
+
+INSERT INTO Attendances (User_Id, Attendance_Date, Time_In, Time_Out, Status, Remarks) VALUES
+        (31, CURDATE(), '09:15:00', '17:05:00', 'Late', 'Stuck in traffic.'),
+        (32, CURDATE(), '09:22:00', '17:01:00', 'Late', NULL),
+       (33, CURDATE(), '09:30:00', '17:03:00', 'Late', 'Metro delay.'),
+       (34, CURDATE(), '09:18:00', '17:10:00', 'Late', NULL),
+       (35, CURDATE(), '09:25:00', '17:00:00', 'Late', NULL);
+
+INSERT INTO Attendances (User_Id, Attendance_Date, Time_In, Time_Out, Status, Remarks) VALUES
+        (36, CURDATE(), NULL, NULL, 'Absent', 'Notified sick.'),
+        (37, CURDATE(), NULL, NULL, 'Absent', 'Unplanned absence.'),
+        (38, CURDATE(), NULL, NULL, 'Absent', NULL),
+        (39, CURDATE(), NULL, NULL, 'Absent', 'Family emergency.'),
+        (40, CURDATE(), NULL, NULL, 'Absent', NULL);
+
+INSERT INTO Attendances (User_Id, Attendance_Date, Time_In, Time_Out, Status, Remarks) VALUES
+        (41, CURDATE(), NULL, NULL, 'Leave', 'Approved annual leave.'),
+        (42, CURDATE(), NULL, NULL, 'Leave', 'Approved sick leave.'),
+        (43, CURDATE(), NULL, NULL, 'Leave', 'Approved personal leave.'),
+        (44, CURDATE(), NULL, NULL, 'Leave', 'Approved study leave.'),
+        (45, CURDATE(), NULL, NULL, 'Leave', 'Approved maternity leave.');
+
+INSERT INTO Attendances (User_Id, Attendance_Date, Time_In, Time_Out, Status, Remarks) VALUES
+        (46, CURDATE(), '09:00:00', '13:00:00', 'Half Day', 'Doctor appointment.'),
+        (47, CURDATE(), '08:55:00', '13:05:00', 'Half Day', 'Personal commitment.'),
+        (48, CURDATE(), '08:50:00', '12:55:00', 'Half Day', NULL),
+        (49, CURDATE(), '09:05:00', '13:10:00', 'Half Day', 'Bank work.'),
+        (50, CURDATE(), '08:58:00', '13:00:00', 'Half Day', NULL);
+
+INSERT INTO Notifications (Title, Message, Target_Role, Target_User_Id, Created_By_User_Id, Expiry_Date)
+VALUES
+('System Maintenance', 'Scheduled system maintenance on 5th July from 10 PM to 12 AM.', 'All Roles', 50, 50, '2025-07-05'),
+('Library Notice', 'All students are requested to return overdue books before 10th July.', 'Student', 5, 4, '2025-07-10'),
+('Fee Reminder', 'Last date to pay semester fee is 15th July 2025.', 'Student', 50, 6, '2025-07-15'),
+('Staff Meeting', 'A general staff meeting is scheduled on 6th July at 11 AM in the seminar hall.', 'Staff', 8, 3, '2025-07-06'),
+('Performance Review', 'Annual teacher performance reviews begin from 10th July.', 'Teacher', 9, 2, '2025-07-20'),
+('Welcome Note', 'Welcome to the new academic year 2025-26. Let\'s make it productive!', 'All Roles', 50, 1, '2025-08-01'),
+('Transport ID Update', 'Students must update their transport ID by 12th July.', 'Student', 2, 7, '2025-07-12'),
+('Library Downtime', 'Library system will be offline for maintenance on 8th July.', 'Librarian', 15, 1, '2025-07-08'),
+('Policy Update', 'New leave policy effective from 1st August. Check HR portal.', 'Admin', 11, 3, '2025-08-01'),
+('Account Audit', 'Monthly audit of finance department starts on 10th July.', 'Accountant', 48, 6, '2025-07-10');
+
+select * from Notifications;
+select * from Authentication where User_Id=3;
+select * from Users;
+select * from Attendances;
+update  Users set  Admin_Approval_Status='Approved'where User_Id=50;
+
+update Notifications set Is_Read=1 where Notification_Id=1;
+delete From Users where User_Id=53;
+update Authentication set Lockout_Until =null where User_Id=14;
+update  Users set  Admin_Approval_Status='Approved'where User_Id=54;
+update Authentication set Password_Hash ='Manish' where User_Id=54;
+
+select * from Users where User_Id=7;
+SELECT COUNT(*) FROM Users WHERE Role = 'Student' OR Role = 'Teacher';
+USE university_management_system;

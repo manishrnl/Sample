@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="823.0" prefWidth="1270.0" spacing="25.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.university_management_system.Admin.Students">
+    <children>
+
+        <!-- Search Grid -->
+        <GridPane prefHeight="138.0" prefWidth="1270.0" VBox.vgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="44.2" />
+                <RowConstraints prefHeight="49.4" />
+                <RowConstraints prefHeight="29.4" />
+            </rowConstraints>
+            <children>
+                <Label styleClass="Label" text="Search By Name" />
+                <TextField fx:id="searchByNameField" promptText="Enter name" styleClass="grid-pane-combo-box" GridPane.columnIndex="1" />
+
+                <Label styleClass="Label" text="Search By Students Mobile Number" GridPane.rowIndex="1" />
+                <TextField fx:id="searchByMobileField" promptText="Enter mobile number" styleClass="grid-pane-combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label styleClass="Label" text="Search By Aadhar Number" GridPane.rowIndex="2" />
+                <TextField fx:id="searchByAadharField" promptText="Enter Aadhar" styleClass="grid-pane-combo-box" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label styleClass="Label" text="Search By User Name" GridPane.columnIndex="2" />
+                <TextField fx:id="searchByUsernameField" promptText="Enter username" styleClass="grid-pane-combo-box" GridPane.columnIndex="3" />
+
+                <Label styleClass="Label" text="Search By Email" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="searchByEmailField" promptText="Enter email" styleClass="grid-pane-combo-box" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                <Label styleClass="Label" text="Search By PAN Number" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="searchByPanField" promptText="Enter PAN" styleClass="grid-pane-combo-box" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            </children>
+        </GridPane>
+
+        <!-- Table -->
+        <TableView fx:id="studentsTable" prefHeight="216.0" prefWidth="1270.0" styleClass="table-view" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colUserId" text="User ID" />
+                <TableColumn fx:id="colUsername" prefWidth="130.39997100830078" text="User Name" />
+                <TableColumn fx:id="colFirstName" prefWidth="108.80000305175781" text="First Name" />
+                <TableColumn fx:id="colLastName" prefWidth="152.0" text="Last Name" />
+                <TableColumn fx:id="colEmail" prefWidth="216.79995727539062" text="Email" />
+                <TableColumn fx:id="colPan" prefWidth="147.20001220703125" text="PAN" />
+                <TableColumn fx:id="colAadhar" prefWidth="211.19998168945312" text="AADHAR" />
+                <TableColumn fx:id="colMobile" prefWidth="207.2000732421875" text="Students Mobile" />
+            </columns>
+        </TableView>
+
+        <!-- Detail Form -->
+        <GridPane fx:id="userFormGrid" hgap="10" prefHeight="260.0" prefWidth="1250.0" vgap="10" VBox.vgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints maxWidth="218.40003051757813" minWidth="112.00000610351563" prefWidth="178.4000244140625" />
+                <ColumnConstraints maxWidth="272.79997558593755" minWidth="94.39996948242191" prefWidth="247.00001220703123" />
+                <ColumnConstraints maxWidth="185.00003662109373" minWidth="64.00002441406252" prefWidth="124.00001220703132" />
+                <ColumnConstraints maxWidth="282.4" minWidth="145.79996337890628" prefWidth="219.19998779296873" />
+                <ColumnConstraints maxWidth="327.0000366210937" minWidth="143.0" prefWidth="148.39999999999998" />
+                <ColumnConstraints maxWidth="439.0" minWidth="228.39999999999986" prefWidth="228.39999999999986" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="35.0" />
+                <RowConstraints prefHeight="35.0" />
+                <RowConstraints prefHeight="35.0" />
+                <RowConstraints prefHeight="35.0" />
+                <RowConstraints prefHeight="35.0" />
+                <RowConstraints prefHeight="35.0" />
+                <RowConstraints maxHeight="46.60001220703123" minHeight="29.60004882812501" prefHeight="35.20002441406251" />
+                <RowConstraints maxHeight="39.19996337890626" minHeight="31.99998779296874" prefHeight="33.5999755859375" />
+            </rowConstraints>
+            <children>
+                <!-- Row 0 -->
+                <Label styleClass="Label" text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="firstNameField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label styleClass="Label" text="Last Name" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField fx:id="lastNameField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                <Label styleClass="Label" text="User Name" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <TextField fx:id="userNameField" promptText="User Name" styleClass="grid-pane-text-field" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+
+                <!-- Row 1 -->
+                <Label styleClass="Label" text="Mobile Number" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="studentMobileField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label styleClass="Label" text="Alternate Mobile" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="parentsMobileField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                <Label styleClass="Label" text="Aadhar Number" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                <TextField fx:id="aadharField" prefHeight="89.0" prefWidth="234.0" styleClass="grid-pane-text-field" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+
+                <!-- Row 2 -->
+                <Label styleClass="Label" text="PAN Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="panField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label styleClass="Label" text="Email" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="emailField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+                <Label styleClass="Label" text="Gender" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                <ComboBox fx:id="genderComboBox" prefHeight="86.0" prefWidth="234.0" promptText="Select Gender" styleClass="grid-pane-combo-box" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Male" />
+                            <String fx:value="Female" />
+                            <String fx:value="Other" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Row 3 -->
+                <Label styleClass="Label" text="DOB" GridPane.rowIndex="3" />
+                <DatePicker fx:id="dobPicker" prefHeight="68.0" prefWidth="247.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label styleClass="Label" text="Blood Group" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <ComboBox fx:id="bloodGroupCombo" layoutX="183.0" layoutY="336.0" prefHeight="75.0" prefWidth="219.0" promptText="Select Blood Group" styleClass="grid-pane-combo-box" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="A+" />
+                            <String fx:value="A-" />
+                            <String fx:value="B+" />
+                            <String fx:value="B-" />
+                            <String fx:value="AB+" />
+                            <String fx:value="AB-" />
+                            <String fx:value="O-" />
+                            <String fx:value="O+" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Label styleClass="Label" text="Marital Status" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                <TextField fx:id="maritalStatusField" prefHeight="70.0" prefWidth="234.0" styleClass="grid-pane-text-field" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+
+                <!-- Row 4 -->
+                <Label styleClass="Label" text="Nationality" GridPane.rowIndex="4" />
+                <ComboBox fx:id="nationalityComboBox" layoutX="183.0" layoutY="336.0" prefHeight="70.0" prefWidth="247.0" promptText="Select Nationality" styleClass="grid-pane-combo-box" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Indian" />
+                            <String fx:value="American" />
+                            <String fx:value="France" />
+                            <String fx:value="Italy" />
+                            <String fx:value="Canada" />
+                            <String fx:value="French" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Label styleClass="Label" text="Father's Name" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <TextField fx:id="fatherNameField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+
+                <Label styleClass="Label" text="Mother's Name" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                <TextField fx:id="motherNameField" prefHeight="85.0" prefWidth="234.0" styleClass="grid-pane-text-field" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+
+                <!-- Row 5 -->
+                <Label styleClass="Label" text="Emergency Contact Name" GridPane.rowIndex="5" />
+                <TextField fx:id="emergencyContactNameField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <Label styleClass="Label" text="Relation" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                <TextField fx:id="emergencyContactRelationField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+
+                <Label styleClass="Label" text="Contact Mobile" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                <TextField fx:id="emergencyContactMobileField" prefHeight="74.0" prefWidth="234.0" styleClass="grid-pane-text-field" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+
+                <!-- Row 6 -->
+                <Label styleClass="Label" text="Temporary Address" GridPane.rowIndex="7" />
+                <TextArea fx:id="temporaryAddressArea" prefRowCount="2" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+
+                <Label styleClass="Label" text="Permanent Address" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                <TextArea fx:id="permanentAddressArea" prefRowCount="2" styleClass="grid-pane-text-field" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+
+                <!-- Row 7 -->
+                <Label styleClass="Label" text="Role" GridPane.rowIndex="6" />
+                <ComboBox fx:id="roleComboBox" prefHeight="74.0" prefWidth="247.0" promptText="Select Role" styleClass="grid-pane-combo-box" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Student" />
+                            <String fx:value="Teacher" />
+                            <String fx:value="Staff" />
+                            <String fx:value="Admin" />
+                            <String fx:value="Accountant" />
+                            <String fx:value="Librarian" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <Label styleClass="Label" text="User Status" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                <ComboBox fx:id="userStatusCombo" prefHeight="89.0" prefWidth="219.0" promptText="Select Status" styleClass="grid-pane-combo-box" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Active" />
+                            <String fx:value="Inactive" />
+                            <String fx:value="Suspended" />
+                            <String fx:value="Archived" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <Label styleClass="Label" text="Admin Approval" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                <ComboBox fx:id="AdminApprovalStatus" prefHeight="75.0" prefWidth="234.0" promptText="Select Admin Approval" styleClass="grid-pane-combo-box" GridPane.columnIndex="5" GridPane.rowIndex="6">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Approved" />
+                            <String fx:value="Pending" />
+                            <String fx:value="Rejected" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+
+            </children>
+        </GridPane>
+        <Label fx:id="errorMessageLabel" prefHeight="76.0" prefWidth="1250.0" />
+        <!-- Buttons & Image -->
+        <HBox prefHeight="150.0" prefWidth="1250.0" spacing="15" styleClass="HBOX">
+            <children>
+                <HBox prefHeight="166.0" prefWidth="584.0" styleClass="HBOX">
+                    <children>
+                        <ImageView fx:id="profileImageView" fitHeight="73.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" styleClass="Image-Profile" />
+                    </children>
+                </HBox>
+                <Button fx:id="uploadPhotoButton" onAction="#handlePhotoUploadOperation" prefHeight="42.0" prefWidth="185.0" styleClass="button-green" text="Upload Profile Photo" />
+                <Button fx:id="cancelButton" onAction="#handleCancelOperation" prefHeight="42.0" prefWidth="99.0" styleClass="button-red" text="Cancel" />
+                <Button fx:id="deleteButton" onAction="#handleDeleteOperation" prefHeight="42.0" prefWidth="106.0" styleClass="button-red" text="Delete" />
+                <Button fx:id="clearButton" onAction="#handleClearOperation" prefHeight="42.0" prefWidth="110.0" styleClass="button-yellow" text="Clear" />
+                <Button fx:id="updateButton" onAction="#handleUpdateOperation" prefHeight="42.0" prefWidth="111.0" styleClass="button-green" text="Update" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" prefHeight="867.0" prefWidth="1523.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.university_management_system.Admin.AdminController">
+    <children>
+        <HBox fx:id="titleBar" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1458.0" styleClass="HBOX-Nav-Bar">
+            <children>
+                <ImageView fx:id="BackImage" fitHeight="18.0" fitWidth="47.0" onMouseClicked="#navigateBackward" pickOnBounds="true" preserveRatio="true" styleClass="navigation">
+                    <image>
+                        <Image url="@../Images/Back.PNG" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="ForwardImage" fitHeight="33.0" fitWidth="29.0" onMouseClicked="#navigateForward" pickOnBounds="true" preserveRatio="true" styleClass="navigation">
+                    <image>
+                        <Image url="@../Images/Forward.PNG" />
+                    </image>
+                </ImageView>
+                <Label alignment="CENTER" prefHeight="44.0" prefWidth="534.0" styleClass="Heading" text="Admin Panel" textFill="white" />
+                <ComboBox fx:id="comboSearch" editable="true" layoutX="20" layoutY="20" prefHeight="54.0" prefWidth="494.0" promptText="Search pages..." styleClass="grid-pane-combo-box" />
+                 <Button fx:id="btnNotifications" mnemonicParsing="false" onAction="#handleNotification" prefHeight="42.0" prefWidth="127.0" styleClass="button-yellow" text="🔔" />
+                <ImageView fx:id="AdminImage" fitHeight="42.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" styleClass="Profile-Image">
+                    <image>
+                        <Image url="@../Images/UserName.png" />
+                    </image>
+                </ImageView>
+                <MenuBar fx:id="menuBarAdmin" prefHeight="34.0" prefWidth="344.0" styleClass="menu-item" useSystemMenuBar="false">
+                    <menus>
+                        <Menu fx:id="menuAdminProfile" text="Admin Profile">
+                            <items>
+                                <MenuItem fx:id="menuItemProfile" onAction="#handleMenuOption" text="My Profile" />
+                                <MenuItem fx:id="menuItemUploadPhoto" onAction="#handleMenuOption" text="Upload Profile Photo" />
+                                <MenuItem fx:id="menuItemChangePassword" onAction="#handleMenuOption" text="Change Password" />
+
+
+                                <!-- Nested Submenu -->
+                                <Menu fx:id="menuAdminProfile2" text="Change Theme">
+                                    <items>
+                                        <MenuItem fx:id="menuItemProfile2" onAction="#handleMenuOption" text="Dark Theme" />
+                                        <MenuItem fx:id="menuItemUploadPhoto2" onAction="#handleMenuOption" text="Light Theme" />
+                                        <MenuItem fx:id="menuItemChangePassword2" onAction="#handleMenuOption" text="Custom Theme" />
+
+                                    </items>
+                                </Menu>
+
+                                <MenuItem fx:id="menuItemLogout" onAction="#handleMenuOption" text="Logout" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            <Label prefHeight="42.0" prefWidth="154.0" styleClass="Label" text="Change Theme" />
+            <ImageView fx:id="lightDarkThemeImage" fitHeight="43.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/day_night_toggle_theme.jpeg" />
+               </image>
+            </ImageView>
+
+
+            </children>
+        </HBox>
+
+        <BorderPane prefHeight="813.0" prefWidth="1543.0" VBox.vgrow="ALWAYS">
+            <left>
+                <VBox prefHeight="818.0" prefWidth="246.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+                    <children>
+                        <Separator prefWidth="200.0" />
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="667.0" prefWidth="282.0" VBox.vgrow="ALWAYS">
+                            <content>
+                                <VBox prefHeight="801.0" prefWidth="245.0" spacing="5.0" styleClass="VBOX">
+                                    <children>
+                                        <Button fx:id="btnDashboard" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Dashboard (Home)" />
+                                        <Button fx:id="btnStudentManagement" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Student Management" />
+                                        <Button fx:id="btnFacultyManagement" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="46.0" prefWidth="240.0" styleClass="button-yellow" text="Faculty &amp; Staff Management" />
+                                        <Button fx:id="btnCourseManagement" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Course &amp; Department" />
+                                        <Button fx:id="btnAttendance" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Attendance &amp; Timetable" />
+                                        <Button fx:id="btnExams" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Examination &amp; Results" />
+                                        <Button fx:id="btnLibrary" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Library Management" />
+                                        <Button fx:id="btnHostelTransport" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Hostel &amp; Transport" />
+                                        <Button fx:id="btnFinance" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Fees &amp; Finance" />
+                                        <Button fx:id="btnEvents" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Events &amp; Notifications" />
+                                        <Button fx:id="btnFeedback" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Feedback &amp; Complaints" />
+                                        <Button fx:id="btnLogs" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="Logs &amp; Reports" />
+                                        <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="240.0" styleClass="button-yellow" text="System Settings" />
+                                        <Button fx:id="btnLogout" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="20.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="46.0" prefWidth="200.0" styleClass="button-red" text="Logout" />
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+            </left>
+            <center>
+                <AnchorPane fx:id="contentArea" prefHeight="839.0" prefWidth="1281.0">
+                    <children>
+                        <ScrollPane fx:id="mainScrollPane" layoutX="1.0" prefHeight="826.0" prefWidth="1278.0" styleClass="back-ground">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+</VBox>
