@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="866.0" prefWidth="1253.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Admin.Attendance">
+   <children>
+      <Label layoutY="4.0" prefHeight="18.0" prefWidth="1253.0" styleClass="Heading" text="Attendance Dashboard" />
+      <GridPane hgap="15" layoutY="29.0" prefHeight="155.0" prefWidth="965.0" vgap="15">
+         <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+         </padding>
+         <columnConstraints>
+            <ColumnConstraints percentWidth="20" />
+            <ColumnConstraints percentWidth="30" />
+            <ColumnConstraints percentWidth="20" />
+            <ColumnConstraints percentWidth="30" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="31.800009155273436" minHeight="28.60001220703125" prefHeight="31.800009155273436" />
+            <RowConstraints maxHeight="40.60001220703125" minHeight="31.800009155273436" prefHeight="35.79999084472656" />
+            <RowConstraints maxHeight="41.60000152587892" minHeight="19.200000000000003" prefHeight="39.79998779296875" />
+         </rowConstraints>
+         <children>
+            <Label styleClass="Label" text="Filter By:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <ComboBox fx:id="filterTypeComboBox" prefHeight="34.0" prefWidth="200" styleClass="grid" GridPane.columnIndex="1" GridPane.rowIndex="0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="All" />
+                     <String fx:value="By Month" />
+                     <String fx:value="By Year" />
+                     <String fx:value="Date Range" />
+                     <String fx:value="By Status" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Label styleClass="Label" text="Filter By Month:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <ComboBox fx:id="monthComboBox" prefHeight="38.0" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="All Months" />
+                     <String fx:value="January" />
+                     <String fx:value="February" />
+                     <String fx:value="March" />
+                     <String fx:value="April" />
+                     <String fx:value="May" />
+                     <String fx:value="June" />
+                     <String fx:value="July" />
+                     <String fx:value="August" />
+                     <String fx:value="September" />
+                     <String fx:value="October" />
+                     <String fx:value="November" />
+                     <String fx:value="December" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Label styleClass="Label" text="Filter By Year:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="yearComboBox" prefHeight="37.0" prefWidth="214.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label styleClass="Label" text="From Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <DatePicker fx:id="fromDatePicker" prefHeight="49.0" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="Label" text="To Date:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <DatePicker fx:id="toDatePicker" prefHeight="38.0" prefWidth="216.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label styleClass="Label" text="Filter By Status:" GridPane.columnIndex="2" />
+            <ComboBox fx:id="statusComboBox" prefHeight="37.0" prefWidth="200" GridPane.columnIndex="3">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="All" />
+                     <String fx:value="Present" />
+                     <String fx:value="Absent" />
+                     <String fx:value="Leave" />
+                     <String fx:value="Late" />
+                     <String fx:value="Half Day" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+         </children>
+      </GridPane>
+      <Label fx:id="errorMessageLabel" layoutX="1.0" layoutY="184.0" prefHeight="65.0" prefWidth="1250.0" styleClass="Label" />
+      <TableView fx:id="editAttendanceTable" layoutY="250.0" prefHeight="376.0" prefWidth="1253.0">
+         <columns>
+            <TableColumn fx:id="ColMarkAttendance" prefWidth="162.3999908566475"
+                         text="Mark Attendence" />
+            <TableColumn fx:id="colAttendanceId" minWidth="0.0" prefWidth="96.80000305175781" text="Attendance ID" />
+            <TableColumn fx:id="colDate" prefWidth="92.0" text="Date" />
+            <TableColumn fx:id="colTimeIn" prefWidth="120" text="Time In" />
+            <TableColumn fx:id="colTimeOut" prefWidth="167.20001220703125" text="Time Out" />
+            <TableColumn fx:id="colStatus" prefWidth="188.79998779296875" text="Status" />
+            <TableColumn fx:id="colRemarks" prefWidth="423.2000732421875" text="Remarks" />
+         </columns>
+      </TableView>
+      <Button fx:id="applyFilterButton" layoutX="966.0" layoutY="133.0" onMouseClicked="#applyFilteredResult" prefHeight="42.0" prefWidth="283.0" styleClass="button-green" text="Apply Filter" />
+   </children>
+</AnchorPane>
