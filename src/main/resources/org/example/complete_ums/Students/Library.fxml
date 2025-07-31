@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="868.0" prefWidth="1224.0" spacing="20.0" styleClass="VBOX" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Students.Library">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <!-- Header -->
+        <Label prefHeight="27.0" prefWidth="1278.0" styleClass="Heading" text="Library Dashboard" />
+
+        <!-- Search and Filter Section -->
+        <HBox alignment="CENTER_LEFT" spacing="15.0">
+            <children>
+                <TextField fx:id="searchField" prefHeight="42.0" prefWidth="1063.0" promptText="Search by Title, Author, or Genre..." styleClass="grid-pane-text-field" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+      <Label fx:id="errorMessageLabel" prefHeight="51.0" prefWidth="1250.0" styleClass="Label" />
+
+        <!-- Borrowed Books Section -->
+        <Label styleClass="Sub-Heading" text="My Borrowed Books" />
+        <TableView fx:id="borrowedBooksTable" prefHeight="610.0" prefWidth="1239.0" styleClass="table-view" VBox.vgrow="ALWAYS">
+            <columns>
+            <TableColumn fx:id="bookIdCol" prefWidth="96.0" text="Book ID" />
+            <TableColumn fx:id="bookNameCol" prefWidth="308.80006408691406" text="Book Name" />
+                <TableColumn fx:id="borrowDateCol" prefWidth="132.79998779296875" text="Borrowed Date" />
+                <TableColumn fx:id="dueDateCol" prefWidth="110.39996337890625" text="Due Date" />
+                <TableColumn fx:id="returnDateCol" prefWidth="104.0" text="Returned Date" />
+                <TableColumn fx:id="statusCol" prefWidth="96.0" text="Status" />
+                <TableColumn fx:id="borrowedRemarkseCol" prefWidth="316.8001708984375" text="Remarks" />
+                <TableColumn fx:id="fineCol" prefWidth="72.7999267578125" text="Fine (₹)" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</VBox>

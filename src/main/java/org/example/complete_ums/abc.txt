@@ -1,0 +1,327 @@
+package org.example.complete_ums.Accountants;
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import org.example.complete_ums.CommonTable.Fee_Collection_Table;
+import org.example.complete_ums.CommonTable.Fee_Collection_Table_Searching;
+import org.example.complete_ums.Databases.DatabaseConnection;
+import org.example.complete_ums.ToolsClasses.SessionManager;
+
+import java.net.URL;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
+
+public class FeesCollection implements Initializable {
+
+    private final SessionManager sessionManager = SessionManager.getInstance();
+    private final Connection connection = DatabaseConnection.getConnection();
+
+    @FXML
+    private TableView<Fee_Collection_Table_Searching> fee_Collection_Table_Searching;
+    @FXML
+    private TableColumn<Fee_Collection_Table_Searching, Integer> userIDCol;
+    @FXML
+    private TableColumn<Fee_Collection_Table_Searching, String> lastNameCol, firstNameCol, userNameCol,
+            regNoCol, rollNoCol;
+
+    @FXML
+    private TableColumn<Fee_Collection_Table, Integer> colAcademicYear, colFeeMonth, colFeeRecordId;
+    @FXML
+    private TableColumn<Fee_Collection_Table, String> colSemester; // Changed from Integer to String
+    @FXML
+    private TableColumn<Fee_Collection_Table, Double> colAmountDue, colAmountPaid;
+    @FXML
+    private TableColumn<Fee_Collection_Table, Date> colDueDate, colPaymentDate;
+    @FXML
+    private TableColumn<Fee_Collection_Table, String> colRemarks, colReceiptNumber, colPaymentStatus, colFeeType, colTransactionId;
+    @FXML
+    private TableView<Fee_Collection_Table> fee_collection_table;
+
+    @FXML
+    private TextField newAcademicYearField, newAmountDueField, newAmountPaidField,
+            newFeeMonthField, newReceiptNumberField, newTransactionIdField, studentSearchField;
+
+    @FXML
+    private ComboBox<String> newFeeTypeComboBox, newPaymentMethodComboBox, newPaymentStatusComboBox,
+            newSemesterComboBox;
+
+    @FXML
+    private DatePicker newDueDatePicker, newPaymentDatePicker;
+    @FXML
+    private TextArea newRemarksArea;
+    @FXML
+    private Button clearFormButton, recordPaymentButton;
+    @FXML
+    private Label dueDateField, paymentDateField, errorMessageLabel; // Note: selectedUserDetails was removed from @FXML in your provided code
+
+    private int selectedStudentId = -1;
+
+    public FeesCollection() throws SQLException {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        errorMessageLabel.setText("");
+        populateFeeTypesComboBox();
+        populateComboBoxes();
+
+        userIDCol.setCellValueFactory(cellData -> cellData.getValue().userIDProperty().asObject());
+        firstNameCol.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        userNameCol.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
+        regNoCol.setCellValueFactory(cellData -> cellData.getValue().regNoProperty());
+        rollNoCol.setCellValueFactory(cellData -> cellData.getValue().rollNoProperty());
+
+        colAcademicYear.setCellValueFactory(cellData -> cellData.getValue().colAcademicYearProperty().asObject());
+        colFeeMonth.setCellValueFactory(cellData -> cellData.getValue().colFeeMonthProperty());
+        colFeeRecordId.setCellValueFactory(cellData -> cellData.getValue().colFeeRecordIdProperty().asObject());
+        colSemester.setCellValueFactory(cellData -> cellData.getValue().colSemesterProperty());
+        colDueDate.setCellValueFactory(cellData -> cellData.getValue().colDueDateProperty());
+        colPaymentDate.setCellValueFactory(cellData -> cellData.getValue().colPaymentDateProperty());
+        colAmountDue.setCellValueFactory(cellData -> cellData.getValue().colAmountDueProperty().asObject());
+        colAmountPaid.setCellValueFactory(cellData -> cellData.getValue().colAmountPaidProperty().asObject());
+        colRemarks.setCellValueFactory(cellData -> cellData.getValue().colRemarksProperty());
+        colReceiptNumber.setCellValueFactory(cellData -> cellData.getValue().colReceiptNumberProperty());
+        colPaymentStatus.setCellValueFactory(cellData -> cellData.getValue().colPaymentStatusProperty());
+        colFeeType.setCellValueFactory(cellData -> cellData.getValue().colFeeTypeProperty());
+        colTransactionId.setCellValueFactory(cellData -> cellData.getValue().colTransactionIdProperty());
+
+        // --- FIX START ---
+        // 1. Modified studentSearchField listener to always trigger a search
+        studentSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchUsers(newValue);
+        });
+
+        // 2. Added initial search to populate the student search table on startup
+        // This will also trigger fetchFeeRecords for the first student if found.
+        searchUsers(""); // Search with an empty string to get all students initially, or a broad set.
+        // --- FIX END ---
+
+        Platform.runLater(() -> {
+            fee_Collection_Table_Searching.setOnMouseClicked(mouseEvent -> {
+                Fee_Collection_Table_Searching selected = fee_Collection_Table_Searching.getSelectionModel().getSelectedItem();
+                if (selected != null) {
+                    selectedStudentId = selected.getUserID();
+                    // selectedUserDetails.setText(selected.toString()); // Commented out as selectedUserDetails is not declared @FXML in your current code
+                    fetchFeeRecords(selected.getUserID());
+                } else {
+                    selectedStudentId = -1;
+                    // selectedUserDetails.setText("No Student Selected"); // Commented out as selectedUserDetails is not declared @FXML in your current code
+                    fee_collection_table.setItems(FXCollections.emptyObservableList());
+                }
+            });
+        });
+    }
+
+    private void searchUsers(String searchValue) {
+        String query = "SELECT U.User_Id, U.First_Name, U.Last_Name, A.UserName, S.Registration_Number, S.Roll_Number " +
+                "FROM Users U JOIN Authentication A ON U.User_Id = A.User_Id JOIN Students S ON U.User_Id = S.User_Id " +
+                "WHERE LOWER(A.UserName) LIKE LOWER(?) OR CAST(U.User_Id AS CHAR) LIKE? OR " +
+                "LOWER(S.Registration_Number) LIKE LOWER(?) OR LOWER(S.Roll_Number) LIKE LOWER(?)";
+
+        ObservableList<Fee_Collection_Table_Searching> results = FXCollections.observableArrayList();
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            String pattern = "%" + searchValue.trim() + "%";
+            for (int i = 1; i <= 4; i++) {
+                pstmt.setString(i, pattern);
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    results.add(new Fee_Collection_Table_Searching(
+                            rs.getInt("User_Id"),
+                            rs.getString("First_Name"),
+                            rs.getString("Last_Name"),
+                            rs.getString("UserName"),
+                            rs.getString("Registration_Number"),
+                            rs.getString("Roll_Number")
+                    ));
+                }
+
+                fee_Collection_Table_Searching.setItems(results);
+                if (!results.isEmpty()) {
+                    selectedStudentId = results.get(0).getUserID();
+                    // selectedUserDetails.setText(results.get(0).toString()); // Commented out as selectedUserDetails is not declared @FXML in your current code
+                    fetchFeeRecords(selectedStudentId);
+                } else {
+                    showAlert(Alert.AlertType.INFORMATION, "No Results", "No student found matching '" + searchValue + "'.");
+                    selectedStudentId = -1;
+                    // selectedUserDetails.setText("No Student Selected"); // Commented out as selectedUserDetails is not declared @FXML in your current code
+                    fee_collection_table.setItems(FXCollections.emptyObservableList());
+                    fee_Collection_Table_Searching.setItems(FXCollections.emptyObservableList());
+                }
+
+            }
+        } catch (SQLException e) {
+            Platform.runLater(() -> {
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to search users: " + e.getMessage());
+                e.printStackTrace();
+            });
+        }
+    }
+
+    private void fetchFeeRecords(int studentId) {
+        ObservableList<Fee_Collection_Table> records = FXCollections.observableArrayList();
+        String sql = "SELECT SF.Fee_Record_Id, FT.Fee_Type_Name, SF.Academic_Year, SF.Semester, SF.Fee_Month, " +
+                "SF.Amount_Due, SF.Amount_Paid, SF.Due_Date, SF.Payment_Date, SF.Payment_Status, " +
+                "SF.Transaction_Id, SF.Receipt_Number, SF.Remarks " +
+                "FROM Student_Fees SF JOIN Fee_Types FT ON SF.Fee_Type_Id = FT.Fee_Type_Id " +
+                "WHERE SF.User_Id =? " +
+                "ORDER BY SF.Academic_Year DESC, SF.Fee_Month IS NULL, SF.Fee_Month DESC";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, studentId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Integer feeMonth = rs.getObject("Fee_Month") != null ? rs.getInt("Fee_Month") : null;
+                    String semester = rs.getString("Semester");
+
+                    records.add(new Fee_Collection_Table(
+                            rs.getInt("Academic_Year"),
+                            feeMonth,
+                            rs.getInt("Fee_Record_Id"),
+                            semester,
+                            rs.getDate("Due_Date"),
+                            rs.getDate("Payment_Date"),
+                            rs.getDouble("Amount_Due"),
+                            rs.getDouble("Amount_Paid"),
+                            rs.getString("Remarks"),
+                            rs.getString("Receipt_Number"),
+                            rs.getString("Payment_Status"),
+                            rs.getString("Fee_Type_Name"),
+                            rs.getString("Transaction_Id")
+                    ));
+                }
+                fee_collection_table.setItems(records);
+                if (records.isEmpty()) {
+                    showAlert(Alert.AlertType.INFORMATION, "No Records", "No fee records found for student ID: " + studentId);
+                }
+
+            }
+        } catch (SQLException e) {
+            Platform.runLater(() -> {
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to fetch fee records: " + e.getMessage());
+                e.printStackTrace();
+            });
+        }
+    }
+
+    @FXML
+    public void handleAddPayment(ActionEvent event) {
+        if (selectedStudentId == -1) {
+            showAlert(Alert.AlertType.WARNING, "No Student Selected", "Please select a student before recording a payment.");
+            return;
+        }
+
+        try {
+            int feesPaidByUserId = sessionManager.getUserID();
+            String feeType = newFeeTypeComboBox.getValue();
+            int academicYear = Integer.parseInt(newAcademicYearField.getText().trim());
+            String semester = newSemesterComboBox.getValue();
+            Integer feeMonth = newFeeMonthField.getText().trim().isEmpty() ? null : Integer.parseInt(newFeeMonthField.getText().trim());
+            double amountDue = Double.parseDouble(newAmountDueField.getText().trim());
+            double amountPaid = newAmountPaidField.getText().trim().isEmpty() ? 0.0 : Double.parseDouble(newAmountPaidField.getText().trim());
+            LocalDate dueDate = newDueDatePicker.getValue();
+            LocalDate paymentDate = newPaymentDatePicker.getValue();
+            String paymentStatus = newPaymentStatusComboBox.getValue();
+            String transactionId = newTransactionIdField.getText().trim();
+            String receiptNumber = newReceiptNumberField.getText().trim();
+            String remarks = newRemarksArea.getText().trim();
+
+            if (feeType == null || semester == null || paymentStatus == null || dueDate == null) {
+                showAlert(Alert.AlertType.WARNING, "Missing Fields", "Please fill in all required fields.");
+                return;
+            }
+
+            String sql = "INSERT INTO Student_Fees (Fees_Paid_By_User_Id, User_Id, Fee_Type_Id, Academic_Year, Semester, " +
+                    "Fee_Month, Amount_Due, Amount_Paid, Due_Date, Payment_Date, Payment_Status, Transaction_Id, Receipt_Number, Remarks) " +
+                    "VALUES (?,?, (SELECT Fee_Type_Id FROM Fee_Types WHERE Fee_Type_Name =?),?,?,?,?,?,?,?,?,?,?,?)";
+
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, feesPaidByUserId);
+                pstmt.setInt(2, selectedStudentId);
+                pstmt.setString(3, feeType);
+                pstmt.setInt(4, academicYear);
+                pstmt.setString(5, semester);
+                pstmt.setObject(6, feeMonth, Types.INTEGER);
+                pstmt.setDouble(7, amountDue);
+                pstmt.setDouble(8, amountPaid);
+                pstmt.setDate(9, Date.valueOf(dueDate));
+                pstmt.setObject(10, paymentDate != null ? Date.valueOf(paymentDate) : null, Types.DATE);
+                pstmt.setString(11, paymentStatus);
+                pstmt.setObject(12, transactionId.isEmpty() ? null : transactionId, Types.VARCHAR);
+                pstmt.setObject(13, receiptNumber.isEmpty() ? null : receiptNumber, Types.VARCHAR);
+                pstmt.setObject(14, remarks.isEmpty() ? null : remarks, Types.VARCHAR);
+
+                int result = pstmt.executeUpdate();
+                Platform.runLater(() -> {
+                    if (result > 0) {
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Fee payment recorded successfully.");
+                        handleClearForm(new ActionEvent());
+                        fetchFeeRecords(selectedStudentId);
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Failure", "Failed to record fee payment.");
+                    }
+                });
+            }
+        } catch (NumberFormatException e) {
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter valid numeric values for academic year, fee month, and amounts."));
+        } catch (SQLException e) {
+            Platform.runLater(() -> {
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to record payment: " + e.getMessage());
+                e.printStackTrace();
+            });
+        }
+    }
+
+    @FXML
+    public void handleClearForm(ActionEvent event) {
+        Platform.runLater(() -> {
+            newFeeTypeComboBox.getSelectionModel().clearSelection();
+            newAcademicYearField.clear();
+            newSemesterComboBox.getSelectionModel().clearSelection();
+            newFeeMonthField.clear();
+            newAmountDueField.clear();
+            newAmountPaidField.clear();
+            newDueDatePicker.setValue(null);
+            newPaymentDatePicker.setValue(null);
+            newPaymentMethodComboBox.getSelectionModel().clearSelection();
+            newTransactionIdField.clear();
+            newReceiptNumberField.clear();
+            newPaymentStatusComboBox.getSelectionModel().clearSelection();
+            newRemarksArea.clear();
+            errorMessageLabel.setText("");
+        });
+    }
+
+    private void populateFeeTypesComboBox() {
+        ObservableList<String> types = FXCollections.observableArrayList();
+        try (PreparedStatement pstmt = connection.prepareStatement("SELECT Fee_Type_Name FROM Fee_Types ORDER BY Fee_Type_Name");
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                types.add(rs.getString("Fee_Type_Name"));
+            }
+            Platform.runLater(() -> newFeeTypeComboBox.setItems(types));
+        } catch (SQLException e) {
+            Platform.runLater(() -> {
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load fee types: " + e.getMessage());
+                e.printStackTrace();
+            });
+        }
+    }
+
+    private void populateComboBoxes() {
+        Platform.runLater(() -> {
+            newSemesterComboBox.setItems(FXCollections.observableArrayList("1st", "2nd", "Summer"));
+            newPaymentStatusComboBox.setItems(FXCollections.observableArrayList("Paid", "Unpaid", "Partial", "Waived"));
+            newPaymentMethodComboBox.setItems(FXCollections.observableArrayList("Bank Transfer", "Cash", "Cheque"));
+        });
+    }
+
+}
