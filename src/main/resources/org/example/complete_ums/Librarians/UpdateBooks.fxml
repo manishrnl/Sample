@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ScrollPane?>
+<ScrollPane fx:id="mainScrollPane" fitToWidth="true" prefHeight="759.0" prefWidth="1253.0"
+            styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.complete_ums.Librarians.UpdateBooks">
+    <content>
+        <AnchorPane prefHeight="759.0" prefWidth="1253.0" styleClass="back-ground">
+
+            <VBox alignment="TOP_CENTER" prefHeight="774.0" prefWidth="1251.0" spacing="20.0"
+                  AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="0.0">
+                <padding>
+                    <Insets bottom="30.0" left="50.0" right="50.0" top="30.0"/>
+                </padding>
+
+                <Label prefHeight="35.0" prefWidth="258.0" styleClass="Heading"
+                       text="Update Book Details">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Label>
+
+                <GridPane hgap="15.0" vgap="15.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" maxWidth="208.80000915527344"
+                                           minWidth="148.00000610351563"
+                                           prefWidth="204.0000213623047"/>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="700.8000244140625"
+                                           minWidth="501.6000732421875"
+                                           prefWidth="507.19997863769527"/>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="280.7999267578125"
+                                           minWidth="10.0" prefWidth="206.39990234375"/>
+                    </columnConstraints>
+
+                    <Label styleClass="Label" text="Book ID:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="0"/>
+                    <TextField fx:id="bookIdField" prefHeight="26.0" prefWidth="730.0"
+                               promptText="Enter the Book ID to update"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="0"/>
+
+                    <Label styleClass="Label" text="Title:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="1"/>
+                    <TextField fx:id="titleField" promptText="Enter book title"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="1"/>
+
+                    <Label styleClass="Label" text="Author:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="2"/>
+                    <TextField fx:id="authorField" promptText="Enter author name"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="2"/>
+
+                    <Label styleClass="Label" text="ISBN:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="3"/>
+                    <TextField fx:id="isbnField" promptText="Enter ISBN"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="3"/>
+
+                    <Label styleClass="Label" text="Publisher:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="4"/>
+                    <TextField fx:id="publisherField" promptText="Enter publisher"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="4"/>
+
+                    <Label prefHeight="18.0" prefWidth="114.0" styleClass="Label"
+                           text="Publication Year:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="5"/>
+                    <TextField fx:id="publicationYearField" promptText="Enter publication year"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="5"/>
+
+                    <Label prefHeight="18.0" prefWidth="57.0" styleClass="Label" text="Genre:"
+                           GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                    <TextField fx:id="genreField" promptText="Enter genre"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="6"/>
+
+                    <Label styleClass="Label" text="New Copies to Add:"
+                           GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+                    <TextField fx:id="newCopiesField"
+                               promptText="Enter number of new copies received"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="8"/>
+
+                    <Label styleClass="Label" text="Location/Shelf:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="9"/>
+                    <TextField fx:id="locationShelfField" promptText="e.g., A-12-3"
+                               styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                               GridPane.rowIndex="9"/>
+
+                    <Label styleClass="Label" text="Description:" GridPane.columnIndex="0"
+                           GridPane.rowIndex="10"/>
+                    <TextArea fx:id="descriptionArea" prefHeight="100.0"
+                              promptText="Enter a brief description of the book"
+                              styleClass="text-area" wrapText="true" GridPane.columnIndex="1"
+                              GridPane.rowIndex="10"/>
+                    <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#searchBookID"
+                            styleClass="button-green" text="Search Books"
+                            GridPane.columnIndex="2"/>
+                    <Label prefHeight="18.0" prefWidth="167.0" styleClass="Label"
+                           text="Total Copies Remaining" GridPane.rowIndex="7"/>
+                    <TextField fx:id="totalCopiesLeft" editable="false"
+                               promptText="Total Copies Left" styleClass="grid-pane-text-field"
+                               GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                    <rowConstraints>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                    </rowConstraints>
+                </GridPane>
+                <Label fx:id="errorMessageLabel" prefHeight="62.0" prefWidth="941.0"
+                       styleClass="Label" wrapText="true"/>
+
+                <HBox alignment="CENTER" prefHeight="50.0" spacing="20.0"
+                      styleClass="HBOX-Right-Alignment">
+                    <Button fx:id="cancelButton" onAction="#handleCancel"
+                            styleClass="button-red" text="Cancel"/>
+                    <Button fx:id="updateButton" onAction="#handleUpdateBook"
+                            styleClass="button-green" text="Update Book"/>
+                </HBox>
+
+            </VBox>
+        </AnchorPane>
+    </content>
+</ScrollPane>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="mainScrollPane" fitToWidth="true" prefHeight="953.0" prefWidth="1563.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Students.ViewIssuedBooks">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="954.0" prefWidth="1548.0" styleClass="back-ground">
+            <children>
+                <HBox alignment="CENTER" prefHeight="35.0" prefWidth="1189.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label prefHeight="35.0" prefWidth="876.0" styleClass="Heading" text="   View and Return Books">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="249.0" styleClass="Label" text="Search by Anything" />
+                        <TextField fx:id="searchField" prefHeight="35.0" prefWidth="682.0" promptText="Search Anything Dynamically" styleClass="grid-pane-text-field" />
+                    </children>
+                </HBox>
+                <TableView fx:id="viewOrReturnBooksTableTableView" layoutX="27.200000000000003" layoutY="148.8" prefHeight="786.0" prefWidth="1521.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="149.0">
+                    <columns>
+                        <TableColumn fx:id="userIdColumn" prefWidth="95.19997787475586" text="User ID" />
+                        <TableColumn fx:id="librariansID" prefWidth="100.0" text="Librarians ID" />
+                        <TableColumn fx:id="userNameColumn" prefWidth="130.39999389648438" text="User Name" />
+                        <TableColumn fx:id="fullNameColumn" prefWidth="132.0" text="Full  Name" />
+                        <TableColumn fx:id="borrowIdColumn" prefWidth="89.5999755859375" text="Borrow ID" />
+                        <TableColumn fx:id="bookIdColumn" prefWidth="100.0" text="Book ID" />
+                        <TableColumn fx:id="borrowDateColumn" prefWidth="150.0" text="Borrow Date" />
+                        <TableColumn fx:id="dueDateColumn" prefWidth="150.0" text="Due Date" />
+                        <TableColumn fx:id="returnDateColumn" prefWidth="150.0" text="Return Date" />
+                        <TableColumn fx:id="fineAmountColumn" prefWidth="100.0" text="Fine Amount" />
+                        <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <Label fx:id="errorMessageLabel" layoutX="14.0" layoutY="51.0" prefHeight="72.0" prefWidth="1507.0" styleClass="Label" wrapText="true" AnchorPane.bottomAnchor="831.4" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="50.0" />
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>

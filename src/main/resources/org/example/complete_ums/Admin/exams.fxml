@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ScrollPane?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true"   fx:controller="org.example.complete_ums.Admin.Exams"  styleClass="back-ground" >
+    <content>
+        <VBox prefHeight="868.0" prefWidth="1270.0" spacing="25.0" styleClass="VBOX"
+           >
+
+            <Label text="Exams Dashboard" styleClass="Heading" layoutX="20.0" layoutY="20.0"/>
+        </VBox>
+    </content>
+</ScrollPane>

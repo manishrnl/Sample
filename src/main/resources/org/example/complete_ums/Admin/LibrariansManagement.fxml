@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.ScrollPane?>
+<ScrollPane xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true"
+            fx:controller="org.example.complete_ums.Admin.LibrariansManagement"  styleClass="back-ground" >
+    <content>
+
+
+        <AnchorPane prefHeight="797.0" prefWidth="1330.0" styleClass="back-ground">
+            <children>
+
+
+            </children>
+            <TableView fx:id="librariansTable" layoutX="14.0" layoutY="55.0" prefHeight="370.0"
+                       prefWidth="1307.0">
+                <columns>
+                    <TableColumn fx:id="colUserId" prefWidth="131.999966442585"
+                                 text="User ID"/>
+                    <TableColumn fx:id="colFullName" prefWidth="191.99998474121094"
+                                 text="Full Name"/>
+                    <TableColumn fx:id="colUserName" prefWidth="272.0" text="User Name"/>
+                    <TableColumn fx:id="colMobile" prefWidth="232.80001831054688"
+                                 text="Mobile Number"/>
+                    <TableColumn fx:id="colPan" prefWidth="216.00006103515625"
+                                 text="PAN Number"/>
+                    <TableColumn fx:id="colAadhar" prefWidth="226.4000244140625"
+                                 text="Aadhar"/>
+                </columns>
+            </TableView>
+
+            <GridPane layoutX="14.0" layoutY="442.0" prefHeight="274.0" prefWidth="963.0">
+
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="387.6000122070312"
+                                       minWidth="56.400019073486305"
+                                       prefWidth="174.8000061035156"/>
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="605.1999809265136"
+                                       minWidth="24.0" prefWidth="157.7999755859375"/>
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="712.0000366210937"
+                                       minWidth="56.9999969482422"
+                                       prefWidth="146.7999755859375"/>
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="779.2000366210937"
+                                       minWidth="105.60000000000002"
+                                       prefWidth="186.80002441406253"/>
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="779.2000366210937"
+                                       minWidth="73.60000000000002"
+                                       prefWidth="139.00004882812505"/>
+                    <ColumnConstraints hgrow="ALWAYS" maxWidth="779.2000366210937"
+                                       minWidth="160.80001220703127"
+                                       prefWidth="160.80001220703127"/>
+                </columnConstraints>
+
+                <!-- Row 0 -->
+                <Label styleClass="Label" text="First Name" GridPane.columnIndex="0"
+                       GridPane.rowIndex="0"/>
+                <TextField fx:id="firstNameField" promptText="First Name"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="0"/>
+
+                <Label prefHeight="18.0" prefWidth="134.0" styleClass="Label" text="Last Name"
+                       GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <TextField fx:id="lastNameField" promptText="Last Name"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="0"/>
+
+                <!-- Row 1 -->
+                <Label styleClass="Label" text="Aadhar Number" GridPane.columnIndex="0"
+                       GridPane.rowIndex="1"/>
+                <TextField fx:id="aadharField" promptText="Aadhar Number"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="1"/>
+
+                <Label styleClass="Label" text="PAN Number" GridPane.columnIndex="2"
+                       GridPane.rowIndex="1"/>
+                <TextField fx:id="panField" promptText="PAN Number"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="1"/>
+
+                <!-- Row 2 -->
+                <Label styleClass="Label" text="Mobile" GridPane.columnIndex="0"
+                       GridPane.rowIndex="2"/>
+                <TextField fx:id="mobileField" promptText="Mobile Number"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="2"/>
+
+                <Label styleClass="Label" text="Alternate Mobile" GridPane.columnIndex="2"
+                       GridPane.rowIndex="2"/>
+                <TextField fx:id="altMobileField" promptText="Alternate Mobile"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="2"/>
+
+                <!-- Row 3 -->
+                <Label styleClass="Label" text="Email" GridPane.columnIndex="0"
+                       GridPane.rowIndex="3"/>
+                <TextField fx:id="emailField" promptText="Email"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="3"/>
+
+                <Label styleClass="Label" text="Gender" GridPane.columnIndex="2"
+                       GridPane.rowIndex="3"/>
+                <ComboBox fx:id="genderCombo" prefHeight="26.0" prefWidth="213.0"
+                          styleClass="grid-pane-combo-box" GridPane.columnIndex="3"
+                          GridPane.rowIndex="3">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Male"/>
+                            <String fx:value="Female"/>
+                            <String fx:value="Other"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Row 4 -->
+                <Label styleClass="Label" text="DOB" GridPane.columnIndex="0"
+                       GridPane.rowIndex="4"/>
+                <DatePicker fx:id="dobPicker" prefHeight="26.0" prefWidth="199.0"
+                            styleClass="date-picker" GridPane.columnIndex="1"
+                            GridPane.rowIndex="4"/>
+
+                <Label styleClass="Label" text="Blood Group" GridPane.columnIndex="2"
+                       GridPane.rowIndex="4"/>
+                <TextField fx:id="bloodGroupField" promptText="Blood Group"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="4"/>
+
+                <!-- Row 5 -->
+                <Label styleClass="Label" text="Marital Status" GridPane.columnIndex="0"
+                       GridPane.rowIndex="5"/>
+                <TextField fx:id="maritalStatusField" promptText="Marital Status"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="5"/>
+
+                <Label styleClass="Label" text="Nationality" GridPane.columnIndex="2"
+                       GridPane.rowIndex="5"/>
+                <TextField fx:id="nationalityField" promptText="Nationality"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="5"/>
+
+                <!-- Row 6 -->
+                <Label styleClass="Label" text="Emergency Contact Name"
+                       GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                <TextField fx:id="emergencyNameField" promptText="Emergency Name"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="6"/>
+
+                <Label styleClass="Label" text="Emergency Relationship"
+                       GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                <TextField fx:id="emergencyRelationField" promptText="Relationship"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="6"/>
+
+                <!-- Row 7 -->
+                <Label styleClass="Label" text="Emergency Mobile" GridPane.columnIndex="0"
+                       GridPane.rowIndex="7"/>
+                <TextField fx:id="emergencyMobileField" promptText="Mobile"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="7"/>
+
+                <Label styleClass="Label" text="Temporary Address" GridPane.columnIndex="2"
+                       GridPane.rowIndex="7"/>
+                <TextField fx:id="tempAddressField" promptText="Temp Address"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="7"/>
+
+                <!-- Row 8 -->
+                <Label styleClass="Label" text="Permanent Address" GridPane.columnIndex="0"
+                       GridPane.rowIndex="8"/>
+                <TextField fx:id="permAddressField" promptText="Perm Address"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="8"/>
+
+                <Label prefHeight="23.0" prefWidth="204.0" styleClass="Label"
+                       text="Father's Name" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+                <TextField fx:id="fatherNameField" promptText="Father's Name"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="3"
+                           GridPane.rowIndex="8"/>
+
+                <!-- Row 9 -->
+                <Label styleClass="Label" text="Mother's Name" GridPane.columnIndex="0"
+                       GridPane.rowIndex="9"/>
+                <TextField fx:id="motherNameField" promptText="Mother's Name"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="1"
+                           GridPane.rowIndex="9"/>
+
+                <Label styleClass="Label" text="Referenced Via" GridPane.columnIndex="4"
+                       GridPane.rowIndex="6"/>
+                <TextField fx:id="referencedViaField" promptText="Referral Source"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="5"
+                           GridPane.rowIndex="6"/>
+
+                <!-- Row 10 (Librarian Specific) -->
+                <Label styleClass="Label" text="Qualification" GridPane.columnIndex="4"
+                       GridPane.rowIndex="4"/>
+                <TextField fx:id="qualificationField" promptText="Qualification"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="5"
+                           GridPane.rowIndex="4"/>
+
+                <Label styleClass="Label" text="Certification" GridPane.columnIndex="4"
+                       GridPane.rowIndex="5"/>
+                <TextField fx:id="certificationField" promptText="Certification"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="5"
+                           GridPane.rowIndex="5"/>
+
+                <!-- Row 11 -->
+                <Label styleClass="Label" text="Experience (Years)" GridPane.columnIndex="4"
+                       GridPane.rowIndex="3"/>
+                <TextField fx:id="experienceYearsField" promptText="Years of Experience"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="5"
+                           GridPane.rowIndex="3"/>
+
+                <Label styleClass="Label" text="Designation" GridPane.columnIndex="4"
+                       GridPane.rowIndex="1"/>
+                <TextField fx:id="designationField" promptText="Designation"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="5"
+                           GridPane.rowIndex="1"/>
+
+                <!-- Row 12 -->
+                <Label styleClass="Label" text="Department ID" GridPane.columnIndex="4"
+                       GridPane.rowIndex="2"/>
+                <TextField fx:id="departmentIdField" promptText="Dept ID"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="5"
+                           GridPane.rowIndex="2"/>
+
+                <Label styleClass="Label" text="Salary" GridPane.columnIndex="4"/>
+                <TextField fx:id="salaryField" promptText="Salary"
+                           styleClass="grid-pane-text-field" GridPane.columnIndex="5"/>
+                <rowConstraints>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                </rowConstraints>
+            </GridPane>
+
+            <Label fx:id="errorMessageLabel" layoutX="975.0" layoutY="692.0" prefHeight="97.0"
+                   prefWidth="341.0" styleClass="Label" wrapText="true"/>
+            <ImageView fx:id="usersImage" fitHeight="243.0" fitWidth="324.0" layoutX="993.0"
+                       layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../Images/UserName.png"/>
+                </image>
+            </ImageView>
+            <HBox layoutX="14.0" layoutY="14.0" prefHeight="36.0" prefWidth="1307.0">
+                <children>
+                    <Label prefHeight="34.0" prefWidth="629.0" styleClass="Heading"
+                           text="Librarians Management"/>
+                    <Label prefHeight="42.0" prefWidth="163.0" styleClass="Label"
+                           text="Search Anything"/>
+                    <TextField fx:id="searchAnything" prefHeight="36.0" prefWidth="532.0"
+                               promptText="Search Anything ...."
+                               styleClass="grid-pane-text-field"/>
+                </children>
+            </HBox>
+            <Button layoutX="554.0" layoutY="730.0" mnemonicParsing="false"
+                    onAction="#uploadUsersImage" prefHeight="54.0" prefWidth="196.0"
+                    styleClass="button-green" text="Upload Users Image"/>
+            <Button layoutX="353.0" layoutY="730.0" mnemonicParsing="false"
+                    onAction="#handleDeleteLibrarians" prefHeight="54.0" prefWidth="186.0"
+                    styleClass="button-red" text="Delete Librarians"/>
+            <Button layoutX="764.0" layoutY="730.0" mnemonicParsing="false"
+                    onAction="#handleUpdateLibrarians" prefHeight="54.0" prefWidth="196.0"
+                    styleClass="button-green" text="Update  Librarians"/>
+        </AnchorPane>
+
+    </content>
+</ScrollPane>

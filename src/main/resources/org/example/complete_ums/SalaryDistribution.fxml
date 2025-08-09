@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="804.0" prefWidth="1251.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.SalaryDistributionController">
+   <children>
+      <Label layoutX="14.0" prefHeight="27.0" prefWidth="764.0" styleClass="Heading" text="Salary Distribution Dashboard        ,     Employee Details &amp; Attendance" />
+      <TableView fx:id="salaryDeuctionsTable" layoutX="8.0" layoutY="41.0" prefHeight="391.0" prefWidth="1216.0">
+         <columns>
+            <TableColumn fx:id="colUserId" prefWidth="97.60000801086426" text="User ID" />
+            <TableColumn fx:id="colFullName" prefWidth="216.80001068115234" text="Full Name" />
+            <TableColumn fx:id="colRoleType" prefWidth="130.39996337890625" text="Role" />
+            <TableColumn fx:id="colUserName" prefWidth="158.40005493164062" text="User Name" />
+            <TableColumn fx:id="colMobile" prefWidth="168.00006103515625" text="Mobile Number" />
+            <TableColumn fx:id="colPan" prefWidth="188.0" text="PAN Number" />
+            <TableColumn fx:id="colAadhar" prefWidth="141.60003662109375" text="Aadhar" />
+         </columns>
+      </TableView>
+      <GridPane hgap="10" layoutX="12.0" layoutY="520.0" prefHeight="155.0" prefWidth="1206.0" vgap="10">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.9999755859375" minWidth="10.0" prefWidth="235.99997558593745" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.20001220703125" minWidth="10.0" prefWidth="272.80004882812506" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.5999511718751" minWidth="10.0" prefWidth="364.5999511718751" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="27.4" minHeight="2.5999511718749986" prefHeight="27.4" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="44.200048828125006" minHeight="10.0" prefHeight="19.400000000000006" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label styleClass="Label" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="employeeNameField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label styleClass="Label" text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="employeeRoleField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label styleClass="Label" text="Monthly Salary (Base):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="baseSalaryField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="Label" text="Total Days in Month:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <TextField fx:id="totalDaysField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+            <Label styleClass="Label" text="Days Present:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="presentDaysField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label styleClass="Label" text="Unpaid Leave/Absent:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="unpaidLeaveDaysField" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label styleClass="Label" text="Attendance Deduction:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="attendanceDeductionField" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="680.0" spacing="20" styleClass="HBOX-Right-Alignment" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="179.0" styleClass="Label" />
+                  <Label prefHeight="22.0" prefWidth="158.0" styleClass="Sub-Heading" text="Final Calculation" />
+                  <Button fx:id="cancelButton" onAction="#cancel" prefHeight="42.0" prefWidth="136.0" styleClass="button-red" text="Cancel" />
+                  <Button fx:id="calculateButton" onAction="#calculateFinalSalary" prefHeight="42.0" prefWidth="214.0" styleClass="button-green" text="Calculate Final Salary" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <Separator layoutX="14.0" layoutY="250.0" />
+      <Label layoutX="14.0" layoutY="487.0" styleClass="Sub-Heading" text="Earnings &amp; Deductions Breakdown" />
+      <Separator layoutX="14.0" layoutY="250.0" />
+      <GridPane hgap="10" layoutX="10.0" layoutY="684.0" prefHeight="98.0" prefWidth="1206.0" vgap="10">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.00000610351563" minWidth="10.0" prefWidth="198.79999389648438" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.59998168945316" minWidth="10.0" prefWidth="249.40004882812505" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="314.8000122070313" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="341.9999877929687" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="grossAmountField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label styleClass="Label" text="Total Deductions:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="totalDeductionsField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label styleClass="Label" text="Net Amount Payable:" GridPane.columnIndex="2" />
+            <TextField fx:id="netSalaryField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="3" />
+            <Label styleClass="Label" text="Gross Amount:" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <TextField fx:id="remarksField" prefHeight="38.0" prefWidth="373.0" promptText="Add Remarks" styleClass="grid-pane-text-field" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="HBOX-Right-Alignment" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#payAllInOneClick" prefHeight="44.0" prefWidth="226.0" styleClass="button-green" text="Save and Pay All" />
+                  <Button fx:id="saveButton" onAction="#saveAndPay" prefHeight="42.0" prefWidth="236.0" styleClass="button-green" text="Save and Pay One" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <Label fx:id="errorMessageLabel" layoutX="8.0" layoutY="433.0" prefHeight="79.0" prefWidth="1234.0" styleClass="Label" wrapText="true" />
+   </children>
+</AnchorPane>

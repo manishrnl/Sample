@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true"  styleClass="back-ground" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.complete_ums.Staffs.StaffsProfileView">
+
+    <VBox spacing="20" styleClass="back-ground">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+        </padding>
+
+        <Label styleClass="Heading" text="Staff Profile" />
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="HBOX-Center-Alignment">
+         <children>
+            <VBox prefHeight="228.0" prefWidth="328.0" styleClass="HBOX-Center-Alignment">
+               <children>
+                  <Label fx:id="fullNameHeader" styleClass="Heading" text="Full Name" />
+                  <Label fx:id="userNameHeader" styleClass="Heading" text="User Name" />
+                  <Label fx:id="idHeader" styleClass="Heading" text="ID" />
+               </children>
+            </VBox>
+            <HBox prefHeight="228.0" prefWidth="92.0" styleClass="back-ground" />
+            <ImageView fx:id="usersImage" fitHeight="228.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/UserName.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+
+        <GridPane hgap="15" prefHeight="585.0" prefWidth="1403.0" vgap="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+            <!-- Row 0 -->
+            <Label styleClass="Label" text="User ID:" />
+            <Label fx:id="userIdLabel" prefHeight="20.0" prefWidth="262.0" styleClass="Label" GridPane.columnIndex="1" />
+            <Label styleClass="Label" text="Role:" GridPane.columnIndex="2" />
+            <Label fx:id="roleLabel" prefHeight="20.0" prefWidth="307.0" styleClass="Label" GridPane.columnIndex="3" />
+            <Label styleClass="Label" text="Status:" GridPane.columnIndex="4" />
+            <Label fx:id="statusLabel" prefHeight="20.0" prefWidth="279.0" styleClass="Label" GridPane.columnIndex="5" />
+
+            <!-- Row 1 -->
+            <Label styleClass="Label" text="Joined On:" GridPane.rowIndex="2" />
+            <Label fx:id="joinedOnLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="Label" text="Updated On:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="updatedOnLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label styleClass="Label" text="Approval:" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="approvalLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+
+            <!-- Row 2 -->
+            <Label styleClass="Label" text="First Name:" GridPane.rowIndex="4" />
+            <Label fx:id="firstNameLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label styleClass="Label" text="Last Name:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="lastNameLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Label styleClass="Label" text="Aadhar:" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Label fx:id="aadharLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+
+            <!-- Row 3 -->
+            <Label styleClass="Label" text="PAN:" GridPane.rowIndex="6" />
+            <Label fx:id="panLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label styleClass="Label" text="Mobile:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Label fx:id="mobileLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label styleClass="Label" text="Alt Mobile:" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <Label fx:id="alternateMobileLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+
+            <!-- Row 4 -->
+            <Label styleClass="Label" text="Email:" GridPane.rowIndex="8" />
+            <Label fx:id="emailLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label styleClass="Label" text="Gender:" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Label fx:id="genderLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Label styleClass="Label" text="DOB:" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+            <Label fx:id="dobLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+
+            <!-- Row 5 -->
+            <Label styleClass="Label" text="Blood Group:" GridPane.rowIndex="10" />
+            <Label fx:id="bloodGroupLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label styleClass="Label" text="Marital Status:" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            <Label fx:id="maritalStatusLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+            <Label styleClass="Label" text="Nationality:" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+            <Label fx:id="nationalityLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="10" />
+
+            <!-- Row 6 -->
+            <Label styleClass="Label" text="Father’s Name:" GridPane.rowIndex="12" />
+            <Label fx:id="fatherNameLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <Label styleClass="Label" text="Mother’s Name:" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+            <Label fx:id="motherNameLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+            <Label styleClass="Label" text="Temp Address:" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+            <Label fx:id="tempAddressLabel" styleClass="Label" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="12" />
+
+            <!-- Row 7 -->
+            <Label styleClass="Label" text="Perm Address:" GridPane.rowIndex="14" />
+            <Label fx:id="permAddressLabel" styleClass="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <Label styleClass="Label" text="Emergency Contact Name:" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+            <Label fx:id="emergencyNameLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+            <Label styleClass="Label" text="Emergency Relation:" GridPane.columnIndex="4" GridPane.rowIndex="14" />
+            <Label fx:id="emergencyRelationLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="14" />
+
+            <!-- Row 8 -->
+            <Label styleClass="Label" text="Emergency Mobile:" GridPane.rowIndex="16" />
+            <Label fx:id="emergencyMobileLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+            <Label styleClass="Label" text="Registration No.:" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+            <Label fx:id="registrationLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="16" />
+            <Label styleClass="Label" text="Designation:" GridPane.columnIndex="4" GridPane.rowIndex="16" />
+            <Label fx:id="designationLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="16" />
+
+            <!-- Row 9 -->
+            <Label styleClass="Label" text="Department ID:" GridPane.rowIndex="18" />
+            <Label fx:id="departmentLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+            <Label styleClass="Label" text="Employment Type:" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+            <Label fx:id="employmentTypeLabel" styleClass="Label" GridPane.columnIndex="3" GridPane.rowIndex="18" />
+            <Label styleClass="Label" text="Experience Years:" GridPane.columnIndex="4" GridPane.rowIndex="18" />
+            <Label fx:id="experienceLabel" styleClass="Label" GridPane.columnIndex="5" GridPane.rowIndex="18" />
+
+            <!-- Row 10 -->
+            <Label styleClass="Label" text="Salary:" GridPane.rowIndex="20" />
+            <Label fx:id="salaryLabel" styleClass="Label" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="1" />
+         <Separator layoutX="20.0" layoutY="51.0" prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="3" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="5" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="7" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="9" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="11" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="13" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="15" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="17" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="19" />
+         <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="21" />
+         <columnConstraints>
+            <ColumnConstraints maxWidth="209.6" minWidth="101.6" prefWidth="163.99999389648437" />
+            <ColumnConstraints maxWidth="331.7999633789063" minWidth="0.0" prefWidth="256.6000061035156" />
+            <ColumnConstraints maxWidth="378.7999938964844" minWidth="0.0" prefWidth="195.80003662109374" />
+            <ColumnConstraints maxWidth="548.1999389648438" minWidth="4.79998779296875" prefWidth="260.4000061035156" />
+            <ColumnConstraints maxWidth="751.9999511718748" minWidth="114.4000244140625" prefWidth="151.40006103515623" />
+            <ColumnConstraints maxWidth="252.0" minWidth="5.5999755859375" prefWidth="252.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints maxHeight="27.199975585937523" minHeight="21.600000000000023" prefHeight="27.199975585937523" />
+            <RowConstraints maxHeight="27.199975585937523" minHeight="21.600000000000023" prefHeight="27.199975585937523" />
+         </rowConstraints>
+        </GridPane>
+    </VBox>
+</ScrollPane>

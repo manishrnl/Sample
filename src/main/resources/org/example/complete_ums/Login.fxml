@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="546.0" prefWidth="782.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Login_Controller">
+    <AnchorPane fx:id="rootPane">
+        <children>
+            <GridPane hgap="10.0" layoutX="78.0" layoutY="95.0" maxWidth="743.0" prefHeight="162.0" prefWidth="603.0" vgap="10.0">
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.9999771118164" minWidth="10.0" prefWidth="109.40005950927736" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.39994049072266" minWidth="10.0" prefWidth="406.39994049072266" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="99.59998168945313" minHeight="10.0" prefHeight="44.00001220703125" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="160.4" minHeight="10.0" prefHeight="36.79998779296874" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+                    <Label prefHeight="70.0" prefWidth="90.0" styleClass="Label" text="Username:" GridPane.columnIndex="1" />
+                    <TextField fx:id="usernameField" prefHeight="39.0" prefWidth="406.0" promptText="Enter your userName" styleClass="Login-TextField" text="saanvi.patel05" GridPane.columnIndex="2" />
+                    <Label prefHeight="68.0" prefWidth="78.0" styleClass="Label" text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <StackPane fx:id="passwordStack" prefHeight="80.0" prefWidth="404.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <children>
+                            <!-- Visible password (initially hidden) -->
+                            <TextField fx:id="showPasswordField" managed="false" promptText="Enter your password" styleClass="Login-TextField" visible="false" />
+
+                            <!-- Masked password -->
+                            <PasswordField fx:id="passwordField" prefHeight="38.0" prefWidth="406.0" promptText="Enter your password" styleClass="Login-TextField" text="Saanvi@1990" />
+
+                            <!-- Eye icon to toggle visibility -->
+                            <ImageView fitHeight="27.0" fitWidth="30.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" styleClass="eye-icon" StackPane.alignment="CENTER_RIGHT">
+                                <image>
+                                    <Image url="@Images/ShowPassword.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </StackPane>
+
+                    <ImageView fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@Images/userName.png" />
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="60.0" fitWidth="46.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                        <image>
+                            <Image url="@Images/password.png" />
+                        </image>
+                    </ImageView>
+                </children>
+            </GridPane>
+            <Label layoutX="285.0" layoutY="14.0" styleClass="Heading" text="MANISH'S University" textFill="#333333">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="394.0" prefHeight="22.0" prefWidth="250.0" styleClass="Sub-Heading" text="Not Registered Yet ? " textFill="#333333">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Label>
+            <Button fx:id="SignupButton" layoutX="332.0" layoutY="384.0" onAction="#handleSignupButton" prefHeight="42.0" prefWidth="163.0" styleClass="button-yellow" text="Signup" />
+            <Hyperlink layoutX="30.0" layoutY="307.0" onAction="#handleForgotPassword" prefHeight="34.0" prefWidth="142.0" styleClass="HTML" text="Forgot Password ?" textFill="#007bff" />
+            <Button fx:id="LoginButton" layoutX="329.0" layoutY="300.0" onAction="#handleLoginButton" prefHeight="48.0" prefWidth="351.0" styleClass="button-green" text="Login" />
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="3.0" layoutY="442.0" prefHeight="89.0" prefWidth="776.0" styleClass="Label" wrapText="true" />
+            <Button fx:id="quitButton" layoutX="517.0" layoutY="384.0" mnemonicParsing="false" onAction="#handleQuit" prefHeight="42.0" prefWidth="163.0" styleClass="button-red" text="Quit" />
+            <Hyperlink layoutX="188.0" layoutY="307.0" onAction="#handleChangePassword" prefHeight="34.0" prefWidth="133.0" styleClass="HTML" text="Change Password ?" textFill="#007bff" />
+        </children>
+    </AnchorPane>
+</StackPane>

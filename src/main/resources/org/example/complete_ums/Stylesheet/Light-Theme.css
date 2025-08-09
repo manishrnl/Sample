@@ -1,0 +1,803 @@
+.back-ground {
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-padding: 10px;
+    -fx-margin: 10px;
+    -fx-background-color: #FFFFFF; /* Primary Background */
+}
+
+.button {
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10px 22px;
+    -fx-background-radius: 14px;
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 4, 0.2, 0, 2);
+    -fx-smooth: true;
+}
+
+.button-green {
+    -fx-alignment:CENTER;
+    -fx-padding: 10px 16px;
+    -fx-background-radius: 12;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #004D40;
+    -fx-background-color: linear-gradient(to bottom, #B8F8D1, #7DECB2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 170, 0.25), 10, 0.4, 0, 4);
+    -fx-border-radius: 12;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.button-green:hover {
+    -fx-background-color: linear-gradient(to bottom, #9FFFCF, #6FEFAF);
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 170, 0.4), 12, 0.5, 0, 6);
+}
+
+.button-red {
+    -fx-alignment:CENTER;
+    -fx-padding: 10px 16px;
+    -fx-background-radius: 12;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #680000;
+    -fx-background-color: linear-gradient(to bottom, #FFD6D6, #FFA8A8);
+    -fx-effect: dropshadow(gaussian, rgba(255, 60, 60, 0.25), 10, 0.4, 0, 4);
+    -fx-border-radius: 12;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.button-red:hover {
+    -fx-background-color: linear-gradient(to bottom, #FFC4C4, #FF9393);
+    -fx-effect: dropshadow(gaussian, rgba(255, 40, 40, 0.4), 12, 0.5, 0, 6);
+}
+
+.button-yellow {
+    -fx-alignment:CENTER;
+    -fx-padding: 10px 16px;
+    -fx-background-radius: 12;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5D4700;
+    -fx-background-color: linear-gradient(to bottom, #FFF7B2, #FFE973);
+    -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.25), 10, 0.4, 0, 4);
+    -fx-border-radius: 12;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.button-yellow:hover {
+    -fx-background-color: linear-gradient(to bottom, #FFF9C1, #FFED86);
+    -fx-effect: dropshadow(gaussian, rgba(255, 200, 0, 0.4), 12, 0.5, 0, 6);
+}
+
+
+.chart {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F1F1F;
+}
+
+.chart-plot-background {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+}
+/* --- Main ComboBox Styling --- */
+.combo-box {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-size: 12px;
+    -fx-border-color: #D0D0D0;
+    -fx-border-width: 1px; /* Explicitly set border width */
+    -fx-cursor: hand;
+}
+
+/* --- NEW: Style when the ComboBox is focused (clicked on) --- */
+/* This gives a clear visual cue that the user can start typing. */
+.combo-box:focused {
+    -fx-border-color: #0066CC; /* Accent Color */
+    -fx-border-width: 1.5px;
+}
+
+/* --- NEW: Add padding to the text input area --- */
+/* This gives a bit of space before the text, making it look cleaner. */
+.combo-box .text-input {
+    -fx-padding: 0 0 0 10px; /* 10px padding on the left */
+}
+
+/* Style for the displayed item in the closed ComboBox */
+.combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F1F1F; /* Primary Text */
+    -fx-alignment: center-left; /* Align left for better readability */
+    -fx-padding: 0 0 0 10px; /* Match the text-input padding */
+}
+
+/* --- Dropdown Arrow Styling --- */
+.combo-box .arrow-button {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0 20 20 0;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #0066CC; /* Accent Color */
+}
+
+/* --- Dropdown Popup List Styling --- */
+.combo-box-popup .list-view {
+    -fx-background-color: #FFFFFF; /* Primary Background */
+    -fx-border-color: #D0D0D0;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5); /* Soft shadow for depth */
+}
+
+/* Style for items within the dropdown list */
+.combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F1F1F;
+    -fx-font-size: 12px;
+    -fx-alignment: center-left; /* Align left for readability */
+    -fx-padding: 5px 15px; /* Add some vertical and horizontal padding */
+}
+
+/* Hover effect for items in the dropdown */
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #E0ECFF; /* Button Background */
+    -fx-text-fill: #0066CC;
+}
+
+/* --- NEW: Style for the currently selected item in the dropdown --- */
+/* This makes it easy to see which item is currently selected. */
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #0066CC; /* Accent Color */
+    -fx-text-fill: white;
+}
+.chart {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F1F1F;
+}
+
+.chart-plot-background {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+}
+
+.chart-legend-item {
+    -fx-text-fill: #4A4A4A; /* Secondary Text */
+    -fx-font-size: 13px;
+}
+
+.chart-legend-item-symbol {
+    -fx-padding: 4px;
+    -fx-background-radius: 5em;
+    -fx-min-width: 1.2em;
+    -fx-min-height: 1.2em;
+    -fx-max-width: 1.2em;
+    -fx-max-height: 1.2em;
+}
+
+.chart-legend-item-symbol .chart-bar {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-text-fill: #1F1F1F; /* Primary Text */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.axis {
+    -fx-tick-label-fill: #4A4A4A; /* Secondary Text */
+}
+
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: #D0D0D0; /* Border / Divider */
+}
+
+.chart-pie-label {
+    -fx-fill: #1F1F1F;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.date-picker {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #D0D0D0;
+    -fx-text-fill: #1F1F1F;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F1F1F;
+    -fx-prompt-text-fill: #4A4A4A;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.date-picker .arrow {
+    -fx-background-color: #0066CC; /* Accent Color */
+}
+
+.date-picker-popup {
+    -fx-background-color: #FFFFFF; /* Primary Background */
+    -fx-border-color: #D0D0D0;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+}
+
+.date-picker-popup .label {
+    -fx-text-fill: #1F1F1F;
+}
+
+.date-picker-popup .day-name-cell > .label {
+    -fx-text-fill: #0066CC; /* Accent */
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup .day-cell {
+    -fx-text-fill: #1F1F1F;
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #E0ECFF; /* Button Background */
+    -fx-background-radius: 6;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: #0066CC; /* Accent Color */
+    -fx-text-fill: #FFFFFF; /* Text on accent */
+    -fx-background-radius: 6;
+}
+
+.eye-icon {
+    -fx-cursor: hand;
+    -fx-background-color: #4A4A4A; /* Secondary Text */
+}
+
+.grid-pane-text-field {
+    -fx-text-alignment: center;
+    -fx-text-fill: black;
+    -fx-pref-width: 250px; /* Example width, adjust as needed */
+    -fx-pref-height: 40px; /* Example height, adjust as needed */
+    -fx-background-color: #FFFFFF; /* Primary Background */
+    -fx-background-radius: 25px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 25px;
+    -fx-border-color: #D0D0D0; /* Border */
+    -fx-prompt-text-fill: rgba(74, 74, 74, 0.7); /* Color of the prompt text */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 3, 0, 0, 1);
+}
+
+.grid-pane-combo-box {
+    -fx-text-alignment: CENTER;
+    -fx-fill: black;
+    -fx-pref-width: 250px; /* Ensures ComboBox can have the same width as TextField */
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-size: 12px;
+    -fx-border-color: #D0D0D0;
+    -fx-cursor: hand;
+}
+
+.grid-pane-combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F1F1F;
+    -fx-alignment:CENTER-LEFT;
+}
+
+.grid-pane-combo-box .arrow-button {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0 20 20 0;
+}
+
+.grid-pane-combo-box .arrow {
+    -fx-background-color: #0066CC;
+}
+
+.Heading {
+    -fx-alignment:CENTER-LEFT;
+    -fx-font-size: 18px;
+    -fx-text-fill: #1F1F1F;
+    -fx-font-weight: bold;
+}
+
+.HBOX-Nav-Bar {
+    -fx-alignment:CENTER-LEFT;
+    -fx-spacing: 15px; /* Space between child elements */
+    -fx-padding: 0 15px 0px 15px; /* top right bottom left */
+}
+
+.HBOX {
+    -fx-background-color: #FFFFFF; /* Primary Background */
+    -fx-alignment: CENTER_RIGHT;
+    -fx-spacing: 15px; /* Space between child elements */
+    -fx-padding: 0 15px 15px 15px; /* top right bottom left */
+}
+.HBOX-Center-Alignment {
+    -fx-background-color:white;
+    -fx-alignment: CENTER;
+    -fx-fill: black;
+    -fx-text-fill: black;
+    -fx-spacing: 5px;
+}
+
+.HBOX-Right-Alignment {
+    -fx-background-color: white;
+    -fx-alignment: CENTER-RIGHT;
+    -fx-spacing: 30px;
+    -fx-padding: 0 15px 0px 15px;
+}
+
+.Label {
+    -fx-text-fill: #4A4A4A; /* Secondary Text */
+    -fx-font-size: 14px;
+    -fx-alignment:CENTER-LEFT;
+    -fx-text-wrap: true;
+}
+
+.Login-TextField, .Signup-TextField {
+    -fx-background-color: #FFFFFF; /* Primary Background */
+    -fx-padding: 15px;
+    -fx-background-radius: 25px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #1F1F1F;
+    -fx-border-radius: 25px;
+    -fx-border-color: #D0D0D0; /* Border */
+    -fx-prompt-text-fill: rgba(74, 74, 74, 0.7); /* Lighter secondary text */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 3, 0, 0, 1);
+}
+.titled-pane {
+    -fx-border-color: #D0D0DA; /* Light Gray Border */
+    -fx-fill: white;
+    -fx-text-fill: white;
+
+}
+
+/* ========== Title Header Section ========== */
+.titled-pane > .title {
+    -fx-background-color: #F0F0F5; /* Very Light Gray */
+}
+
+/* ========== Text/Label in the Title Header ========== */
+.titled-pane > .title > .text {
+    -fx-fill: #212121; /* Black text for the title */
+}
+
+/* ========== Arrow Icon in the Title Header ========== */
+.titled-pane > .title > .arrow-button .arrow {
+    -fx-background-color: #555555; /* Dark gray for the arrow */
+}
+
+/* ========== Content Area ========== */
+.titled-pane > .content {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-border-color: transparent;
+}
+
+.list-view {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-border-color: #D0D0DA;     /* Light Gray Border */
+}
+
+.list-cell {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-padding: 8px 12px;
+    -fx-border-color: transparent transparent #EAEAF2 transparent;
+}
+
+.list-cell:odd {
+    -fx-background-color: #F4F4F9; /* Very Light Gray */
+}
+
+.list-cell:hover, .list-cell:filled:selected {
+    -fx-background-color: #0078D7; /* Standard Blue */
+}
+
+/* Text styling within the list cell */
+.list-cell .list-cell-heading {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #212121; /* Black */
+}
+
+.list-cell .list-cell-subheading {
+    -fx-font-weight: normal;
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555; /* Dark Gray */
+}
+
+.list-cell:hover .list-cell-heading,
+.list-cell:hover .list-cell-subheading,
+.list-cell:filled:selected .list-cell-heading,
+.list-cell:filled:selected .list-cell-subheading {
+    -fx-text-fill: white;
+}
+.menu-button {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #D0D0D0;
+    -fx-padding: 8px 20px;
+    -fx-cursor: hand;
+}
+
+.menu-button .label {
+    -fx-text-fill: #1F1F1F; /* Primary Text */
+}
+
+.menu-button:hover {
+    -fx-background-color: #E0ECFF; /* Button Background */
+    -fx-border-color: #C2DCFF;
+}
+
+.menu-button .context-menu {
+    -fx-background-color: #FFFFFF; /* Primary Background */
+    -fx-border-color: #D0D0D0;
+    -fx-background-radius: 10px;
+}
+
+.menu-button .context-menu .menu-item .label {
+    -fx-text-fill: #1F1F1F;
+}
+
+.menu-button .context-menu .menu-item:hover {
+    -fx-background-color: #E0ECFF; /* Button Background */
+}
+
+.menu-button .context-menu #btnLogout .label {
+    -fx-text-fill: #DC3545; /* Error Color */
+}
+
+.menu-button .context-menu #btnLogout:hover .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.menu-button .context-menu #btnLogout:hover {
+    -fx-background-color: #DC3545;
+}
+
+.rounded-lighter-back-ground {
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-padding: 10px;
+    -fx-margin: 10px;
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+    -fx-text-fill: #1F1F1F; /* Primary Text */
+    -fx-border-color: #272930;
+    -fx-border-width: 3px;
+}
+
+.scroll-bar:vertical .track,
+.scroll-bar:horizontal .track {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #D0D0D0; /* Border color */
+    -fx-background-radius: 30px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #4A4A4A; /* Secondary text color */
+}
+
+.scroll-bar .decrement-button,
+.scroll-bar .increment-button {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+/* --- Base ComboBox Styling --- */
+.searchable-combo-box {
+    -fx-background-color: #F0F0F0; /* Light Grey Background for the control itself */
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #B0B0B0; /* Softer border color */
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #666666; /* Medium grey for prompt text */
+    -fx-cursor: text; /* Keeping your original cursor, assuming editable text input */
+}
+
+/* --- Visual feedback when the box is active (focused) --- */
+.searchable-combo-box:focused {
+    -fx-border-color: #007ACC; /* A standard blue accent for light themes */
+    -fx-border-width: 1.5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 122, 204, 0.3), 8, 0, 0, 2); /* Softer shadow */
+}
+
+/* --- Text input area where the user types --- */
+.searchable-combo-box .text-input {
+    -fx-background-color: transparent;
+    -fx-padding: 2px 0 2px 12px;
+    -fx-text-fill: #333333; /* Darker text for readability on light background */
+}
+
+/* --- The dropdown arrow button --- */
+.searchable-combo-box .arrow-button {
+    -fx-background-color: #E0E0E0; /* Slightly darker than main background for contrast */
+    -fx-background-radius: 0 20px 20px 0;
+    -fx-padding: 0 8px 0 0;
+}
+
+.searchable-combo-box .arrow {
+    -fx-background-color: #007ACC; /* Standard blue accent for the arrow */
+}
+
+
+/* === Dropdown Popup List Styling === */
+
+/* --- The popup container --- */
+.searchable-combo-box-popup .list-view {
+    -fx-background-color: #FFFFFF; /* Primary White Background */
+    -fx-border-color: #B0B0B0; /* Softer border for the popup */
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 5); /* Lighter, less intrusive shadow */
+}
+
+/* --- Individual items in the list --- */
+.searchable-combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333; /* Darker text for readability */
+    -fx-padding: 8px 15px;
+    -fx-alignment: center-left;
+}
+
+/* --- Hover effect for items in the list --- */
+.searchable-combo-box-popup .list-cell:hover {
+    -fx-background-color: #E8E8E8; /* Light grey hover effect */
+    -fx-text-fill: #000000; /* Black text on hover for good contrast */
+}
+
+/* --- Style for the currently selected item --- */
+.searchable-combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #007ACC; /* Standard blue accent for selected */
+    -fx-text-fill: white; /* White text on blue background */
+}
+
+/* --- ScrollBar Styling (Often needed for ListViews/ComboBox popups) --- */
+.searchable-combo-box-popup .scroll-bar:vertical .thumb,
+.searchable-combo-box-popup .scroll-bar:horizontal .thumb {
+    -fx-background-color: #CCCCCC; /* Light grey thumb */
+    -fx-background-radius: 5px;
+}
+
+.searchable-combo-box-popup .scroll-bar:vertical .track,
+.searchable-combo-box-popup .scroll-bar:horizontal .track {
+    -fx-background-color: #F5F5F5; /* Very light grey track */
+    -fx-background-radius: 5px;
+}
+
+.searchable-combo-box-popup .scroll-bar .increment-button,
+.searchable-combo-box-popup .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.searchable-combo-box-popup .scroll-bar .increment-arrow,
+.searchable-combo-box-popup .scroll-bar .decrement-arrow {
+    -fx-background-color: #666666; /* Darker arrow color */
+}
+
+.searchable-combo-box-popup .scroll-bar .increment-button:hover .increment-arrow,
+.searchable-combo-box-popup .scroll-bar .decrement-button:hover .decrement-arrow {
+    -fx-background-color: #333333; /* Even darker arrow on hover */
+}
+.Sub-Heading {
+    -fx-font-size: 15px;
+    -fx-text-fill: #1F1F1F;
+    -fx-font-weight: bold;
+}
+.Sub-Sub-Heading{
+
+    -fx-font-size: 13px;
+    -fx-text-fill: #1F1F1F;
+    -fx-font-weight: 700;
+}
+.tab-pane {
+    -fx-border-color: #D0D0DA; /* Light Gray Border */
+    -fx-border-width: 1px;
+}
+
+/* ========== Header Area Behind the Tabs ========== */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #F4F4F9; /* Very Light Gray */
+}
+
+/* ========== Individual Tab Styling ========== */
+.tab-pane .tab {
+    -fx-background-color: #EAEAF2; /* Slightly darker gray for inactive tabs */
+    -fx-background-insets: 0;
+    -fx-padding: 8 20 8 20;
+    -fx-border-color: transparent transparent #D0D0DA transparent;
+    -fx-border-width: 2px;
+}
+
+/* ========== Tab Label Styling ========== */
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #555555; /* Dark gray for inactive tab text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* ========== Hover Effect for Tabs ========== */
+.tab-pane .tab:hover {
+    -fx-background-color: #FFFFFF; /* White on hover */
+}
+
+/* ========== Selected Tab Styling ========== */
+.tab-pane .tab:selected {
+    -fx-background-color: #F4F4F9; /* Match content pane background */
+    -fx-border-color: transparent transparent #0078D7 transparent; /* Blue highlight */
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #212121; /* Black for active tab text */
+}
+
+/* ========== Content Area of Each Tab ========== */
+.tab-pane .tab-content-pane {
+    -fx-background-color: #F4F4F9; /* Very Light Gray */
+    -fx-padding: 15px;
+}
+
+/* ================================================================== */
+/* TitledPane Styling (Light Theme)                                   */
+/* ================================================================== */
+
+/* Use a style class on the root pane to switch themes, e.g.,  .titled-pane */
+
+/* ========== Main TitledPane Container ========== */
+.titled-pane {
+    -fx-border-color: #D0D0DA; /* Light Gray Border */
+}
+
+/* ========== Title Header Section ========== */
+.titled-pane > .title {
+    -fx-background-color: #F0F0F5; /* Very Light Gray */
+}
+
+/* ========== Text/Label in the Title Header ========== */
+.titled-pane > .title > .text {
+    -fx-fill: #212121; /* Black text for the title */
+}
+
+/* ========== Arrow Icon in the Title Header ========== */
+.titled-pane > .title > .arrow-button .arrow {
+    -fx-background-color: #555555; /* Dark gray for the arrow */
+}
+
+/* ========== Content Area ========== */
+.titled-pane > .content {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-border-color: transparent;
+}
+
+.table-view {
+    -fx-background-color: #FFFFFF; /* Pure White */
+    -fx-border-color: #D0D0D0; /* Divider Gray */
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 35px;
+    -fx-border-color: #D0D0D0;
+    -fx-border-width: 0 0 1 1;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-weight: bold;
+    -fx-background-color: #F0F0F0;
+    -fx-text-fill: #1F1F1F; /* Charcoal Black */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #1F1F1F;
+}
+
+.table-row-cell {
+    -fx-cell-size: 32px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #F0F0F0 transparent;
+    -fx-text-fill: #1F1F1F;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #F0F0F0;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #C2DCFF; /* Sky Blue */
+    -fx-text-fill: #1F1F1F;
+}
+
+.table-row-cell:filled:selected,
+.table-row-cell:focused:selected {
+    -fx-background-color: #0066CC; /* Royal Blue */
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-cell {
+    -fx-text-fill: #1F1F1F;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 8 0 8;
+}
+
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #D0D0D0;
+    -fx-background-radius: 6;
+}
+
+.table-view .column-resize-line {
+    -fx-stroke: #0066CC;
+    -fx-stroke-width: 2;
+}
+
+.table-row-cell.success {
+    -fx-background-color: #28A745; /* Green */
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-row-cell.warning {
+    -fx-background-color: #FFA500; /* Orange */
+    -fx-text-fill: #1F1F1F;
+}
+
+.table-row-cell.error {
+    -fx-background-color: #DC3545; /* Crimson */
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-area {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F1F1F;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.text-area .content {
+    -fx-background-color: #F0F0F0; /* Secondary Background */
+    -fx-padding-left: 10px;
+}
+
+.text-area .prompt-text {
+    -fx-fill: rgba(74, 74, 74, 0.7);
+}
+
+.VBOX {
+    -fx-background-color: #FFFFFF; /* Primary Background */
+    -fx-alignment: CENTER_RIGHT;
+}

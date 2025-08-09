@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="866.0" prefWidth="1258.0" spacing="15.0" styleClass="VBOX" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Students.TimeTable">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <!-- Header -->
+        <Label fx:id="weeklyTimetableLabel" prefHeight="18.0" prefWidth="1277.0" styleClass="Heading" text="My Weekly Timetable" />
+        <Separator prefWidth="200.0" />
+
+        <!-- Main Timetable Grid -->
+        <ScrollPane fitToWidth="true" prefHeight="791.0" prefWidth="1254.0" styleClass="back-ground" VBox.vgrow="ALWAYS">
+            <content>
+                <GridPane fx:id="timetableGrid" gridLinesVisible="true" prefHeight="762.0" prefWidth="1243.0" styleClass="HBOX">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <!-- Time Slot Headers -->
+                        <Label styleClass="Heading" text="Time / Day" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label styleClass="Heading" text="09:00 - 10:00" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label styleClass="Heading" text="10:00 - 11:00" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                        <Label styleClass="Heading" text="11:00 - 12:00" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                        <Label styleClass="Heading" text="01:00 - 02:00" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                        <Label styleClass="Heading" text="02:00 - 03:00" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+
+                        <!-- Monday Schedule -->
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <Label styleClass="Label" text="CS202: Data Structures" />
+                                <Label styleClass="Label" text="Prof. Rohan Gupta" />
+                                <Label styleClass="Label" text="Room: C-301" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <children>
+                                <Label styleClass="Label" text="MA201: Linear Algebra" />
+                                <Label styleClass="Label" text="Dr. Priya Sharma" />
+                                <Label styleClass="Label" text="Room: A-105" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <children>
+                                <Label styleClass="Label" text="EE101: Basic Electrical" />
+                                <Label styleClass="Label" text="Prof. Vikram Singh" />
+                                <Label styleClass="Label" text="Room: E-210" />
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="66.0" prefWidth="215.0" styleClass="HBOX-Center-Alignment" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                            <children>
+                                <Label styleClass="Label" text="HS101: Sociology" />
+                                <Label styleClass="Label" text="Dr. Meera Desai" />
+                                <Label styleClass="Label" text="Room: H-101" />
+                            </children>
+                        </VBox>
+
+                        <!-- Tuesday Schedule -->
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <children>
+                                <Label styleClass="Label" text="ME203: Thermodynamics" />
+                                <Label styleClass="Label" text="Prof. Arjun Patel" />
+                                <Label styleClass="Label" text="Room: M-112" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                            <children>
+                                <Label styleClass="Label" text="CS202: Data Structures Lab" />
+                                <Label styleClass="Label" text="Prof. Rohan Gupta" />
+                                <Label styleClass="Label" text="Lab: C-305" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                            <children>
+                                <Label styleClass="Label" text="MA201: Linear Algebra" />
+                                <Label styleClass="Label" text="Dr. Priya Sharma" />
+                                <Label styleClass="Label" text="Room: A-105" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                            <children>
+                                <Label styleClass="Label" text="PH101: Classical Mechanics" />
+                                <Label styleClass="Label" text="Dr. Ishan Joshi" />
+                                <Label styleClass="Label" text="Room: P-101" />
+                            </children>
+                        </VBox>
+
+                        <!-- Wednesday Schedule -->
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <children>
+                                <Label styleClass="Label" text="CS101: Programming" />
+                                <Label styleClass="Label" text="Dr. Aditi Verma" />
+                                <Label styleClass="Label" text="Room: C-101" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                            <children>
+                                <Label styleClass="Label" text="EE101: Basic Electrical" />
+                                <Label styleClass="Label" text="Prof. Vikram Singh" />
+                                <Label styleClass="Label" text="Room: E-210" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                            <children>
+                                <Label styleClass="Sub-Heading" text="BREAK" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                            <children>
+                                <Label styleClass="Label" text="ME203: Thermodynamics" />
+                                <Label styleClass="Label" text="Prof. Arjun Patel" />
+                                <Label styleClass="Label" text="Room: M-112" />
+                            </children>
+                        </VBox>
+
+                        <!-- Thursday Schedule -->
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <children>
+                                <Label styleClass="Label" text="PH101: Classical Mechanics" />
+                                <Label styleClass="Label" text="Dr. Ishan Joshi" />
+                                <Label styleClass="Label" text="Room: P-101" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                            <children>
+                                <Label styleClass="Label" text="CS101: Programming Lab" />
+                                <Label styleClass="Label" text="Dr. Aditi Verma" />
+                                <Label styleClass="Label" text="Lab: C-105" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                            <children>
+                                <Label styleClass="Label" text="CS202: Data Structures" />
+                                <Label styleClass="Label" text="Prof. Rohan Gupta" />
+                                <Label styleClass="Label" text="Room: C-301" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                     <children>
+                        <Label styleClass="Label" text="EE101: Basic Electrical" />
+                        <Label styleClass="Label" text="Prof. Vikram Singh" />
+                        <Label styleClass="Label" text="Room: E-210" />
+                     </children></VBox>
+
+                        <!-- Friday Schedule -->
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <children>
+                                <Label styleClass="Label" text="MA201: Linear Algebra" />
+                                <Label styleClass="Label" text="Dr. Priya Sharma" />
+                                <Label styleClass="Label" text="Room: A-105" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                            <children>
+                                <Label styleClass="Label" text="HS101: Sociology" />
+                                <Label styleClass="Label" text="Dr. Meera Desai" />
+                                <Label styleClass="Label" text="Room: H-101" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                            <children>
+                                <Label styleClass="Label" text="EE101: Advanced Java Lab" />
+                                <Label styleClass="Label" text="Prof. Vikram Singh" />
+                                <Label styleClass="Label" text="Lab: E-101" />
+                            </children>
+                        </VBox>
+                        <VBox styleClass="HBOX-Center-Alignment" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                     <children>
+                        <Label styleClass="Label" text="EE101: Advanced Java " />
+                        <Label styleClass="Label" text="Prof. Shivansh Singh" />
+                        <Label styleClass="Label" text="Room: E-215" />
+                     </children></VBox>
+                  <Label styleClass="Sub-Heading" text="Weekly Off" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label styleClass="Sub-Heading" text="LUNCH" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Label styleClass="Sub-Heading" text="LUNCH" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Label styleClass="Sub-Heading" text="LUNCH" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <Label styleClass="Sub-Heading" text="LUNCH" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <Label styleClass="Sub-Heading" text="LUNCH" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <Label styleClass="Sub-Heading" text="Weekly Off" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <Label styleClass="Sub-Heading" text="Weekly Off" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <Label styleClass="Sub-Heading" text="Weekly Off" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <Label styleClass="Sub-Heading" text="Weekly Off" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <VBox layoutX="163.0" layoutY="192.0" styleClass="HBOX-Center-Alignment" GridPane.rowIndex="1">
+                     <children>
+                        <Label styleClass="Label" text="Monday" />
+                        <Label fx:id="mondayLabel" styleClass="Label" text="Room: M-112" />
+                     </children>
+                  </VBox>
+                  <VBox styleClass="HBOX-Center-Alignment" GridPane.rowIndex="2">
+                     <children>
+                        <Label styleClass="Label" text="Tuesday" />
+                        <Label fx:id="tuesdayLabel" styleClass="Label" text="Room: M-112" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="163.0" layoutY="192.0" styleClass="HBOX-Center-Alignment" GridPane.rowIndex="3">
+                     <children>
+                        <Label styleClass="Label" text="Wednesday" />
+                        <Label fx:id="wednesdayLabel" styleClass="Label" text="Room: M-112" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="163.0" layoutY="308.0" styleClass="HBOX-Center-Alignment" GridPane.rowIndex="4">
+                     <children>
+                        <Label styleClass="Label" text="Thursday" />
+                        <Label fx:id="thursdayLabel" styleClass="Label" text="Room: C-101" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="163.0" layoutY="424.0" styleClass="HBOX-Center-Alignment" GridPane.rowIndex="5">
+                     <children>
+                        <Label styleClass="Label" text="Friday" />
+                        <Label fx:id="fridayLabel" styleClass="Label" text="Room: P-101" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="163.0" layoutY="424.0" styleClass="HBOX-Center-Alignment" GridPane.rowIndex="6">
+                     <children>
+                        <Label styleClass="Label" text="Saturday" />
+                        <Label fx:id="saturdayLabel" styleClass="Label" text="Room: P-101" />
+                     </children>
+                  </VBox>
+
+                    </children>
+                </GridPane>
+            </content>
+        </ScrollPane>
+    </children>
+</VBox>

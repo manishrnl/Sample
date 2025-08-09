@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="805.0" prefWidth="1322.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Librarians.IssueBooks">
+
+    <VBox alignment="TOP_CENTER" layoutX="13.600000000000001" layoutY="51.199999999999996" prefHeight="663.0" prefWidth="729.0" spacing="20.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="387.0" AnchorPane.topAnchor="41.0">
+        <padding>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+        </padding>
+
+        <Label text="Issue Book" />
+
+        <GridPane hgap="15.0" prefHeight="423.0" prefWidth="789.0" vgap="15.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" maxWidth="188.79996337890626" minWidth="155.19998779296876" prefWidth="188.79996337890626" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="640.0" minWidth="499.9999755859375" prefWidth="601.6000366210938" />
+            </columnConstraints>
+
+            <Label prefHeight="18.0" prefWidth="84.0" styleClass="Label" text="Student ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="studentIdentifierField" promptText="Enter student ID" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label styleClass="Label" text="Book ID / ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="bookIdentifierField" promptText="Enter book ID or ISBN" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <Label styleClass="Label" text="Librarian ID:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextField fx:id="librarianIdField" promptText="Enter your user ID" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+            <Label styleClass="Label" text="Borrow Date:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+            <DatePicker fx:id="borrowDatePicker" promptText="Select borrow date" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+            <Label styleClass="Label" text="Due Date:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+            <DatePicker fx:id="dueDatePicker" promptText="Select due date" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+            <Label styleClass="Label" text="Remarks:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+            <TextArea fx:id="remarksArea" prefHeight="100.0" promptText="Add any notes about the borrowing" styleClass="text-area" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+         <Label layoutX="45.0" layoutY="14.0" styleClass="Label" text="Students Name:" GridPane.rowIndex="1" />
+         <TextField fx:id="studentsName" editable="false" layoutX="176.0" layoutY="10.0" promptText="Students Name generated automatically from Database" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <Label layoutX="79.0" layoutY="96.0" prefHeight="18.0" prefWidth="69.0" styleClass="Label" text="Book Title" GridPane.rowIndex="3" />
+         <Label layoutX="108.0" layoutY="138.0" prefHeight="18.0" prefWidth="110.0" styleClass="Label" text="Available Copies" GridPane.rowIndex="4" />
+         <TextField fx:id="bookTitle" editable="false" layoutX="176.0" layoutY="92.0" promptText="Book Title" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <TextField fx:id="availableCopiesField" editable="false" layoutX="176.0" layoutY="134.0" promptText="Total Copies Available" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <rowConstraints>
+                <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                <RowConstraints />
+                <RowConstraints maxHeight="47.999972534179676" minHeight="31.999972534179676" prefHeight="40.0" />
+                <RowConstraints maxHeight="54.39998168945314" minHeight="26.40002746582033" prefHeight="44.0" />
+                <RowConstraints maxHeight="95.20001220703125" minHeight="57.600006103515625" prefHeight="72.79999389648435" />
+            </rowConstraints>
+        </GridPane>
+        <Label fx:id="errorMessageLabel" prefHeight="98.0" prefWidth="831.0" styleClass="Label" wrapText="true" />
+
+        <HBox alignment="CENTER" prefHeight="50.0" spacing="20.0" styleClass="HBOX-Right-Alignment">
+            <Button fx:id="cancelButton" onAction="#handleCancel" styleClass="button-red" text="Cancel" />
+            <Button fx:id="issueButton" onAction="#handleIssueBook" styleClass="button-green" text="Issue Book" />
+        </HBox>
+
+    </VBox>
+    <ImageView fx:id="usersImage" fitHeight="332.0" fitWidth="364.0" layoutX="734.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="21.0">
+      <image>
+         <Image url="@../Images/UserName.png" />
+      </image></ImageView>
+    <Label layoutX="14.0" layoutY="14.0" prefHeight="59.0" prefWidth="1082.0" styleClass="Heading" text="Issue Book Panel" />
+</AnchorPane>

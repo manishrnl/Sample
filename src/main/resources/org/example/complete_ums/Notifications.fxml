@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="root" prefHeight="776.0" prefWidth="1434.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Notification_Controller">
+
+    <VBox layoutX="-0.8" prefHeight="776.0" prefWidth="1525.0" spacing="15.0" styleClass="back-ground" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+        <Label prefHeight="0.0" prefWidth="557.0" styleClass="Heading" text="📢 Notifications" />
+        <HBox spacing="10" styleClass="HBOX-Nav-Bar">
+            <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="730.0" promptText="Search notifications..." styleClass="grid-pane-text-field" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="comboRoleFilter" prefHeight="39.0" prefWidth="224.0" promptText="Filter by Role" styleClass="grid-pane-combo-box">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="All Roles" />
+                        <String fx:value="Student" />
+                        <String fx:value="Teacher" />
+                        <String fx:value="Admin" />
+                        <String fx:value="Staff" />
+                        <String fx:value="Accountant" />
+                        <String fx:value="Librarian" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button fx:id="btnRefresh" onAction="#handleRefresh" prefHeight="38.0" prefWidth="182.0" styleClass="button-green" text="🔄 Refresh" />
+            <Button fx:id="btnMyNotification" layoutX="1408.0" layoutY="10.0" onAction="#handleMyNotification" prefHeight="38.0" prefWidth="328.0" styleClass="button-green" text="🔄 My Notification" />
+        </HBox>
+        <TableView fx:id="notificationsTable" prefHeight="404.0" prefWidth="1439.0" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colTargetUserID" prefWidth="56.800018310546875" text="User ID" />
+                <TableColumn fx:id="colTargetUserName" prefWidth="85.59997177124023" text="User Name" />
+                <TableColumn fx:id="colTitle" prefWidth="150.40000915527344" text="Title" />
+                <TableColumn fx:id="colMessage" prefWidth="739.2001647949219" text="Message" />
+                <TableColumn fx:id="colTargetRole" prefWidth="107.199951171875" text="Target Role" />
+                <TableColumn fx:id="colExpiryDate" prefWidth="103.2000732421875" text="Expiry Date" />
+                <TableColumn fx:id="colCreatedOn" prefWidth="101.60009765625" text="Created On" />
+                <TableColumn fx:id="colIsRead" prefWidth="89.5999755859375" text="Read?" />
+            </columns>
+        </TableView>
+        <GridPane prefHeight="167.0" prefWidth="1129.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="604.5999755859375" minWidth="10.0" prefWidth="221.8" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1087.200018310547" minWidth="10.0" prefWidth="353.400048828125" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1087.200018310547" minWidth="10.0" prefWidth="237.39995117187505" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1087.200018310547" minWidth="10.0" prefWidth="411.79999999999995" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label prefHeight="30.0" prefWidth="122.0" styleClass="Label" text="Expiry Date" GridPane.columnIndex="2" />
+                <DatePicker fx:id="expiryDatePicker" prefHeight="38.0" prefWidth="520.0" GridPane.columnIndex="3" />
+                <Label prefHeight="37.0" prefWidth="122.0" styleClass="Label" text="Target User Id" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="targetUserIDField" prefHeight="42.0" prefWidth="411.0" promptText="Leave null if not for any particular users" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <Label prefHeight="40.0" prefWidth="122.0" styleClass="Label" text="Target User Name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="targetUserNameField" editable="false" prefHeight="41.0" prefWidth="411.0" promptText="Target User Name" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <Label layoutX="444.0" layoutY="72.0" prefHeight="39.0" prefWidth="142.0" styleClass="Label" text="Title" />
+                <TextField fx:id="titleField" prefHeight="36.0" prefWidth="353.0" promptText="Title field" styleClass="grid-pane-text-field" GridPane.columnIndex="1" />
+                <Label layoutX="444.0" layoutY="16.0" prefHeight="32.0" prefWidth="142.0" styleClass="Label" text="Message" GridPane.rowIndex="1" />
+                <TextField fx:id="messageField" prefHeight="41.0" prefWidth="353.0" promptText="Message Field" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label layoutX="444.0" layoutY="44.0" prefHeight="36.0" prefWidth="142.0" styleClass="Label" text="Target Role" GridPane.rowIndex="2" />
+                <ComboBox fx:id="targetRoleCombo" prefHeight="38.0" prefWidth="429.0" promptText="Assign Notifications for users" styleClass="grid-pane-combo-box" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="All Roles" />
+                            <String fx:value="Student" />
+                            <String fx:value="Teacher" />
+                            <String fx:value="Admin" />
+                            <String fx:value="Staff" />
+                            <String fx:value="Accountant" />
+                            <String fx:value="Librarian" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </children>
+        </GridPane>
+        <Label fx:id="errorMessageLabel" prefHeight="76.0" prefWidth="1526.0" styleClass="Label" wrapText="true" />
+        <HBox prefHeight="32.0" prefWidth="1177.0" styleClass="HBOX-Right-Alignment">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleCloseOperation" prefHeight="42.0" prefWidth="161.0" styleClass="button-red" text="Close" />
+                <Button mnemonicParsing="false" onAction="#handleDeleteNotifications" prefHeight="32.0" prefWidth="186.0" styleClass="button-red" text="Delete Notifications" />
+                <Button mnemonicParsing="false" onAction="#handleUpdateNotifications" prefHeight="32.0" prefWidth="194.0" styleClass="button-yellow" text="Update Notifications" />
+                <Button mnemonicParsing="false" onAction="#handleAddNotifications" prefHeight="32.0" prefWidth="178.0" styleClass="button-green" text="Add Notifications" />
+                <Button fx:id="markAsDoneButton" mnemonicParsing="false" onAction="#handleMarkAsDoneNotifications" prefHeight="32.0" prefWidth="162.0" styleClass="button-green" text="Mark as Done" />
+            </children>
+        </HBox>
+    </VBox>
+</AnchorPane>

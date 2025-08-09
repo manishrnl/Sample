@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="805.0" prefWidth="1322.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Librarians.SalaryDistributionController">
+    <top>
+        <VBox alignment="CENTER_LEFT" spacing="10">
+            <Label styleClass="Heading" text="Salary Management" />
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label prefHeight="18.0" prefWidth="123.0" styleClass="Label" text="Employee:" />
+                <ComboBox fx:id="employeeComboBox" prefHeight="26.0" prefWidth="287.0" promptText="Select Employee (Non-Student)" styleClass="grid-pane-combo-box" />
+                <Label prefHeight="18.0" prefWidth="72.0" styleClass="Label" text="Month:" />
+                <DatePicker fx:id="monthPicker" prefHeight="26.0" prefWidth="222.0" promptText="Select Month" styleClass="date-picker" />
+                <Button fx:id="loadDataButton" prefHeight="26.0" prefWidth="105.0" styleClass="button-green" text="Load Data" />
+                <Button fx:id="calculateSalaryButton" prefHeight="26.0" prefWidth="138.0" styleClass="button-green" text="Calculate Salary" />
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <HBox spacing="20" style="-fx-padding: 20;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="655.0" prefWidth="1017.0" spacing="10" HBox.hgrow="ALWAYS">
+                <Label styleClass="Sub-Heading" text="Attendance and Salary Summary" />
+                <GridPane hgap="10" prefHeight="98.0" prefWidth="968.0" vgap="10" VBox.vgrow="SOMETIMES">
+                    <Label styleClass="Label" text="Total Working Days:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="totalDaysField" editable="false" prefHeight="26.0" prefWidth="101.0" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label styleClass="Label" text="Days Present:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="presentDaysField" editable="false" prefHeight="67.0" prefWidth="177.0" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label styleClass="Label" text="Days on Leave (Unpaid):" GridPane.columnIndex="2" />
+                    <TextField fx:id="leaveDaysField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="3" />
+                    <Label styleClass="Label" text="Holidays (Paid Leave):" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                    <TextField fx:id="holidaysField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="179.19998168945312" minWidth="111.200048828125" prefWidth="167.2" />
+                  <ColumnConstraints maxWidth="240.79999999999998" minWidth="93.60001831054691" prefWidth="240.79999999999998" />
+                  <ColumnConstraints maxWidth="369.599951171875" minWidth="10.0" prefWidth="235.20000610351565" />
+                  <ColumnConstraints maxWidth="533.2" minWidth="10.0" prefWidth="286.4000488281249" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="31.2" minHeight="11.999994850158693" prefHeight="28.000018310546874" />
+                  <RowConstraints maxHeight="28.79998779296875" minHeight="0.0" prefHeight="23.99998168945313" />
+               </rowConstraints>
+                </GridPane>
+                <Label styleClass="Sub-Heading" text="Earnings and Deductions" />
+                <GridPane hgap="10" prefHeight="92.0" prefWidth="970.0" vgap="10">
+                    <Label styleClass="Label" text="Monthly Salary:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="monthlySalaryField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label styleClass="Label" text="Per Day Salary:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="perDaySalaryField" editable="false" prefHeight="62.0" prefWidth="240.0" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label styleClass="Label" text="Salary to Pay (Gross):" GridPane.columnIndex="2" />
+                    <TextField fx:id="grossSalaryField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="3" />
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="167.99999389648437" minWidth="87.20000610351562" prefWidth="167.99999389648437" />
+                  <ColumnConstraints maxWidth="245.59996337890627" minWidth="126.40000610351564" prefWidth="245.59996337890627" />
+                  <ColumnConstraints maxWidth="337.60003662109375" minWidth="10.0" prefWidth="254.0" />
+                  <ColumnConstraints maxWidth="437.60002441406255" minWidth="10.0" prefWidth="295.6" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="33.5999755859375" minHeight="32.79998779296875" prefHeight="32.79998779296875" />
+                  <RowConstraints maxHeight="28.799975585937496" minHeight="14.400033569335939" prefHeight="28.799975585937496" />
+               </rowConstraints>
+                </GridPane>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Additional Deductions:" />
+                        <TableView fx:id="deductionsTableView" prefHeight="347.0" prefWidth="970.0" HBox.hgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="deductionNameColumn" prefWidth="150" text="Deduction Type" />
+                                <TableColumn fx:id="deductionAmountColumn" prefWidth="100" text="Amount" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </HBox>
+                <Label styleClass="Sub-Heading" text="Final Amount" />
+                <GridPane hgap="10" vgap="10">
+                    <Label styleClass="Label" text="Total Deductions:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="totalDeductionsField" editable="false" prefHeight="26.0" prefWidth="310.0" styleClass="grid-pane-text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label styleClass="Label" text="Net Salary Payable:" GridPane.columnIndex="2" />
+                    <TextField fx:id="netSalaryField" editable="false" styleClass="grid-pane-text-field" GridPane.columnIndex="3" />
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="244.19999084472656" minWidth="23.399987792968744" prefWidth="158.80001525878907" />
+                  <ColumnConstraints maxWidth="422.4000366210937" minWidth="80.20000915527345" prefWidth="258.1999755859375" />
+                  <ColumnConstraints maxWidth="422.4000366210937" minWidth="148.19996337890626" prefWidth="230.20002441406257" />
+                  <ColumnConstraints maxWidth="422.4000366210937" minWidth="154.39998779296877" prefWidth="298.5999877929688" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="20.0000244140625" minHeight="16.80001220703125" prefHeight="16.80001220703125" />
+               </rowConstraints>
+                </GridPane>
+            </VBox>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10" styleClass="HBOX-Right-Alignment">
+            <Button fx:id="cancelButton" prefHeight="42.0" prefWidth="207.0" styleClass="button-red" text="Cancel" />
+            <Button fx:id="saveButton" prefHeight="42.0" prefWidth="222.0" styleClass="button-green" text="Save and Pay" />
+        </HBox>
+    </bottom>
+</BorderPane>

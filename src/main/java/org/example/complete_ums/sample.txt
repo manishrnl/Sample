@@ -1,0 +1,580 @@
+package org.example.complete_ums.Admin;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.example.complete_ums.Databases.AdminActivityLogs;
+import org.example.complete_ums.Databases.DatabaseConnection;
+import org.example.complete_ums.Java_StyleSheet.Button3DEffect;
+import org.example.complete_ums.Java_StyleSheet.RoundedImage;
+import org.example.complete_ums.Java_StyleSheet.Theme_Manager;
+import org.example.complete_ums.ToolsClasses.AlertManager;
+import org.example.complete_ums.ToolsClasses.LoadFrame;
+import org.example.complete_ums.ToolsClasses.NavigationManager;
+import org.example.complete_ums.ToolsClasses.SessionManager;
+
+import java.io.*;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class AdminController implements Initializable {
+    private AdminActivityLogs adminActivityLogs = new AdminActivityLogs();
+    private Theme_Manager themeManager = new Theme_Manager();
+    private RoundedImage roundedImage = new RoundedImage();
+    private Connection connection = DatabaseConnection.getConnection();
+    private AlertManager alertManager = new AlertManager(); // Initialize to avoid null
+    private LoadFrame loadFrame = new LoadFrame(); // Initialize to avoid null
+    private SessionManager sessionManager = SessionManager.getInstance();
+    private Button3DEffect button3DEffect = new Button3DEffect(); // Initialize to avoid null
+    private NavigationManager navigationManager = NavigationManager.getInstance();
+
+    @FXML
+    private ImageView lightDarkThemeImage;
+    @FXML
+    private MenuItem btnMarkAttendance, btnAttendance, btnCourseManagement, btnDashboard,
+            btnEvents, btnExams, btnInitializeData,
+            btnFeedback, btnFinance, btnHostelTransport, btnLogout, btnLogs, btnSettings, btnStudentManagement,
+            btnAdminManagement, btnTeacherManagement, btnAccountantManagement,
+            btnLibrariansManagement, btngroundStaffManagement, btnViewSalary, btnSalaryDistribution;
+
+    @FXML
+    private Button btnNotifications;
+    @FXML
+    private Label menuAdminProfile,ActiveCourses, PendingApprovals, TotalFaculty,
+            TotalStudents, TotalStaff, errorMessageLabel,
+            TotalDepartments, LoginAttempts, Feedback, titleLabel;
+
+    @FXML
+    private StackPane contentArea; // Critical for loading pages
+
+
+    @FXML
+    private VBox root;
+    @FXML
+    private ComboBox comboSearch;
+    @FXML
+    private HBox titleBar;
+
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private ImageView BackImage, ForwardImage, profileImage;
+    private String currentPage = "";
+    private static AdminController instance;
+    private File selectedImageFile;
+    private final Map<String, String> fxmlPathMap = new HashMap<>();
+
+    public AdminController() throws SQLException {
+        instance = this;
+    }
+
+    public static AdminController getInstance() {
+        return instance;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Debug: Check if contentArea is injected
+        if (contentArea == null) {
+            System.err.println("FXML Error: contentArea StackPane is null. Check Admin.fxml fx:id.");
+            return;
+        } else {
+            System.out.println("contentArea StackPane successfully injected.");
+        }
+
+        // Initialize fxmlPathMap and log mappings
+        initializeFxmlPathMap();
+        fxmlPathMap.forEach((key, value) -> System.out.println("fxmlPathMap Key: " + key + ", Value: " + value));
+
+        // Set up profile image and theme toggle
+        profileImage.setOnMouseClicked(uploadProfilePhoto -> updateProfilePhoto());
+        profileImage.setStyle("-fx-cursor: hand");
+        roundedImage.makeImageViewRounded(profileImage);
+        roundedImage.makeImageViewRounded(lightDarkThemeImage);
+        lightDarkThemeImage.setOnMouseClicked(toggleThemeChange());
+
+        // Load profile image and default page
+        loadProfileImage(sessionManager.getUserID());
+        loadPageIntoContentArea("/org/example/complete_ums/Admin/AdminDashboardContent.fxml");
+
+        // Apply theme
+        Platform.runLater(() -> Theme_Manager.applyTheme(root.getScene()));
+        menuAdminProfile.setText("👤 Welcome, " + sessionManager.getFirstName());
+    }
+
+    private void initializeFxmlPathMap() {
+        fxmlPathMap.put("btnDashboard", "/org/example/complete_ums/Admin/AdminDashboardContent.fxml");
+        fxmlPathMap.put("btnStudentManagement", "/org/example/complete_ums/Admin/StudentsManagement.fxml");
+        fxmlPathMap.put("btnAdminManagement", "/org/example/complete_ums/Admin/AdminManagement.fxml");
+        fxmlPathMap.put("btnTeacherManagement", "/org/example/complete_ums/Admin/TeacherManagement.fxml");
+        fxmlPathMap.put("btnAccountantManagement", "/org/example/complete_ums/Admin/AccountantManagement.fxml");
+        fxmlPathMap.put("btnLibrariansManagement", "/org/example/complete_ums/Admin/LibrariansManagement.fxml");
+        fxmlPathMap.put("btngroundStaffManagement", "/org/example/complete_ums/Admin/GroundStaffManagement.fxml");
+        fxmlPathMap.put("btnCourseManagement", "/org/example/complete_ums/Admin/courses.fxml");
+        fxmlPathMap.put("btnAttendance", "/org/example/complete_ums/ViewAttendance.fxml");
+        fxmlPathMap.put("btnMarkAttendance", "/org/example/complete_ums/MarkAttendance.fxml");
+        fxmlPathMap.put("btnExams", "/org/example/complete_ums/Students/Exams.fxml");
+        fxmlPathMap.put("btnHostelTransport", "/org/example/complete_ums/Students/HostelTransport.fxml");
+        fxmlPathMap.put("btnFinance", "/org/example/complete_ums/Admin/finance.fxml");
+        fxmlPathMap.put("btnEvents", "/org/example/complete_ums/Events.fxml");
+        fxmlPathMap.put("btnFeedback", "/org/example/complete_ums/Admin/feedback.fxml");
+        fxmlPathMap.put("btnLogs", "/org/example/complete_ums/Admin/logs.fxml");
+        fxmlPathMap.put("btnSettings", "/org/example/complete_ums/Admin/settings.fxml");
+        fxmlPathMap.put("btnInitializeData", "/org/example/complete_ums/InsertMissingFieldsIntoSQLTable.fxml");
+        fxmlPathMap.put("btnViewSalary", "/org/example/complete_ums/ViewSalary.fxml");
+        fxmlPathMap.put("btnSalaryDistribution", "/org/example/complete_ums/SalaryDistribution.fxml");
+
+
+    }
+
+    @FXML
+    private void handleMenuOption(ActionEvent event) {
+        MenuItem clickedItem = (MenuItem) event.getSource();
+        String text = clickedItem.getText();
+        switch (text) {
+            case "Dark Theme":
+                changeTheme("/org/example/complete_ums/Stylesheet/Dark_Theme.css");
+                break;
+            case "Light Theme":
+                changeTheme("/org/example/complete_ums/Stylesheet/Light-Theme.css");
+                break;
+            case "Change Password":
+                changePassword();
+                break;
+            case "My Profile":
+                viewProfile();
+                break;
+            case "Upload Profile Photo":
+                updateProfilePhoto();
+                break;
+            case "Logout":
+                handleLogout(event);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private EventHandler<? super MouseEvent> toggleThemeChange() {
+        return event -> {
+            String currentTheme = Theme_Manager.getCurrentTheme();
+            String newTheme = currentTheme.equals("/org/example/complete_ums/Stylesheet/Dark_Theme.css")
+                    ? "/org/example/complete_ums/Stylesheet/Light-Theme.css"
+                    : "/org/example/complete_ums/Stylesheet/Dark_Theme.css";
+            changeTheme(newTheme);
+            System.out.println("Theme changed to: " + newTheme);
+        };
+    }
+
+
+    private void loadProfileImage(int userID) {
+        String imageQuery = "SELECT Photo_URL FROM Users WHERE User_Id=?";
+        try (PreparedStatement stmt = connection.prepareStatement(imageQuery)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                try (InputStream is = rs.getBinaryStream("Photo_URL")) {
+                    if (is != null) {
+                        Image profileImage1 = new Image(is);
+                        profileImage.setImage(profileImage1);
+                        System.out.println("Profile image loaded for User ID: " + userID);
+                    } else {
+                        System.out.println("No profile image data found for User ID: " + userID);
+                    }
+                }
+            } else {
+                System.out.println("No user found with User ID: " + userID);
+            }
+        } catch (SQLException | IOException e) {
+            System.err.println("Error loading profile image: " + e.getMessage());
+            e.printStackTrace();
+            alertManager.showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load profile image",
+                    "An error occurred while retrieving the image: " + e.getMessage());
+        }
+    }
+
+    void loadPageIntoContentArea(String fxmlFile) {
+        if (fxmlFile == null) {
+            System.err.println("Attempted to load null FXML file, aborting.");
+            alertManager.showAlert(Alert.AlertType.ERROR, "Page Load Error", "Invalid Path",
+                    "The requested page path is null.");
+            return;
+        }
+
+        System.out.println("Loading FXML: " + fxmlFile + ", Current page: " + currentPage);
+        try {
+            URL resourceUrl = getClass().getResource(fxmlFile);
+            if (resourceUrl == null) {
+                throw new FileNotFoundException("FXML file not found at path: " + fxmlFile);
+            }
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            Parent newContent = loader.load();
+
+            if (contentArea != null) {
+                Platform.runLater(() -> {
+                    createLoadingOverlay();
+                    contentArea.getChildren().clear();
+                    contentArea.getChildren().add(newContent);
+                    System.out.println("Page loaded successfully: " + fxmlFile);
+                });
+                currentPage = fxmlFile;
+            } else {
+                System.err.println("FXML Error: contentArea is null during page loading.");
+                alertManager.showAlert(Alert.AlertType.ERROR, "Page Load Error", "Content Area Error",
+                        "The content area is not initialized. Check Admin.fxml configuration.");
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Resource not found: " + fxmlFile);
+            e.printStackTrace();
+            alertManager.showAlert(Alert.AlertType.ERROR, "Page Load Error", "File Not Found",
+                    "The requested page could not be found: " + fxmlFile);
+        } catch (IOException e) {
+            System.err.println("Failed to load page due to IOException: " + e.getMessage());
+            e.printStackTrace();
+            alertManager.showAlert(Alert.AlertType.ERROR, "Page Load Error", "Loading Failed",
+                    "An error occurred while loading the page: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unexpected error while loading page: " + e.getMessage());
+            e.printStackTrace();
+            alertManager.showAlert(Alert.AlertType.ERROR, "Page Load Error", "Unexpected Error",
+                    "An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    private StackPane createLoadingOverlay() {
+        ProgressIndicator pIndicator = new ProgressIndicator();
+        pIndicator.setPrefSize(80, 80);
+        pIndicator.setMaxSize(80, 80);
+        StackPane overlay = new StackPane(pIndicator);
+        overlay.setAlignment(Pos.CENTER);
+        overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.4);");
+        return overlay;
+    }
+
+    private void changeTheme(String themePath) {
+        if (root.getScene() != null) {
+            Theme_Manager.setCurrentTheme(themePath);
+            Theme_Manager.applyTheme(root.getScene());
+            System.out.println("Theme changed to: " + themePath);
+        } else {
+            System.err.println("Cannot change theme: Scene is null.");
+            alertManager.showAlert(Alert.AlertType.ERROR, "Theme Error", "Failed to Change Theme",
+                    "The scene is not initialized.");
+        }
+    }
+
+    private void changePassword() {
+        Optional<ButtonType> result = alertManager.showResponseAlert(Alert.AlertType.CONFIRMATION, "Change Password",
+                "Are you sure you want to change Password?",
+                "Your password must contain a combination of uppercase, lowercase, digits, and a special character, " +
+                        "and be at least 10 characters long.");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            navigationManager.navigateTo("changePassword.fxml");
+            System.out.println("Navigating to changePassword.fxml");
+        }
+    }
+
+    private void viewProfile() {
+        alertManager.showAlert(Alert.AlertType.INFORMATION, "Profile Information", "User Profile",
+                "Name: " + sessionManager.getFirstName() + " " + sessionManager.getLastName() +
+                        "\nEmail: " + sessionManager.getEmail() +
+                        "\nRole: " + sessionManager.getRole() +
+                        "\nUser ID: " + sessionManager.getUserID() +
+                        "\nPAN: " + sessionManager.getPan() +
+                        "\nAadhar: " + sessionManager.getAadhar() +
+                        "\nMobile: " + sessionManager.getPhone() +
+                        "\nAddress: " + sessionManager.getAddress() +
+                        "\nDate of Birth: " + sessionManager.getDOB());
+        System.out.println("Displayed user profile");
+    }
+
+    private void updateProfilePhoto() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Upload your Profile Picture");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.jpeg")
+        );
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            selectedImageFile = file;
+            profileImage.setImage(new Image(file.toURI().toString()));
+            roundedImage.makeImageViewRounded(profileImage);
+            String updateQuery = "UPDATE Users SET Photo_URL=? WHERE User_Id=?";
+            try (PreparedStatement pstmt = connection.prepareStatement(updateQuery)) {
+                pstmt.setBinaryStream(1, new FileInputStream(selectedImageFile));
+                pstmt.setInt(2, sessionManager.getUserID());
+                int rowsAffected = pstmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    if (adminActivityLogs != null && errorMessageLabel != null) {
+                        adminActivityLogs.insertAdminLogsData(errorMessageLabel, sessionManager.getUserID(),
+                                sessionManager.getUserID(), "UPDATE", "Users", "Profile Photo Updated");
+                    }
+                    System.out.println("Profile image updated successfully.");
+                    alertManager.showAlert(Alert.AlertType.INFORMATION, "Success", "Profile Image Updated",
+                            "Your profile image has been updated successfully.");
+                } else {
+                    System.err.println("No record updated. User ID might be invalid: " + sessionManager.getUserID());
+                    alertManager.showAlert(Alert.AlertType.ERROR, "Error", "Profile Image Update Failed",
+                            "No user found with the specified ID.");
+                }
+            } catch (Exception e) {
+                System.err.println("Error updating profile image: " + e.getMessage());
+                e.printStackTrace();
+                alertManager.showAlert(Alert.AlertType.ERROR, "Error", "Profile Image Update Failed",
+                        "An error occurred while updating your profile image: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No image selected for profile update.");
+        }
+    }
+
+    @FXML
+    public void handleMenuItemClicked(ActionEvent actionEvent) {
+        try {
+            MenuItem item = (MenuItem) actionEvent.getSource();
+            String buttonId = item.getId();
+            System.out.println("MenuItem clicked: ID = " + buttonId + ", Text = " + item.getText()); // Debug
+            String fxmlPath = fxmlPathMap.get(buttonId);
+            if (fxmlPath != null) {
+                System.out.println("Mapped FXML Path: " + fxmlPath); // Debug
+                loadPageIntoContentArea(fxmlPath);
+            } else {
+                System.err.println("No FXML path found for button ID: " + buttonId);
+                alertManager.showAlert(Alert.AlertType.ERROR, "Navigation Error", "Page Not Found",
+                        "No page is configured for the selected menu item: " + buttonId);
+            }
+        } catch (Exception e) {
+            System.err.println("Error in handleMenuItemClicked: " + e.getMessage());
+            e.printStackTrace();
+            alertManager.showAlert(Alert.AlertType.ERROR, "Navigation Error", "Unexpected Error",
+                    "An error occurred while processing the menu item: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleAbout(ActionEvent event) {
+        alertManager.showAlert(Alert.AlertType.INFORMATION, "About", "About the Application",
+                "University Management System v1.0");
+        System.out.println("Displayed About dialog");
+    }
+
+    public void handleLogout(ActionEvent actionEvent) {
+        Optional<ButtonType> result = alertManager.showResponseAlert(Alert.AlertType.CONFIRMATION, "QUIT!",
+                "Quitting will log you out of the Application",
+                "Are you sure you want to Quit? All connections will be closed, and you need to login again.");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            String query = "UPDATE Users u JOIN Authentication a ON u.User_Id = a.User_Id " +
+                    "SET u.User_Status = 'Inactive', a.Last_Login = ? WHERE u.User_Id = ?;";
+            try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+                pstmt.setString(1, String.valueOf(LocalDateTime.now()));
+                pstmt.setString(2, String.valueOf(sessionManager.getUserID()));
+                int rowsAffected = pstmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Last Login Updated for User ID: " + sessionManager.getUserID());
+                } else {
+                    System.err.println("No record updated. User ID might be invalid: " + sessionManager.getUserID());
+                }
+            } catch (SQLException e) {
+                System.err.println("Error updating last login: " + e.getMessage());
+                e.printStackTrace();
+                alertManager.showAlert(Alert.AlertType.ERROR, "Logout Error", "Database Update Failed",
+                        "Failed to update login status: " + e.getMessage());
+            }
+            DatabaseConnection.closeConnection();
+            sessionManager.clearAll();
+            Stage currentStage = (Stage) contentArea.getScene().getWindow();
+            currentStage.close();
+            navigationManager.navigateTo("Login.fxml");
+            System.out.println("User logged out and navigated to Login.fxml");
+        }
+    }
+
+    public void handleNotification(ActionEvent actionEvent) throws IOException {
+        Stage currentStage = (Stage) btnNotifications.getScene().getWindow();
+        loadFrame.addNewFrame(currentStage, getClass(), "Notifications.fxml",
+                "Notification Controller Panel", false);
+        System.out.println("Opened Notifications.fxml");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" prefHeight="867.0" prefWidth="1523.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Admin.AdminController">
+    <children>
+        <HBox fx:id="titleBar" alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="1523.0" styleClass="HBOX-Nav-Bar">
+            <children>
+                <MenuBar prefHeight="43.0" prefWidth="855.0" styleClass="back-ground">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Home">
+                            <items>
+                                <MenuItem fx:id="btnDashboard" onAction="#handleMenuItemClicked" text="Home" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Manage Users">
+                            <items>
+                                <MenuItem fx:id="btnAdminManagement" onAction="#handleMenuItemClicked" text="Admin Management" />
+                                <MenuItem fx:id="btnAccountantManagement" onAction="#handleMenuItemClicked" text="Accountant Management" />
+                                <MenuItem fx:id="btngroundStaffManagement" onAction="#handleMenuItemClicked" text="Ground Staff Management" />
+                                <MenuItem fx:id="btnLibrariansManagement" onAction="#handleMenuItemClicked" text="Librarians Management" />
+                                <MenuItem fx:id="btnStudentManagement" onAction="#handleMenuItemClicked" text="Student Management" />
+                                <MenuItem fx:id="btnTeacherManagement" onAction="#handleMenuItemClicked" text="Teacher Management" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Attendance">
+                            <items>
+                                <MenuItem fx:id="btnAttendance" onAction="#handleMenuItemClicked" text="View Attendance" />
+                                <MenuItem fx:id="btnMarkAttendance" onAction="#handleMenuItemClicked" text="Mark Attendance" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Exams">
+                            <items>
+                                <MenuItem fx:id="btnCourseManagement" onAction="#handleMenuItemClicked" text="Course &amp; Department" />
+                                <MenuItem fx:id="btnEvents" onAction="#handleMenuItemClicked" text="Events" />
+                                <MenuItem fx:id="btnExams" onAction="#handleMenuItemClicked" text="Examination &amp; Results" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Finance">
+                            <items>
+                                <MenuItem fx:id="btnViewSalary" onAction="#handleMenuItemClicked" text="View Salary" />
+                                <MenuItem fx:id="btnSalaryDistribution" onAction="#handleMenuItemClicked" text="Salary Distribution" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Hostels">
+                            <items>
+                                <MenuItem fx:id="btnFinance" onAction="#handleMenuItemClicked" text="Fees &amp; Finance" />
+                                <MenuItem fx:id="btnHostelTransport" onAction="#handleMenuItemClicked" text="Hostel &amp; Transport" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Tools">
+                            <items>
+                                <MenuItem fx:id="btnFeedback" onAction="#handleMenuItemClicked" text="Feedback &amp; Complaints" />
+                                <MenuItem fx:id="btnLogs" onAction="#handleMenuItemClicked" text="Logs &amp; Reports" />
+                                <MenuItem fx:id="btnSettings" onAction="#handleMenuItemClicked" text="System Settings" />
+                                <MenuItem fx:id="btnInitializeData" onAction="#handleMenuItemClicked" text="Initialize SQL Data" />
+                                <MenuItem fx:id="btnAbout" onAction="#handleAbout" text="About" />
+                                <MenuItem fx:id="btnLogout" onAction="#handleLogout" text="Logout" />
+
+
+                                <MenuItem fx:id="menuItemProfile" onAction="#handleMenuOption" text="My Profile" />
+                                <MenuItem fx:id="menuItemUploadPhoto" onAction="#handleMenuOption" text="Upload Profile Photo" />
+                                <MenuItem fx:id="menuItemChangePassword" onAction="#handleMenuOption" text="Change Password" />
+                                <Menu fx:id="menuChangeTheme" text="Change Theme">
+                                    <items>
+                                        <MenuItem fx:id="menuItemDarkTheme" onAction="#handleMenuOption" text="Dark Theme" />
+                                        <MenuItem fx:id="menuItemLightTheme" onAction="#handleMenuOption" text="Light Theme" />
+                                        <MenuItem fx:id="menuItemCustomTheme" onAction="#handleMenuOption" text="Custom Theme" />
+                                    </items>
+                                </Menu>
+
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <Label alignment="CENTER" prefHeight="43.0" prefWidth="287.0" styleClass="Heading" text="Admin Panel" textFill="white" />
+                <ComboBox fx:id="comboSearch" editable="true" prefHeight="40.0" prefWidth="266.0" promptText="Search Anything...." styleClass="searchable-combo-box" />
+                <Button fx:id="btnNotifications" mnemonicParsing="false" onAction="#handleNotification" prefHeight="42.0" prefWidth="236.0" styleClass="button-yellow" text="🔔" />
+                <ImageView fx:id="profileImage" fitHeight="42.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/UserName.png" />
+                    </image>
+                </ImageView>
+
+                <Label fx:id="menuAdminProfile" prefHeight="42.0" prefWidth="263.0" styleClass="Label" />
+                <ImageView fx:id="lightDarkThemeImage" fitHeight="43.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/day_night_toggle_theme.jpeg" />
+                    </image>
+                </ImageView>
+            </children>
+        </HBox>
+        <BorderPane VBox.vgrow="ALWAYS">
+            <center>
+                <StackPane fx:id="contentArea" prefHeight="800.0" prefWidth="1300.0" />
+            </center>
+        </BorderPane>
+    </children>
+</VBox>

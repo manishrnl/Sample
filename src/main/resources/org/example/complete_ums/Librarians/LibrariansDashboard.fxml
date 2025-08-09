@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" prefHeight="1000.0" prefWidth="1910.0" styleClass="back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.Librarians.LibrarianController">
+    <children>
+        <HBox prefHeight="39.0" prefWidth="1523.0">
+            <children>
+
+                <MenuBar fx:id="menuBarAdmin" prefHeight="45.0" prefWidth="836.0" styleClass="menu-item" useSystemMenuBar="false">
+                    <menus>
+                        <Menu fx:id="menuHome" mnemonicParsing="false" text="Home">
+                            <items>
+                                <MenuItem fx:id="btnDashboard" onAction="#handleMenuItemClick" text="Main Dashboard                                                                                          " />
+                                <MenuItem fx:id="btnViewProfile" onAction="#handleMenuItemClick" text="View Profile" />
+                            </items>
+                        </Menu>
+
+                        <Menu fx:id="menuAttendance" mnemonicParsing="false" text="Attendance">
+                            <items>
+                                <MenuItem fx:id="btnAttendance" onAction="#handleMenuItemClick" text="View Attendance" />
+                                <MenuItem fx:id="btnMarkAttendance" onAction="#handleMenuItemClick" text="Mark Attendance                                                                     " />
+                            </items>
+                        </Menu>
+                        <Menu fx:id="menuExams" mnemonicParsing="false" text="Exams">
+                            <items>
+
+                                <MenuItem fx:id="btnEvents" onAction="#handleMenuItemClick" text="Events                                                              " />
+
+
+                            </items>
+                        </Menu>
+                        <Menu fx:id="menuFinance" mnemonicParsing="false" text="Finance">
+                            <items>
+                                <MenuItem fx:id="btnViewSalary" onAction="#handleMenuItemClick" text="View Salary                                                                 " />
+                            </items>
+                        </Menu>
+
+                        <Menu fx:id="menuBooks" mnemonicParsing="false" text="Books">
+                            <items>
+                                <MenuItem fx:id="btnAddBooks" onAction="#handleMenuItemClick" text="View Books                                                                                  " />
+                                <MenuItem fx:id="btnIssueBooks" onAction="#handleMenuItemClick" text="Issue Books" />
+                                <MenuItem fx:id="btnUpdateBooks" onAction="#handleMenuItemClick" text="Update Books" />
+                                <MenuItem fx:id="btnReturnBooks" onAction="#handleMenuItemClick" text="Return Books" />
+                            </items>
+                        </Menu>
+
+                        <Menu fx:id="menuTools" mnemonicParsing="false" text="Tools">
+                            <items>
+                                <MenuItem fx:id="btnViewFaculty" onAction="#handleMenuItemClick" text="View all Faculty Members" />
+                                <MenuItem fx:id="btnSettings" onAction="#handleMenuItemClick" text="System Settings" />
+                                <MenuItem fx:id="btnInitializeData" onAction="#handleMenuItemClick" text="Initialize SQL Data" />
+                                <MenuItem fx:id="btnAbout" onAction="#handleAbout" text="About" />
+                                <MenuItem fx:id="btnLogout" onAction="#handleLogout" text="Logout" />
+
+
+                                <MenuItem fx:id="menuItemProfile" onAction="#handleMenuOption" text="My Profile" />
+                                <MenuItem fx:id="menuItemUploadPhoto" onAction="#handleMenuOption" text="Upload Profile Photo                                                                        " />
+                                <MenuItem fx:id="menuItemChangePassword" onAction="#handleMenuOption" text="Change Password" />
+                                <Menu fx:id="menuChangeTheme" text="Change Theme">
+                                    <items>
+                                        <MenuItem fx:id="menuItemDarkTheme" onAction="#handleMenuOption" text="Dark Theme                                                          " />
+                                        <MenuItem fx:id="menuItemLightTheme" onAction="#handleMenuOption" text="Light Theme" />
+                                        <MenuItem fx:id="menuItemCustomTheme" onAction="#handleMenuOption" text="Custom Theme" />
+                                    </items>
+                                </Menu>
+
+                            </items>
+                        </Menu>
+
+                        <Menu mnemonicParsing="false" text="Logout">
+                            <items>
+                                <MenuItem fx:id="menuLogout" onAction="#handleLogout" text="      Logout                                                 " />
+                            </items>
+                        </Menu>
+
+                    </menus>
+                </MenuBar>
+                <Separator orientation="VERTICAL" prefHeight="45.0" prefWidth="44.0" styleClass="back-ground" />
+                <ComboBox fx:id="comboSearch" editable="true" prefHeight="43.0" prefWidth="246.0" promptText="Search Anything...." styleClass="searchable-combo-box" />
+                <Separator orientation="VERTICAL" prefHeight="45.0" prefWidth="58.0" styleClass="back-ground" />
+                <ImageView fx:id="studentsImage" fitHeight="41.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/UserName.png" />
+                    </image>
+                </ImageView>
+                <Separator orientation="VERTICAL" prefHeight="45.0" prefWidth="42.0" styleClass="back-ground" />
+                <Button fx:id="btnNotifications" mnemonicParsing="false" onAction="#handleNotification" prefHeight="42.0" prefWidth="110.0" styleClass="button-yellow" text="🔔" />
+                <Separator layoutX="1128.0" layoutY="10.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="38.0" styleClass="back-ground" />
+                <Label fx:id="usersDetails" prefHeight="42.0" prefWidth="249.0" styleClass="Label" />
+                <ImageView fx:id="lightDarkThemeImage" fitHeight="43.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/day_night_toggle_theme.jpeg" />
+                    </image>
+                </ImageView>
+            </children>
+        </HBox>
+        <Separator prefWidth="200.0" styleClass="back-ground" />
+        <BorderPane VBox.vgrow="ALWAYS">
+            <center>
+                <StackPane fx:id="contentArea" prefHeight="800.0" prefWidth="1300.0" />
+            </center>
+        </BorderPane>
+    </children>
+</VBox>

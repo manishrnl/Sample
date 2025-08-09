@@ -1,0 +1,1012 @@
+.back-ground {
+    -fx-padding: 10px;
+    -fx-margin: 10px;
+    -fx-background-color: #2C2C3E;
+}
+
+
+.button-green {
+    -fx-alignment: CENTER;
+    -fx-padding: 10px 16px;
+    -fx-background-radius: 10;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(to bottom, #465c61, #3e5140); /* cyan to mint gradient */
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.3), 12, 0.3, 0, 6); /* cool neon-like glow */
+    -fx-border-radius: 10;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.button-green:hover {
+    /* -fx-background-color: linear-gradient(to bottom, #f7971e, #ffd200); /* premium gold hover */
+    -fx-text-fill: #000000;
+    /* -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.5), 14, 0.4, 0, 8); /* golden glow */
+
+    -fx-background-color: #444466;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 12, 0.5, 0, 7);
+}
+
+
+.button-red {
+    -fx-alignment: CENTER;
+    -fx-padding: 10px 16px;
+    -fx-background-radius: 10;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    /* -fx-background-color: linear-gradient(to bottom, #ff416c, #ff4b2b); /* coral red to deep red */
+    -fx-background-color: linear-gradient(to bottom, #5e4e52, #4c362e);
+    -fx-effect: dropshadow(gaussian, rgba(255, 80, 80, 0.4), 12, 0.4, 0, 6);
+    -fx-border-radius: 10;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.button-red:hover {
+    /* -fx-background-color: linear-gradient(to bottom, #ffcc70, #ff7c60); /* warm orange-red hover */
+    /* -fx-effect: dropshadow(gaussian, rgba(255, 170, 0, 0.5), 14, 0.5, 0, 8);   */
+    -fx-background-color: #444466;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 12, 0.5, 0, 7);
+}
+
+.button-yellow {
+    -fx-alignment: CENTER;
+    -fx-margin: 15px;
+    -fx-padding: 10px 16px;
+    -fx-background-radius: 10;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F5F5F5;
+    /* -fx-background-color: linear-gradient(to bottom, #fff200, #ffcc00); /* lemon to gold */
+    -fx-background-color: #333344;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 100, 0.4), 10, 0.4, 0, 5);
+    -fx-border-radius: 10;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.button-yellow:hover {
+    /* -fx-background-color: linear-gradient(to bottom, #ffcc70, #ff7c60); /* warm orange-red hover */
+
+    /* -fx-text-fill: #000000;   */
+    -fx-background-color: #444466;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 12, 0.5, 0, 7);
+}
+
+/* Main style for the custom ComboBox */
+.combo-box {
+    /* -fx-background-color: linear-gradient(to bottom, #8022af, #5a0d8d); /* Elegant gradient */
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-size: 12px;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+/* This affects the visible text inside the custom combo box */
+.combo-box .list-cell {
+    -fx-background-color: transparent; /* Ensure cell background is clear */
+    -fx-text-fill: white;
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* FIX for the arrow background, now using the correct class */
+.combo-box .arrow-button {
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 0 20 20 0; /* top-right, bottom-right, bottom-left, top-left */
+}
+
+/* This styles the arrow symbol itself */
+.combo-box .arrow {
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #1a1a2e;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER-LEFT;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #663399;
+    -fx-text-fill: white;
+}
+
+.custom-alert {
+    -fx-background-color: #2C2C3E; /* Dark blue background */
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: #1E1E2F;
+    -fx-border-width: 4px;
+}
+
+
+/* ========== Line Chart CSS ========== */
+
+.chart {
+    -fx-background-color: transparent;
+    -fx-text-fill: #F5F5F5;
+}
+
+.chart-plot-background {
+    -fx-background-color: #2C2C3E; /* Charcoal */
+}
+
+.chart-legend {
+    -fx-background-color: rgba(174, 54, 54, 0); /* Final version kept */
+}
+
+.chart-legend-item {
+    -fx-text-fill: #F5F5F5;
+    -fx-font-size: 13px;
+}
+
+.chart-legend-item-symbol {
+    -fx-padding: 4px;
+    -fx-background-radius: 5em;
+    -fx-min-width: 1.2em;
+    -fx-min-height: 1.2em;
+    -fx-max-width: 1.2em;
+    -fx-max-height: 1.2em;
+}
+
+.chart-legend-item-symbol .chart-bar {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-text-fill: #ffffff; /* Final version kept */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Axis Styling */
+.axis {
+    -fx-tick-label-fill: #ffffff; /* Set axis labels to white */
+    -fx-label-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-tick-length: 5px;
+}
+
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: #444454;
+    -fx-stroke-width: 0.5;
+}
+
+/* Line Series Colors */
+.chart-series-line {
+    -fx-stroke-width: 2px;
+}
+
+
+.default-color0.chart-series-line {
+    -fx-stroke: #3CB371;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: #FFC107;
+}
+
+.default-color2.chart-series-line {
+    -fx-stroke: #FF4C4C;
+}
+
+.default-color3.chart-series-line {
+    -fx-stroke: #3A99D8;
+}
+
+.default-color4.chart-series-line {
+    -fx-stroke: #7c1ee1;
+}
+
+/* Line Data Points */
+.chart-line-symbol {
+    -fx-background-color: #3A99D8, white;
+    -fx-background-radius: 5px;
+    -fx-padding: 4px;
+}
+
+
+/* ========== Pie Chart Colors ========== */
+.default-color0.chart-pie {
+    -fx-pie-color: #9ab921;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: #bba11f;
+}
+
+.default-color2.chart-pie {
+    -fx-pie-color: #a82e2e;
+}
+
+.default-color3.chart-pie {
+    -fx-pie-color: #7c1ee1;
+}
+
+/* Pie chart slice labels */
+.chart-pie-label {
+    -fx-fill: #ffffff; /* Set pie chart labels to white */
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.date-picker {
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+/* === Internal Text Field === */
+.date-picker .text-field {
+    -fx-background-color: #2C2C3E;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-font-size: 12px;
+    -fx-background-radius: 20;
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* === Arrow Button === */
+.date-picker .arrow-button {
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 20;
+}
+
+.date-picker .arrow {
+    -fx-background-color: white;
+}
+
+/* === POPUP CALENDAR === */
+.date-picker-popup {
+    -fx-background-color: #2C2C3E;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+/* === MONTH/YEAR HEADER BAR === */
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #2C2C3E;
+}
+
+/* === Header Labels (Month/Year) === */
+.date-picker-popup .label {
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 1.0;
+    -fx-font-size: 12px;
+}
+
+/* === Week Day Names (Sun, Mon, ...) === */
+.date-picker-popup .day-name-cell {
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup .day-name-cell > .label {
+    -fx-text-fill: #ffdd33;
+    -fx-opacity: 1.0;
+    -fx-font-weight: bold;
+}
+
+/* === Day Numbers === */
+.date-picker-popup .day-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #2C2C3E;
+    -fx-alignment: CENTER-LEFT;
+    -fx-opacity: 1.0;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #1E1E2F;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: #ffdd33;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 6;
+}
+
+/* === Arrow Navigation Buttons === */
+.date-picker-popup .left-button .label,
+.date-picker-popup .right-button .label {
+    -fx-text-fill: white;
+    -fx-opacity: 1.0;
+}
+
+.date-picker-popup .left-button,
+.date-picker-popup .right-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.eye-icon {
+    -fx-cursor: hand;
+    -fx-background-color: white;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 20px;
+    -fx-padding: 5px;
+    -fx-translate-x: -10px; /* Optional: shifts icon slightly left */
+}
+
+
+.grid-pane-text-field {
+    -fx-text-alignment: CENTER;
+    -fx-background-color: #3B3B50; /* A slightly lighter shade than the main background */
+    -fx-background-radius: 20px; /* Rounded corners */
+    -fx-border-radius: 20px; /* Ensures border rounding matches background */
+    -fx-border-color: #5A5A72; /* A subtle border color for dark theme */
+    -fx-font-size: 14px;
+    -fx-text-fill: white; /* Light text color for readability */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+.grid-pane-text-field:focused {
+    -fx-border-color: #7B7BFF; /* Highlight color when the field is selected */
+}
+
+
+/* ========== ComboBox within a GridPane (Dark Mode) ========== */
+
+.grid-pane-combo-box {
+    -fx-text-alignment: CENTER;
+    -fx-background-color: #3B3B50; /* Consistent background with TextField */
+    -fx-background-radius: 20px; /* Rounded corners */
+    -fx-border-radius: 20px; /* Ensures border rounding matches background */
+    -fx-border-color: #5A5A72;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+}
+
+/* Style for the text of the selected item in the ComboBox */
+.grid-pane-combo-box .list-cell {
+    -fx-text-fill: #E0E0E0; /* Light text color for readability */
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Style for the dropdown arrow button area */
+.grid-pane-combo-box .arrow-button {
+    -fx-background-color: #3B3B50;
+    -fx-background-radius: 0 20px 20px 0; /* Rounds the right corners */
+}
+
+/* Style for the dropdown arrow itself */
+.grid-pane-combo-box .arrow {
+    -fx-background-color: #7B7BFF; /* A bright accent color for the arrow */
+}
+
+.HBOX {
+    -fx-background-color: #2C2C3E;
+    -fx-alignment: CENTER-LEFT;
+    -fx-spacing: 15px; /* Space between child elements */
+    -fx-padding: 0 15px 15px 15px; /* top right bottom left */
+}
+
+.HBOX-Right-Alignment {
+    -fx-background-color: #2C2C3E;
+    -fx-alignment: CENTER-RIGHT;
+    -fx-spacing: 30px;
+    -fx-padding: 0 15px 0px 15px;
+}
+
+.HBOX-Center-Alignment {
+    -fx-background-color: #2C2C3E;
+    -fx-alignment: CENTER;
+    -fx-fill: white;
+    -fx-spacing: 5px;
+}
+
+
+.HBOX-Nav-Bar {
+    -fx-background-color: #2C2C3E;
+    -fx-alignment: CENTER-LEFT;
+    -fx-spacing: 15px; /* Space between child elements */
+    -fx-padding: 0 15px 0px 15px; /* top right bottom left */
+}
+
+.Heading {
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.HTML {
+    -fx-font-size: 14px;
+    -fx-color: #5858c1;
+}
+
+.Label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER-LEFT;
+    -fx-text-wrap: true;
+}
+
+.lighter-back-ground {
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-padding: 10px;
+    -fx-margin: 10px;
+    -fx-background-color: white;
+}
+
+.list-view {
+    -fx-background-color: #1E1E2F; /* Gunmetal */
+    -fx-border-color: #444454; /* Slate Gray */
+    -fx-padding: 5px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* ========== Individual List Cell Styling ========== */
+.list-cell {
+    -fx-background-color: #1E1E2F; /* Gunmetal */
+    /* -fx-text-fill is removed from here as it's not effective */
+    -fx-cell-size: 50px; /* Adjust height as needed */
+    -fx-padding: 0 10px; /* Padding for content */
+    -fx-border-color: transparent transparent #2C2C3E transparent; /* Bottom border */
+    -fx-border-width: 1px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* ========== THIS IS THE KEY FIX ========== */
+/* Apply the text color directly to the Label nodes inside the cell */
+.list-cell .label {
+    -fx-text-fill: white; /* This will now correctly apply pure white */
+}
+
+/* ========== Alternating Row Color (Striping) ========== */
+.list-cell:odd {
+    -fx-background-color: #2C2C3E; /* Charcoal */
+    -fx-text-fill: white;
+}
+
+/* ========== Hover Effect ========== */
+/* Changes color when the mouse is over a cell */
+.list-cell:hover {
+    -fx-background-color: #3A99D8; /* Electric Blue */
+}
+
+/* The label text will remain white on hover due to the rule above */
+
+/* ========== Selection Effect ========== */
+/* Changes color for the selected cell */
+.list-cell:filled:selected,
+.list-cell:focused:selected {
+    -fx-background-color: #3A99D8; /* Electric Blue */
+}
+
+/* The label text will remain white on selection */
+
+/* ========== Scrollbar Styling ========== */
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: #444454; /* Slate Gray */
+    -fx-background-radius: 6;
+}
+
+.Login-TextField {
+    -fx-background-color: #2C2C3E;
+    -fx-padding: 15px;
+    -fx-background-radius: 25px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F5F5F5;
+    -fx-border-radius: 25px;
+    -fx-border-weight: 5px;
+    -fx-border-color: #b3b3da; /* Dark blue border */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.4, 0, 2);
+}
+
+.menu-3d-hover:hover {
+    -fx-background-color: linear-gradient(to bottom right, #ffe066, #ffdd00);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.menu-3d-hover:hover {
+    -fx-background-color: linear-gradient(to bottom right, #ffe066, #ffdd00);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.menu-button {
+    /*   -fx-background-color: linear-gradient(to bottom, #8022af, #5a0d8d);*/
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: transparent;
+    -fx-padding: 8px 20px;
+    -fx-cursor: hand;
+}
+
+/* Style for the text inside the button */
+.menu-button .label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Hide the default dropdown arrow */
+.menu-button .arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* Add a subtle glow effect on hover for a premium feel */
+.menu-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(200, 126, 255, 0.5), 10, 0.4, 0, 0);
+}
+
+/* This targets the popup menu that appears on click FOR THE MENU BUTTON ONLY */
+.menu-button .context-menu {
+    -fx-background-color: #1a1a2e;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 15, 0, 0, 5);
+}
+
+/* Base style for each menu item inside our specific menu button's dropdown */
+.menu-button .context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 25px;
+    -fx-background-radius: 6px;
+}
+
+/* Style for the text of each menu item */
+.menu-button .context-menu .menu-item .label {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+/* Style for a menu item when hovered over or focused */
+.menu-button .context-menu .menu-item:focused,
+.menu-button .context-menu .menu-item:hover {
+    -fx-background-color: #663399;
+}
+
+/* Styling for the Separator in the new dark theme */
+.menu-button .context-menu .separator-menu-item .line {
+    -fx-border-insets: 0.5px 5px 0.5px 5px;
+    -fx-border-color: #4A4E69;
+}
+
+/* Special styling for the Logout item */
+.menu-button .context-menu #btnLogout .label {
+    -fx-text-fill: #ff7b7b;
+    -fx-font-weight: bold;
+}
+
+.menu-button .context-menu #btnLogout:hover .label,
+.enu-button .context-menu #btnLogout:focused .label {
+    -fx-text-fill: white;
+}
+
+.navigation {
+    -fx-cursor: hand;
+}
+
+
+.Image-Profile {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-border-color: #ddd;
+    -fx-border-width: 2px;
+    -fx-border-radius: 75px;
+}
+
+.rounded-lighter-back-ground {
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-padding: 10px;
+    -fx-margin: 10px;
+    -fx-background-color: #2C2C3E;
+    -fx-border-color: #272930;
+    -fx-border-width: 3px;
+}
+
+/* --- Style for the background of the entire scroll bar (the "track") --- */
+.scroll-bar:vertical .track-background {
+    -fx-background-color: #2C2C3E; /* Sets the visible track color to green */
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #2C2C3E; /* Sets the visible track color to green */
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* --- Style for the draggable button (the "thumb") --- */
+.scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(to bottom, #ffcc70, #ff7c60); /* warm orange-red hover */
+    -fx-background-insets: 2; /* Adds a little padding around the thumb */
+    -fx-background-radius: 30px;
+}
+
+/* --- Style for the UP and DOWN arrow buttons --- */
+.scroll-bar:vertical .decrement-button,
+.scroll-bar:vertical .increment-button {
+    -fx-font-size: 5px;
+    -fx-background-color: #2C2C3E; /* Make buttons red to match the thumb */
+    -fx-padding: 5px;
+}
+
+.scroll-bar:horizontal .track-background {
+    -fx-background-color: #2C2C3E; /* Sets the visible track color to green */
+}
+
+.scroll-bar:horizontal .track {
+    -fx-background-color: #2C2C3E; /* Sets the visible track color to green */
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* --- Style for the draggable button (the "thumb") --- */
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to bottom, #ffcc70, #ff7c60); /* warm orange-red hover */
+    -fx-background-insets: 2; /* Adds a little padding around the thumb */
+    -fx-background-radius: 30px;
+}
+
+/* --- Style for the UP and DOWN arrow buttons --- */
+.scroll-bar:horizontal .decrement-button,
+.scroll-bar:horizontal .increment-button {
+    -fx-font-size: 5px;
+    -fx-background-color: #2C2C3E; /* Make buttons red to match the thumb */
+    -fx-padding: 5px;
+}
+
+/*
+ * Standalone DARK THEME CSS for a modern, searchable ComboBox.
+ */
+.Sub-Heading {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.Sub-Sub-Heading {
+
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+.searchable-combo-box {
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #555555; /* Darker Border */
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #888888; /* Lighter grey for prompt text */
+    -fx-cursor: text;
+}
+
+/* --- Visual feedback when the box is active --- */
+.searchable-combo-box:focused {
+    -fx-border-color: #3399FF; /* Brighter Blue Accent */
+    -fx-border-width: 1.5px;
+    -fx-effect: dropshadow(gaussian, rgba(51, 153, 255, 0.5), 8, 0, 0, 2);
+}
+
+/* --- Text input area where the user types --- */
+.searchable-combo-box .text-input {
+    -fx-background-color: transparent;
+    -fx-padding: 2px 0 2px 12px;
+    -fx-text-fill: #BBBBBB; /* Light Grey Text */
+}
+
+/* --- The dropdown arrow button --- */
+.searchable-combo-box .arrow-button {
+    -fx-background-color: #3C3F41; /* Dark Grey Background */
+    -fx-background-radius: 0 20px 20px 0;
+    -fx-padding: 0 8px 0 0;
+}
+
+.searchable-combo-box .arrow {
+    -fx-background-color: #3399FF; /* Brighter Blue Accent */
+}
+
+
+/* === Dropdown Popup List Styling === */
+
+/* --- The popup container --- */
+.searchable-combo-box-popup .list-view {
+    -fx-background-color: #2B2B2B; /* Very Dark Background */
+    -fx-border-color: #555555;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0, 0, 5);
+}
+
+/* --- Individual items in the list --- */
+.searchable-combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #BBBBBB; /* Light Grey Text */
+    -fx-padding: 8px 15px;
+    -fx-alignment: center-left;
+}
+
+/* --- Hover effect for items in the list --- */
+.searchable-combo-box-popup .list-cell:hover {
+    -fx-background-color: #4B4F52; /* Lighter Dark Grey Hover */
+    -fx-text-fill: #FFFFFF;
+}
+
+/* --- Style for the currently selected item --- */
+.searchable-combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #3399FF; /* Brighter Blue Accent */
+    -fx-text-fill: white;
+}
+
+.Signup-TextField {
+    -fx-cursor-position: TOP-CENTER;
+    -fx-alignment: CENTER-LEFT;
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 25px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.1), 5, 0.4, 0, 2);
+}
+
+/* ================================================================== */
+/* TabPane Styling (Dark Theme)                                       */
+/* ================================================================== */
+
+/* ========== Main TabPane Container ========== */
+.tab-pane {
+    -fx-border-color: #444454; /* Slate Gray */
+    -fx-border-width: 1px;
+}
+
+/* ========== Header Area Behind the Tabs ========== */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #1E1E2F; /* Gunmetal */
+}
+
+/* ========== Individual Tab Styling ========== */
+.tab-pane .tab {
+    -fx-background-color: #2C2C3E; /* Charcoal */
+    -fx-background-insets: 0;
+    -fx-padding: 8 20 8 20;
+    -fx-border-color: transparent transparent #444454 transparent; /* Bottom border for inactive tabs */
+    -fx-border-width: 2px;
+}
+
+/* ========== Tab Label Styling ========== */
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #CCCCCC; /* Light gray for inactive tab text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* ========== Hover Effect for Tabs ========== */
+.tab-pane .tab:hover {
+    -fx-background-color: #444454; /* Slate Gray */
+}
+
+/* ========== Selected Tab Styling ========== */
+.tab-pane .tab:selected {
+    -fx-background-color: #1E1E2F; /* Gunmetal to match content pane */
+    -fx-border-color: transparent transparent #3A99D8 transparent; /* Electric Blue highlight */
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: white; /* Pure white for active tab text */
+}
+
+/* ========== Content Area of Each Tab ========== */
+.tab-pane .tab-content-pane {
+    -fx-background-color: #1E1E2F; /* Gunmetal */
+    -fx-padding: 15px;
+}
+
+.table-view {
+    -fx-background-color: #1E1E2F; /* Gunmetal */
+    -fx-border-color: #444454; /* Slate Gray */
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    /* -fx-text-fill: red;  <-- This line can be removed */
+}
+
+/* ========== Column Header Background & Text ========== */
+.table-view .column-header-background {
+    -fx-background-color: #2C2C3E; /* Charcoal */
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 35px;
+    -fx-border-color: #444454;
+    -fx-border-width: 0 0 1 1;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-weight: bold;
+    -fx-background-color: #2C2C3E;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+/* ========== Table Row Styling ========== */
+.table-row-cell {
+    -fx-cell-size: 32px;
+    -fx-background-color: #1E1E2F;
+    -fx-border-color: transparent transparent #2C2C3E transparent;
+    /* -fx-text-fill: white; <-- This is not needed here */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #2C2C3E;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #3A99D8; /* Electric Blue */
+    -fx-text-fill: white; /* Keep this for hover state */
+}
+
+.table-row-cell:filled:selected,
+.table-row-cell:focused:selected {
+    -fx-background-color: #3A99D8;
+    -fx-text-fill: white;
+}
+
+/* ========== THIS IS THE KEY FIX ========== */
+/* Apply the text color directly to the cell */
+.table-cell {
+    -fx-text-fill: white; /* This will now correctly apply */
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 8 0 8;
+}
+
+/* ========== Scrollbar ========== */
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #444454;
+    -fx-background-radius: 6;
+}
+
+/* ========== Resize Line for Columns ========== */
+.table-view .column-resize-line {
+    -fx-stroke: #3A99D8;
+    -fx-stroke-width: 2;
+}
+
+/* ========== Optional Row Types (Success / Warning / Error) ========== */
+/* These are correct as they override the base row style */
+.table-row-cell.success, .table-row-cell.success .table-cell {
+    -fx-background-color: #3CB371;
+    -fx-text-fill: white;
+}
+
+.table-row-cell.warning, .table-row-cell.warning .table-cell {
+    -fx-background-color: #FFC107;
+    -fx-text-fill: white;
+}
+
+.table-row-cell.error, .table-row-cell.error .table-cell {
+    -fx-background-color: #FF4C4C;
+    -fx-text-fill: white;
+}
+
+/* ================================================================== */
+/* TitledPane Styling (Dark Theme)                                    */
+/* ================================================================== */
+
+/* ========== Main TitledPane Container ========== */
+/* This styles the entire component, including the border */
+.titled-pane {
+    -fx-background-color: transparent; /* The content area will have its own color */
+    -fx-border-color: #444454; /* Slate Gray border */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* ========== Title Header Section ========== */
+/* This targets the clickable header bar */
+.titled-pane > .title {
+    -fx-background-color: #2C2C3E; /* Charcoal */
+    -fx-background-radius: 5px 5px 0 0; /* Rounded top corners */
+    -fx-padding: 8px 15px;
+    -fx-border-color: transparent;
+}
+
+/* ========== Text/Label in the Title Header ========== */
+.titled-pane > .title > .text {
+    -fx-fill: white; /* White text for the title */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* ========== Arrow Icon in the Title Header ========== */
+.titled-pane > .title > .arrow-button .arrow {
+    -fx-background-color: white;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z"; /* Standard down-arrow shape */
+}
+
+/* ========== Content Area ========== */
+/* This styles the collapsible content section */
+.titled-pane > .content {
+    -fx-background-color: #1E1E2F; /* Gunmetal */
+    -fx-padding: 15px;
+    -fx-background-radius: 0 0 5px 5px; /* Rounded bottom corners */
+    -fx-border-color: transparent;
+}
+
+.text-area {
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: #2C2C3E;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 0;
+}
+
+.text-area .viewport {
+    -fx-background-color: transparent; /* <- This fixes white block */
+}
+
+.text-area .content {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15;
+    -fx-padding-left: 20px;
+
+}
+
+.text-area .text {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+.text-area .prompt-text {
+    -fx-fill: rgba(255, 255, 255, 0.4);
+}
+
+
+.VBOX {
+    -fx-background-color: #2C2C3E;
+    -fx-alignment: CENTER-LEFT;
+    -fx-spacing: 10px; /* Space between elements */
+    -fx-padding: 0 10px 0 10px; /* Padding around the VBox */
+}

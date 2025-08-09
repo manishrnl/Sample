@@ -1,0 +1,23 @@
+Remove-Item -Recurse -Force .git
+git init
+git add .
+git commit -m "Version 2025.0.23"
+git branch -M main
+git remote add origin https://github.com/manishrnl/complete_university_management_system.git
+git push origin main --force
+
+Remove-Item -Recurse -Force .git
+git init
+git add .
+git commit -m "Version 2025.0.23"
+git branch -M main
+git remote add origin https://github.com/manishrnl/Sample.git
+git push origin main --force
+
+
+
+
+
+wmic path Win32_VideoController get CurrentHorizontalResolution,CurrentVerticalResolution
+CurrentHorizontalResolution  CurrentVerticalResolution
+1920                         1200

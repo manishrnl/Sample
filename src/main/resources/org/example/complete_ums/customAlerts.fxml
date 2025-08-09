@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" alignment="TOP_CENTER" maxWidth="685.0" prefHeight="451.0" prefWidth="685.0" spacing="15.0" styleClass="rounded-lighter-back-ground" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.complete_ums.ToolsClasses.CustomAlertController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+      <Label fx:id="titleLabel" prefHeight="22.0" prefWidth="664.0" styleClass="Sub-Heading" />
+      <HBox alignment="TOP_RIGHT" prefHeight="94.0" prefWidth="594.0" style="-fx-alignment: right;">
+         <children>
+              <Label fx:id="headerLabel" prefHeight="94.0" prefWidth="562.0" styleClass="Sub-Heading" wrapText="true" />
+              <ImageView fx:id="iconImageView" fitHeight="94.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+        <Label fx:id="messageLabel" prefHeight="262.0" prefWidth="631.0" styleClass="Label" wrapText="true" />
+        <HBox fx:id="buttonBar" alignment="CENTER" prefHeight="70.0" prefWidth="594.0" spacing="15.0" styleClass="HBOX-Right-Alignment">
+            <VBox.margin>
+                <Insets top="15.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+</VBox>

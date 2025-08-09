@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Complete_UMS:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f977b28-e862-49d0-8435-9fcac37f1896" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="30NAE5UUlHLSNP3WkceE7nA0T9N" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/MANISH/Downloads/Complete_UMS/src/main/java/org/example/complete_ums/Admin",
+    "last_opened_file_path": "C:/Users/MANISH/Downloads/Complete_UMS/Bundled_Software",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15039062",
+    "project.structure.side.proportion": "0.5471264",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\Bundled_Software" />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\src\main\java\org\example\complete_ums\Librarians" />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\src\main\resources\org\example\complete_ums\Librarians" />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\src\main\resources" />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\src\main\resources\org\example\complete_ums" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\Bundled_Software " />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\src\main\resources\org\example\complete_ums" />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\src\main\resources" />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS\src\main\resources\org\example\complete_ums\Common FXML" />
+      <recent name="C:\Users\MANISH\Downloads\Complete_UMS" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.complete_ums" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.example.complete_ums.Main_Application" />
+      <module name="Complete_UMS" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f977b28-e862-49d0-8435-9fcac37f1896" name="Changes" comment="" />
+      <created>1753457542475</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753457542475</updated>
+      <workItem from="1753457544179" duration="114000" />
+      <workItem from="1753457680584" duration="883000" />
+      <workItem from="1753490870828" duration="9658000" />
+      <workItem from="1753529221476" duration="12304000" />
+      <workItem from="1753613164205" duration="17606000" />
+      <workItem from="1753665761520" duration="31397000" />
+      <workItem from="1753714503029" duration="388000" />
+      <workItem from="1753750004104" duration="33098000" />
+      <workItem from="1753835736236" duration="33128000" />
+      <workItem from="1753880182023" duration="11084000" />
+      <workItem from="1753925876693" duration="44101000" />
+      <workItem from="1754017419629" duration="4995000" />
+      <workItem from="1754023816795" duration="27701000" />
+      <workItem from="1754095005199" duration="10195000" />
+      <workItem from="1754124483727" duration="19233000" />
+      <workItem from="1754185483938" duration="43399000" />
+      <workItem from="1754267970305" duration="39775000" />
+      <workItem from="1754359824408" duration="6127000" />
+      <workItem from="1754366027826" duration="2472000" />
+      <workItem from="1754368639669" duration="25712000" />
+      <workItem from="1754441688893" duration="44254000" />
+      <workItem from="1754575128401" duration="456000" />
+      <workItem from="1754575720001" duration="3032000" />
+      <workItem from="1754616759868" duration="19814000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

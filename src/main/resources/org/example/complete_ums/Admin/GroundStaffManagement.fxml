@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<?import javafx.scene.control.ScrollPane?>
+<ScrollPane  styleClass="back-ground"  xmlns="http://javafx.com/javafx/24.0.1"
+             xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true" fx:controller="org.example.complete_ums.Admin.GroundStaffManagement">
+    <content>
+
+
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" prefHeight="784.0" prefWidth="1239.0"
+                    styleClass="back-ground">
+            <children>
+                <HBox layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="1142.0">
+                    <children>
+                        <Label alignment="TOP_LEFT" prefHeight="33.0" prefWidth="630.0"
+                               styleClass="Heading" text="Ground Staff Management"/>
+                        <Label prefHeight="34.0" prefWidth="196.0" styleClass="Label"
+                               text="Search Anything "/>
+                        <TextField fx:id="SearchAnything" prefHeight="26.0" prefWidth="502.0"
+                                   promptText="Search Anything ..."
+                                   styleClass="grid-pane-text-field"/>
+                    </children>
+                </HBox>
+                <TableView fx:id="groundStaffTable" layoutX="1.0" layoutY="47.0"
+                           prefHeight="447.0" prefWidth="1155.0" styleClass="table-cell">
+                    <columns>
+                        <TableColumn fx:id="colUserId" prefWidth="80" text="User ID"/>
+                        <TableColumn fx:id="colFullName" prefWidth="200" text="Full Name"/>
+                        <TableColumn fx:id="colMobile" prefWidth="120" text="Mobile"/>
+                        <TableColumn fx:id="colEmail" prefWidth="180" text="Email"/>
+                        <TableColumn fx:id="colDesignation" prefWidth="150"
+                                     text="Designation"/>
+                        <TableColumn fx:id="colEmploymentType" prefWidth="178.4000244140625"
+                                     text="Employment Type"/>
+                        <TableColumn fx:id="colStatus" prefWidth="171.199951171875"
+                                     text="Status"/>
+                    </columns>
+                </TableView>
+                <GridPane hgap="10" layoutX="23.0" layoutY="505.0" prefHeight="202.0"
+                          prefWidth="778.0" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints maxWidth="144.8000244140625"
+                                           minWidth="113.60001220703126"
+                                           prefWidth="113.60001220703126"/>
+                        <ColumnConstraints maxWidth="244.79996337890628"
+                                           minWidth="176.79996337890628"
+                                           prefWidth="213.59998779296876"/>
+                        <ColumnConstraints maxWidth="244.79996337890623"
+                                           minWidth="123.19998779296873"
+                                           prefWidth="196.8000366210938"/>
+                        <ColumnConstraints maxWidth="377.6000122070312" minWidth="250.0"
+                                           prefWidth="377.6000122070312"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="48.000024414062494"
+                                        minHeight="31.199975585937494"
+                                        prefHeight="31.199975585937494"/>
+                        <RowConstraints maxHeight="53.600024414062496"
+                                        minHeight="29.200048828125"
+                                        prefHeight="29.200048828125"/>
+                        <RowConstraints maxHeight="44.80001220703126"
+                                        minHeight="14.400000000000006"
+                                        prefHeight="31.999975585937506"/>
+                        <RowConstraints maxHeight="41.60000000000001"
+                                        minHeight="30.399987792968744"
+                                        prefHeight="36.00002441406251"/>
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+                    </rowConstraints>
+                    <children>
+                        <Label prefHeight="71.0" prefWidth="174.0" styleClass="Label"
+                               text="First Name:" GridPane.columnIndex="0"
+                               GridPane.rowIndex="0"/>
+                        <TextField fx:id="firstNameField" prefHeight="44.0" prefWidth="177.0"
+                                   promptText="First Name" styleClass="grid-pane-text-field"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label prefHeight="32.0" prefWidth="175.0" styleClass="Label"
+                               text="Last Name:" GridPane.rowIndex="1"/>
+                        <TextField fx:id="lastNameField" prefHeight="46.0" prefWidth="177.0"
+                                   promptText="Last Name" styleClass="grid-pane-text-field"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label prefHeight="35.0" prefWidth="174.0" styleClass="Label"
+                               text="Mobile:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="mobileField" prefHeight="49.0" prefWidth="177.0"
+                                   promptText="Mobile Number" styleClass="grid-pane-text-field"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label prefHeight="31.0" prefWidth="174.0" styleClass="Label"
+                               text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="emailField" prefHeight="50.0" prefWidth="177.0"
+                                   promptText="Email Address" styleClass="grid-pane-text-field"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label prefHeight="30.0" prefWidth="250.0" styleClass="Label"
+                               text="Designation:" GridPane.columnIndex="2"
+                               GridPane.rowIndex="2"/>
+                        <Label prefHeight="108.0" prefWidth="270.0" styleClass="Label"
+                               text="Employment Type:" GridPane.columnIndex="2"
+                               GridPane.rowIndex="1"/>
+                        <ComboBox fx:id="employmentTypeCombo" prefHeight="50.0"
+                                  prefWidth="335.0" promptText="Select Employement Type"
+                                  styleClass="combo-box" GridPane.columnIndex="3"
+                                  GridPane.rowIndex="1">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Full-time"/>
+                                    <String fx:value="Part-time"/>
+                                    <String fx:value="Contract"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <Label prefHeight="85.0" prefWidth="309.0" styleClass="Label"
+                               text="Salary:" GridPane.columnIndex="2"/>
+                        <TextField fx:id="salaryField" prefHeight="66.0" prefWidth="318.0"
+                                   promptText="Salary" styleClass="grid-pane-text-field"
+                                   GridPane.columnIndex="3"/>
+                        <ComboBox fx:id="designationCombo" layoutX="717.0" layoutY="83.0"
+                                  prefHeight="70.0" prefWidth="318.0"
+                                  promptText="Select Designation" styleClass="combo-box"
+                                  GridPane.columnIndex="3" GridPane.rowIndex="2">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Bathroom Cleaner"/>
+                                    <String fx:value="Sweeper"/>
+                                    <String fx:value="Helper"/>
+                                    <String fx:value="Painter"/>
+                                    <String fx:value="Driver"/>
+                                    <String fx:value="Watchman"/>
+                                    <String fx:value="Gardener"/>
+                                    <String fx:value="Electrician"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </children>
+                </GridPane>
+                <HBox alignment="CENTER_RIGHT" layoutX="6.0" layoutY="714.0" prefHeight="50.0"
+                      prefWidth="807.0" spacing="15" styleClass="HBOX">
+                    <children>
+                        <Button onAction="#handleRefresh" prefHeight="39.0" prefWidth="142.0"
+                                styleClass="button-green" text="Refresh Table"/>
+                        <Button onAction="#handleDelete" prefHeight="39.0" prefWidth="142.0"
+                                styleClass="button-red" text="Delete Staff"/>
+                        <Button onAction="#handleUpdate" prefHeight="38.0" prefWidth="150.0"
+                                styleClass="button-green" text="Update Staff"/>
+                        <Button onAction="#handleClear" prefHeight="38.0" prefWidth="124.0"
+                                styleClass="button-yellow" text="Clear Fields"/>
+                        <Button mnemonicParsing="false" onAction="#uploadUsersImage"
+                                prefHeight="38.0" prefWidth="188.0" styleClass="button-green"
+                                text="Upload Users Image"/>
+                    </children>
+                </HBox>
+                <Label fx:id="errorMessageLabel" layoutX="10.0" layoutY="663.0"
+                       prefHeight="43.0" prefWidth="958.0" style="-fx-font-weight: bold"
+                       textFill="RED" wrapText="true"/>
+                <ImageView fx:id="usersImage" fitHeight="266.0" fitWidth="330.0"
+                           layoutX="824.0" layoutY="505.0" pickOnBounds="true"
+                           preserveRatio="true"/>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>
