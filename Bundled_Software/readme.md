@@ -1,16 +1,25 @@
-To use my software , please follow these steps:
+# Software Usage Guide
 
-1. Download the software package from the provided link.
+## Steps to Use the Software
 
-2. To continue using my software make sure you have JAVA installed on your system. You can download the latest version of Java from the official Oracle website or use OpenJDK.
+1. **Download the software package** from the provided link.
 
-3.once you have Java installed, you can run the software by first signing .
+2. **Install Java**  
+   To continue using this software, make sure you have Java installed on your system.  
+   - You can download the latest version of Java from the [official Oracle website](https://www.oracle.com/java/technologies/javase-downloads.html)  
+   - Or use [OpenJDK](https://openjdk.org/install/).
 
-4. Signing in as a student will enable you to use students dashboard automatically.
+3. **Run the Software**  
+   Once you have Java installed, you can run the software by first signing in.
 
-5. I have used authentication and admin approval for the other role like Librarians,Staffs,
-Teachers,Admin etc.
+4. **Student Access**  
+   Signing in as a student will automatically enable you to use the student dashboard.
 
-5. Without admin approval you will not have the access to the software.
+5. **Role-based Access**  
+   Authentication and admin approval are required for other roles like **Librarians, Staff, Teachers, and Admin**.
 
-6. for the checking purposes use signing in as a student.
+6. **Admin Approval Required**  
+   Without admin approval, you will not have access to the software.
+
+7. **Testing the Software**  
+   For checking purposes, sign in as a **student**.
