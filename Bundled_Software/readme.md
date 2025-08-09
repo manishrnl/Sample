@@ -19,7 +19,7 @@
    Authentication and admin approval are required for other roles like **Librarians, Staff, Teachers, and Admin**.
 
 6. **Admin Approval Required**  
-   Without admin approval, you will not have access to the software.
+   Without admin approval, you will not have access to the software.Signing in as others will first ask for admin approval . Once approved by admin , your profile will be validated and thereafter you can use it.
 
 7. **Testing the Software**  
    For checking purposes, sign in as a **student**.
